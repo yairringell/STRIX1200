@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_PISTON" Id="{f4523f62-f900-4afa-86ce-0e9446376750}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_PISTON
+VAR_INPUT
+	sSTATE:STRING:='UNINIT';
+	sNAME:STRING;
+	bLOCAL_MANUAL: BOOL:=FALSE;
+	pist_TYPE: E_PISTON_TYPE:=E_PISTON_TYPE.NO_SENSORS;
+	pist_STATE: E_PISTON_STATE:=E_PISTON_STATE.uninit;
+	rOPEN_TIME: TIME;
+	rCLOSE_TIME: TIME;
+	rOPEN_TIMEOUT: TIME;
+	tCLOSE_TIMEOUT: TIME;
+	bOPEN_LIMIT: BOOL;
+	bCLOSED_LIMIT: BOOL;
+	bOPEN_CMD: BOOL;
+	bCLOSE_CMD: BOOL;
+	bOPEN_SWR: BOOL;
+	bCLOSE_SWR: BOOL;
+	bCONDITION: BOOL:=TRUE;
+	bLOCAL_RESET:BOOL;
+END_VAR
+VAR_OUTPUT
+	bOPEN_VALVE: BOOL;
+	bCLOSE_VALVE: BOOL;
+	bBUSY:BOOL;
+	bOPENED:BOOL;
+	bCLOSED:BOOL;
+	bERROR:BOOL:=FALSE;
+END_VAR
+VAR
+	T_OPEN: TON;
+	T_OPEN_TIMEOUT: TON;
+	T_CLOSE: TON;
+	T_CLOSE_TIMEOUT: TON;
+	bOPEN_DEFAULT: BOOL:=FALSE;
+	bFIRST_DONE: BOOL:=FALSE;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[T_OPEN(IN:= bOPEN_CMD, PT:=rOPEN_TIME , Q=> , ET=> );
+T_CLOSE(IN:=  NOT bOPEN_CMD, PT:=rCLOSE_TIME , Q=> , ET=> );
+T_OPEN_TIMEOUT(IN:= bOPEN_CMD , PT:= rOPEN_TIMEOUT, Q=> , ET=> );
+T_CLOSE_TIMEOUT(IN:=  NOT bOPEN_CMD , PT:= tCLOSE_TIMEOUT, Q=> , ET=> );
+
+IF bLOCAL_RESET THEN//========================== RESET================
+	bLOCAL_RESET:=FALSE;
+	pist_STATE:=E_PISTON_STATE.uninit;
+END_IF
+
+IF NOT bLOCAL_MANUAL THEN//====================== MANUAL ==============
+	bOPEN_CMD:=bOPEN_SWR;
+END_IF
+
+IF NOT bFIRST_DONE THEN  // ============== check default mode ===============
+	bFIRST_DONE:=TRUE;
+	IF bOPEN_DEFAULT THEN
+		bOPEN_CMD:=TRUE;
+	ELSE
+		bOPEN_CMD:=FALSE;
+	END_IF
+END_IF
+//================================================== UNINIT =====================================================
+CASE pist_STATE OF
+	E_PISTON_STATE.uninit:
+		bERROR:=FALSE;
+		IF bOPEN_CMD  THEN
+			bOPEN_VALVE:=TRUE;
+			pist_STATE:=E_PISTON_STATE.opening;
+		ELSE
+			bOPEN_VALVE:=FALSE;
+			pist_STATE:=E_PISTON_STATE.closing;
+		END_IF
+//================================================== OPENING =====================================================
+	E_PISTON_STATE.opening:
+	sSTATE:='OPENING';
+	bBUSY:=TRUE; bOPENED:=FALSE; bCLOSED:=FALSE;
+	CASE pist_TYPE OF//------------------------------no sensors
+		E_PISTON_TYPE.NO_SENSORS:
+		IF T_OPEN.Q THEN
+			pist_STATE:=E_PISTON_STATE.opened;
+		END_IF
+		//----------------------------- both sensors
+		E_PISTON_TYPE.BOTH:
+		IF bOPEN_LIMIT THEN
+			pist_STATE:=E_PISTON_STATE.opened;
+		END_IF
+		IF T_OPEN_TIMEOUT.Q THEN
+			bOPEN_CMD:=FALSE;
+			pist_STATE:=E_PISTON_STATE.error;
+		END_IF
+		//----------------------------- only open sensor
+		E_PISTON_TYPE.ONLY_OPEN:
+		IF bOPEN_LIMIT THEN
+			pist_STATE:=E_PISTON_STATE.opened;
+		END_IF
+		IF T_OPEN_TIMEOUT.Q THEN
+			bOPEN_CMD:=FALSE;
+			pist_STATE:=E_PISTON_STATE.error;
+		END_IF
+		//----------------------------- only close sensor
+		E_PISTON_TYPE.ONLY_CLOSE:
+		IF T_OPEN.Q THEN
+			pist_STATE:=E_PISTON_STATE.opened;
+		END_IF
+	END_CASE
+//================================================== CLOSING =====================================================	
+	E_PISTON_STATE.closing:
+	sSTATE:='CLOSING'; bOPENED:=FALSE; bCLOSED:=FALSE;
+	bBUSY:=TRUE;
+	CASE pist_TYPE OF//--------------------------------------- no sensors
+		E_PISTON_TYPE.NO_SENSORS:
+		IF T_CLOSE.Q THEN
+			pist_STATE:=E_PISTON_STATE.closed;
+		END_IF
+		//-------------------------------------- both sensors
+		E_PISTON_TYPE.BOTH:
+		IF bCLOSED_LIMIT THEN
+			pist_STATE:=E_PISTON_STATE.closed;
+		END_IF
+		IF T_CLOSE_TIMEOUT.Q THEN
+			bOPEN_CMD:=TRUE;
+			pist_STATE:=E_PISTON_STATE.error;
+		END_IF
+		//-------------------------------------- only close sensor
+		E_PISTON_TYPE.ONLY_CLOSE:
+		IF bCLOSED_LIMIT THEN
+			pist_STATE:=E_PISTON_STATE.closed;
+		END_IF
+		IF T_CLOSE_TIMEOUT.Q THEN
+			bOPEN_CMD:=TRUE;
+			pist_STATE:=E_PISTON_STATE.error;
+		END_IF
+		//----------------------------- only close sensor
+		E_PISTON_TYPE.ONLY_OPEN:
+		IF T_CLOSE.Q THEN
+			pist_STATE:=E_PISTON_STATE.closed;
+		END_IF
+	END_CASE
+//================================================== OPENED =====================================================	
+	E_PISTON_STATE.opened:
+	sSTATE:='OPENED';
+	bBUSY:=FALSE; bOPENED:=TRUE; bCLOSED:=FALSE;
+	IF NOT bOPEN_CMD  THEN
+		pist_STATE:=E_PISTON_STATE.closing;
+		bOPEN_VALVE:=FALSE;
+	END_IF
+	CASE pist_TYPE OF
+		//-------------------------------------- both sensors
+		E_PISTON_TYPE.BOTH:
+		IF NOT bOPEN_LIMIT THEN
+			bOPEN_CMD:=FALSE;
+			pist_STATE:=E_PISTON_STATE.error;
+		END_IF
+		//-------------------------------------- only open sensor
+		E_PISTON_TYPE.ONLY_OPEN:
+		IF NOT bOPEN_LIMIT THEN
+			bOPEN_CMD:=FALSE;
+			pist_STATE:=E_PISTON_STATE.error;
+		END_IF
+	END_CASE
+//================================================== CLOSED =====================================================	
+	E_PISTON_STATE.closed:
+	sSTATE:='CLOSED';
+	bBUSY:=FALSE; bOPENED:=FALSE; bCLOSED:=TRUE;
+	IF bOPEN_CMD  THEN
+		pist_STATE:=E_PISTON_STATE.opening;
+		bOPEN_VALVE:=TRUE;
+	END_IF
+	CASE pist_TYPE OF
+		//-------------------------------------- both sensors
+		E_PISTON_TYPE.BOTH:
+		IF NOT bCLOSED_LIMIT THEN
+			bOPEN_CMD:=TRUE;
+			pist_STATE:=E_PISTON_STATE.error;
+		END_IF
+		//-------------------------------------- only close sensor
+		E_PISTON_TYPE.ONLY_CLOSE:
+		IF NOT bCLOSED_LIMIT THEN
+			bOPEN_CMD:=TRUE;
+			pist_STATE:=E_PISTON_STATE.error;
+		END_IF
+	END_CASE
+//================================================== ERROR =====================================================	
+	E_PISTON_STATE.error:
+	sSTATE:='ERROR';
+	bERROR:=TRUE;
+	//
+END_CASE	
+	
+	
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_PISTON">
+      <LineId Id="3" Count="152" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
