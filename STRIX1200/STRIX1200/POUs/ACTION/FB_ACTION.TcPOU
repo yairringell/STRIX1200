@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_ACTION" Id="{77b4196e-a6d2-4735-ae2e-ed59e88b663e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ACTION
+VAR_INPUT
+	bSTART_HOMING:BOOL;
+	iHOME_STATE:INT:=98;
+	bHOME_ALL:BOOL;
+	actionSTATE: E_ACTION_STATE;
+	tHOMING:TON;
+	rHOMING_TIMEOUT: TIME:=T#50s;
+END_VAR
+VAR_OUTPUT
+	bERROR:BOOL;
+	bALL_HOMED:BOOL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+mHOME_ALL();
+]]></ST>
+    </Implementation>
+    <Method Name="mHOME_ALL" Id="{772af3f2-716d-41e3-828b-24d6ec899e44}">
+      <Declaration><![CDATA[METHOD mHOME_ALL : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[tHOMING(IN:= bSTART_HOMING, PT:=rHOMING_TIMEOUT , Q=> , ET=> );
+IF bHOME_ALL AND iHOME_STATE>5 THEN
+	iHOME_STATE:=1;
+	bALL_HOMED:=FALSE;
+	bHOME_ALL:=FALSE;
+END_IF
+		
+CASE iHOME_STATE OF
+	98:// UNINIT
+		
+	1://HOME XY
+		XY.bHome:=TRUE;
+		bSTART_HOMING:=TRUE;
+		iHOME_STATE:=2;
+		
+	2:
+		XY.bHome:=FALSE;
+		IF XY.bHOMED THEN
+			bSTART_HOMING:=FALSE;
+			iHOME_STATE:=3;
+		END_IF
+		IF tHOMING.Q THEN
+			iHOME_STATE:=99;
+		END_IF
+		
+	3://HOME LIFT
+		LIFT.bHome:=TRUE;
+		bSTART_HOMING:=TRUE;
+		iHOME_STATE:=4;
+		
+	4:
+		LIFT.bHome:=FALSE;
+		IF LIFT.bHOMED THEN
+			bSTART_HOMING:=FALSE;
+			iHOME_STATE:=5;
+		END_IF
+		IF tHOMING.Q THEN
+			iHOME_STATE:=99;
+		END_IF
+		
+	5://HOME PISTON
+		bSTART_HOMING:=TRUE;
+		PIST1.bOPEN_SWR:=TRUE;
+		IF PIST1.bOPENED THEN
+			bSTART_HOMING:=FALSE;
+			iHOME_STATE:=100;
+			bALL_HOMED:=TRUE;
+		END_IF
+		
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_ACTION">
+      <LineId Id="11" Count="1" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ACTION.mHOME_ALL">
+      <LineId Id="6" Count="0" />
+      <LineId Id="46" Count="1" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="14" Count="1" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="56" Count="1" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="58" Count="2" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="64" Count="12" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="35" Count="1" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="41" Count="1" />
+      <LineId Id="44" Count="1" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

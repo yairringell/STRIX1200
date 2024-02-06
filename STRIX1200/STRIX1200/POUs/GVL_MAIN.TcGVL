@@ -7,7 +7,7 @@ VAR_GLOBAL
 	XY:FB_Axis;
 	PIST1: FB_PISTON;
 	PIST2: FB_PISTON;
-	
+	ACTION1:FB_ACTION;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
