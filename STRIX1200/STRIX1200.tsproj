@@ -1761,7 +1761,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{CA1013CD-D2D4-4D21-B7E4-1998D10D30A6}" Name="STRIX1200" PrjFilePath="STRIX1200\STRIX1200.plcproj" TmcFilePath="STRIX1200\STRIX1200.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="STRIX1200\STRIX1200.tmc" TmcHash="{F3BC0999-68B0-44FD-99A1-9ECFF925515F}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="STRIX1200\STRIX1200.tmc" TmcHash="{602A0125-BCB7-2E7B-AEF5-927B9FD92F8F}">
 					<Name>STRIX1200 Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">

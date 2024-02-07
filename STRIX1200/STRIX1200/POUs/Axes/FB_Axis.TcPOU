@@ -3,13 +3,13 @@
   <POU Name="FB_Axis" Id="{1ec8daca-b967-496e-b296-4221933406bb}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Axis
 VAR_INPUT
-	axisSTATE: E_AXIS_STATE;
+	
 	sAXIS_STATE:STRING:='UNINIT';
 	sName:STRING;
 	Axis:Axis_ref;
 	bEnable:BOOL:=FALSE;
 	bHalt:BOOL:=FALSE;
-	bHome:BOOL:=FALSE;
+	bHOME:BOOL:=FALSE;
 	bHOME_DIR:BOOL;
 	bReset:BOOL:=FALSE;
 	bSetPosition:BOOL:=FALSE;
@@ -25,26 +25,17 @@ VAR_INPUT
 	bMoveAbsBusy:BOOL;
 	bJogPos:BOOL;
 	bJogNeg:BOOL;
-	rStep: REAL:=400;
-	rStep_vel: REAL:=400;
-	bmanual:BOOL:=FALSE;
-	bDo_Step_FW:BOOL:=FALSE;
-	bDo_Step_BW:BOOL:=FALSE;
-	stepFW_state:INT:=0;
-	stepBW_state:INT:=0;
-	bStop:BOOL:=0;
+	bMANUAL:BOOL:=FALSE;
+	tACTION:TON;
 	ton_Reset: TON;
-	tOPEN:TON;
-	tCLOSE:TON;
-	tHOME:TON;
 	bOPEN:BOOL;
 	bCLOSE:BOOL;
 	bLIMIT_OPENED:BOOL;
 	bLIMIT_CLOSED:BOOL;
-	rOPEN_TIMEOUT: TIME;
-	rCLOSE_TIMEOUT:TIME;
-	rHOME_TIMEOUT:TIME;
+	bLIMIT:BOOL;
+	rACTION_TIMEOUT:TIME:=T#10S;
 	jogVEL: REAL;
+	bSTOP:BOOL;
 END_VAR
 
 VAR_OUTPUT
@@ -52,7 +43,8 @@ VAR_OUTPUT
 	bCLOSED:BOOL;
 	bHOMED:BOOL;
 	bBusy: BOOL;
-	bError:BOOL;
+	bAXIS_ERROR:BOOL;
+	bSTATE_ERROR:BOOL;
 	bInPos:BOOL;
 	rActPos:LREAL;
 	rActVel:LREAL;
@@ -61,7 +53,9 @@ VAR_OUTPUT
 	bHaltDone:BOOL;
 END_VAR
 VAR
-	iHOME_STATE: INT:=5;
+	bSTART_ACTION:BOOL;
+	iHOME_STATE: INT:=98;
+	iAXIS_STATE:INT:=98;
 	tDelay: TON;
 	bDelay:BOOL:=FALSE;
 	MoveAbsolute: MC_MoveAbsolute;
@@ -83,15 +77,6 @@ END_VAR
     <Implementation>
       <ST><![CDATA[IF NOT bFirst_run THEN
 	RESET.Execute:=TRUE;
-	IF bLIMIT_OPENED THEN
-		bOPENED:=TRUE;
-		axisSTATE:= E_AXIS_STATE.opened;
-		sAXIS_STATE:= 'OPENED';
-	ELSE
-		bOPENED:=FALSE;
-		axisSTATE:= E_AXIS_STATE.closed;
-		sAXIS_STATE:= 'CLOSED';
-	END_IF
 	 bFirst_run:=TRUE;
 END_IF
 
@@ -131,10 +116,10 @@ IF NOT RELATIVE.Busy AND NOT JOG.Busy AND NOT moveAbsolute.busy THEN
 END_IF
 
 IF POWER.error OR RELATIVE.error OR MoveAbsolute.error OR JOG.error THEN
-	bError:=TRUE;
+	bAXIS_ERROR:=TRUE;
 END_IF
 IF NOT POWER.error AND NOT RELATIVE.error AND NOT MoveAbsolute.error AND NOT JOG.error THEN
-	bError:=FALSE;
+	bAXIS_ERROR:=FALSE;
 END_IF
 
 IF bRelDone OR  bAbsDone THEN
@@ -148,12 +133,13 @@ END_IF
 
 
 CMDs();
-mACTION();
-IF bHOME_DIR THEN
-	mHOME(bLIMIT_OPENED);
-ELSE
-	mHOME(bLIMIT_CLOSED);
-END_IF]]></ST>
+mAXIS_STATE_MACHINE();
+//mACTION();
+//IF bHOME_DIR THEN
+//	mHOME(bLIMIT_OPENED);
+//ELSE
+//	mHOME(bLIMIT_CLOSED);
+//END_IF]]></ST>
     </Implementation>
     <Method Name="clear_cmd_req" Id="{c115c33f-8377-4dd1-8142-a1b93e7b6e59}">
       <Declaration><![CDATA[METHOD clear_cmd_req : BOOL
@@ -2901,115 +2887,26 @@ bMoveABS:= bMoveRel:= bJogPos:= bJogNeg:=FALSE;
         </NWL>
       </Implementation>
     </Action>
-    <Method Name="mACTION" Id="{a88e275e-89d0-4ba5-b799-6403b5952bab}">
-      <Declaration><![CDATA[METHOD mACTION : BOOL
+    <Method Name="mAXIS_STATE_MACHINE" Id="{5855ed75-8fcd-47ee-ae72-6d0b401eafef}">
+      <Declaration><![CDATA[METHOD mAXIS_STATE_MACHINE : BOOL
 VAR_INPUT
 	
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ tOPEN(IN:= bOPEN, PT:=rOPEN_TIMEOUT , Q=> , ET=> );
-tCLOSE(IN:= bCLOSE, PT:=rCLOSE_TIMEOUT , Q=> , ET=> );
-
-IF bOPEN AND axisSTATE=E_AXIS_STATE.closed THEN
-	axisSTATE:= E_AXIS_STATE.opening;
-	sAXIS_STATE:= 'OPENING';
-	bHOMED:=FALSE;
-END_IF
-IF bCLOSE AND axisSTATE=E_AXIS_STATE.opened THEN
-	axisSTATE:= E_AXIS_STATE.closing;
-	sAXIS_STATE:= 'CLOSING';
-	bHOMED:=FALSE;
+        <ST><![CDATA[tACTION(IN:= bSTART_ACTION, PT:=rACTION_TIMEOUT , Q=> , ET=> );
+IF bHOME_DIR THEN
+	bLIMIT:=bLIMIT_OPENED;
+ELSE
+	bLIMIT:=bLIMIT_CLOSED;
 END_IF
 
 
-
-CASE axisSTATE OF
-		E_AXIS_STATE.opening://===================================== OPENING ==========================================
-		bCLOSED:=FALSE;
-		bJogNeg:=FALSE;
-		bCLOSE:=FALSE;
-		bENABLE:=TRUE;
-		rVel:= jogVEL;
-		bJogPos:=TRUE;
-		IF bLIMIT_OPENED THEN
-			axisSTATE:= E_AXIS_STATE.open_dec;
-			bJogPos:=FALSE;
-			sAXIS_STATE:= 'OPEN DEC';
-		END_IF
-		IF tOPEN.Q THEN
-			axisSTATE:= E_AXIS_STATE.error;
-			sAXIS_STATE:= 'ERROR';
-			bJogPos:=FALSE;
-			bOPEN:=FALSE;
-		END_IF
-		
-		E_AXIS_STATE.open_dec:
-			IF Axis.NcToPlc.ActVelo= 0 THEN
-				bOPENED:=TRUE;
-				bOPEN:=FALSE;
-				axisSTATE:= E_AXIS_STATE.opened;
-				sAXIS_STATE:= 'OPENED';
-			END_IF
-		
-		
-		E_AXIS_STATE.closing: //===================================== CLOSING ==========================================
-		bOPENED:=FALSE;
-		bJogPos:=FALSE;
-		bOPEN:=FALSE;
-		bENABLE:=TRUE;
-		rVel:= jogVEL;
-		bJogNeg:=TRUE;
-		IF bLIMIT_CLOSED THEN
-			axisSTATE:= E_AXIS_STATE.close_dec;
-			bJogNeg:=FALSE;
-			sAXIS_STATE:= 'CLOSE DEC';
-		END_IF
-		IF tCLOSE.Q THEN
-			axisSTATE:= E_AXIS_STATE.error;
-			sAXIS_STATE:= 'ERROR';
-			bJogNeg:=FALSE;
-		END_IF
-		
-		E_AXIS_STATE.close_dec:
-			IF Axis.NcToPlc.ActVelo= 0 THEN
-				bCLOSED:=TRUE;
-				bCLOSE:=FALSE;
-				axisSTATE:= E_AXIS_STATE.closed;
-				sAXIS_STATE:= 'CLOSED';
-			END_IF
-
-
-END_CASE]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="mHOME" Id="{881aeee7-b284-47f2-a397-0c316e9357d6}">
-      <Declaration><![CDATA[METHOD mHOME : BOOL
-VAR_INPUT
-	bLIMIT:BOOL;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[tHOME(IN:= bHOME, PT:=rHOME_TIMEOUT , Q=> , ET=> );
-
-IF bHOME AND iHOME_STATE > 4 THEN
-	iHOME_STATE :=1;
-	bHOMED:=FALSE;
-END_IF
-
-CASE iHOME_STATE OF
-	0://ERROR
-		bJogNeg:=FALSE;
-		bJogPos:=FALSE;
-		
-		
-	1://TO LIMIT
-		sAXIS_STATE:= 'HOMING TO LIMIT';
-		bOPENED:=FALSE;
-		bCLOSED:=FALSE;
-		bOPEN:=FALSE;
-		bCLOSE:=FALSE;
-		bHOMED:=FALSE;
+CASE iAXIS_STATE OF
+	1:// ============================================== HOMING
+		bSTART_ACTION:=TRUE;
+		sAXIS_STATE:='HOMING - TO SENSOR';
+		bOPENED:=FALSE;bCLOSED:=FALSE;bOPEN:=FALSE;bCLOSE:=FALSE;bHOMED:=FALSE;bHOME:=FALSE;
 		bENABLE:=TRUE;
 		rVel:= jogVEL;
 		IF bHOME_DIR THEN
@@ -3019,16 +2916,18 @@ CASE iHOME_STATE OF
 		END_IF
 		
 		IF bLIMIT THEN
+			bSTART_ACTION:=FALSE;
 			bJogNeg:=FALSE;
 			bJogPos:=FALSE;
-			iHOME_STATE:=2;
+			iAXIS_STATE:=2;
 		END_IF
-		IF tHOME.Q THEN
-			iHOME_STATE:=0;
+		IF tACTION.Q THEN
+			bSTART_ACTION:=FALSE;
+			iAXIS_STATE:=99;
+			bSTATE_ERROR:=TRUE;
 		END_IF
-		
-		2://FROM LIMIT
-			sAXIS_STATE:= 'HOMING FROM LIMIT';
+	2://FROM LIMIT
+			sAXIS_STATE:= 'HOMING- FROM SENSOR';
 			IF Axis.NcToPlc.ActVelo= 0 THEN
 				rVel:= jogVEL/5;
 				IF bHOME_DIR THEN
@@ -3036,171 +2935,199 @@ CASE iHOME_STATE OF
 				ELSE
 					bJogPos:=TRUE;
 				END_IF
-				iHOME_STATE:=3;
-			END_IF
-		
-		3:// FINISH
+				iAXIS_STATE:=3;
+			END_IF	
+	3:// FINISH
 			IF NOT bLIMIT THEN
 				bJogNeg:=FALSE;
 				bJogPos:=FALSE;
-				iHOME_STATE:=4;
-			END_IF
-			
-		4://HOMED
-			IF Axis.NcToPlc.ActVelo= 0 THEN
-				IF bHOME_DIR THEN
-					bOPENED:=TRUE;
-					sAXIS_STATE:= 'OPENED';
-					axisSTATE:= E_AXIS_STATE.opened;
-				ELSE
-					bCLOSED:=TRUE;
-					sAXIS_STATE:= 'CLOSED';
-					axisSTATE:= E_AXIS_STATE.closed;
+				IF Axis.NcToPlc.ActVelo= 0 THEN
+					bHOMED:=TRUE;
+					IF bHOME_DIR THEN
+						iAXIS_STATE:=30;// to opened state
+						bOPENED:=TRUE;
+					ELSE
+						iAXIS_STATE:=50;// to closed state
+						bCLOSED:=TRUE;
+					END_IF
 				END_IF
-				bHOMED:=TRUE;
-				bHOME:=FALSE;
-				iHOME_STATE:=5;
+			END_IF
+	20://=============================================== OPENING
+		sAXIS_STATE:= 'OPENING';
+		bSTART_ACTION:=TRUE;
+		bOPENED:=FALSE;bCLOSED:=FALSE;bOPEN:=FALSE;bCLOSE:=FALSE;bHOMED:=FALSE;bHOME:=FALSE;
+		bENABLE:=TRUE;
+		rVel:= jogVEL;
+		bJogPos:=TRUE;
+		IF bLIMIT_OPENED THEN
+			iAXIS_STATE:=21;// to deccell
+			bJogPos:=FALSE;
+			bSTART_ACTION:=FALSE;
+		END_IF
+		IF tACTION.Q THEN
+			bSTART_ACTION:=FALSE;
+			iAXIS_STATE:=99;
+			bSTATE_ERROR:=TRUE;
+		END_IF
+		
+		21:
+			sAXIS_STATE:= 'OPEN DECCELERATING';
+			IF Axis.NcToPlc.ActVelo= 0 THEN
+				iAXIS_STATE:=30;
+				bOPENED:=TRUE;
+			END_IF
+	
+	
+	30://=============================================== OPENED
+		sAXIS_STATE:= 'OPENED';
+		IF bHOME THEN
+			iAXIS_STATE:=1;
+			bSTATE_ERROR:=FALSE;
+		END_IF
+		IF bCLOSE THEN
+			iAXIS_STATE:=40;
+			bSTATE_ERROR:=FALSE;
+		END_IF
+	40://=============================================== CLOSING
+		sAXIS_STATE:= 'CLOSING';
+		bSTART_ACTION:=TRUE;
+		bOPENED:=FALSE;bCLOSED:=FALSE;bOPEN:=FALSE;bCLOSE:=FALSE;bHOMED:=FALSE;bHOME:=FALSE;
+		bENABLE:=TRUE;
+		rVel:= jogVEL;
+		bJogNeg:=TRUE;
+		IF bLIMIT_CLOSED THEN
+			iAXIS_STATE:=41;// to deccell
+			bJogNeg:=FALSE;
+			bSTART_ACTION:=FALSE;
+		END_IF
+		IF tACTION.Q THEN
+			bSTART_ACTION:=FALSE;
+			iAXIS_STATE:=99;
+			bSTATE_ERROR:=TRUE;
+		END_IF
+		
+		41:
+			sAXIS_STATE:= 'CLOSE DECCELERATING';
+			IF Axis.NcToPlc.ActVelo= 0 THEN
+				iAXIS_STATE:=50;
+				bCLOSED:=TRUE;
 			END_IF
 			
-		5://UNINIT
+	50://=============================================== CLOSED
+		sAXIS_STATE:= 'CLOSED';
+		IF bHOME THEN
+			iAXIS_STATE:=1;
+			bSTATE_ERROR:=FALSE;
+		END_IF
+		IF bOPEN THEN
+			iAXIS_STATE:=20;
+			bSTATE_ERROR:=FALSE;
+		END_IF
 		
+		
+	98:// ============================================ UNINIT
+		sAXIS_STATE:='UNINIT';
+		IF bHOME THEN
+			iAXIS_STATE:=1;
+			bSTATE_ERROR:=FALSE;
+		END_IF
+		
+	99://======================================= ERROR 
+		sAXIS_STATE:='STATE ERROR';
+		bJogNeg:=FALSE;
+		bJogPos:=FALSE;
+		bHOMED:=FALSE;
+		IF bHOME THEN
+			iAXIS_STATE:=1;
+			bSTATE_ERROR:=FALSE;
+		END_IF
+	
+	
 END_CASE]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_Axis">
-      <LineId Id="3" Count="1" />
-      <LineId Id="146" Count="1" />
-      <LineId Id="151" Count="0" />
-      <LineId Id="153" Count="0" />
-      <LineId Id="149" Count="1" />
-      <LineId Id="152" Count="0" />
-      <LineId Id="154" Count="0" />
-      <LineId Id="148" Count="0" />
-      <LineId Id="155" Count="0" />
-      <LineId Id="5" Count="20" />
-      <LineId Id="131" Count="5" />
-      <LineId Id="129" Count="0" />
-      <LineId Id="128" Count="0" />
-      <LineId Id="26" Count="22" />
-      <LineId Id="139" Count="0" />
-      <LineId Id="49" Count="1" />
-      <LineId Id="2" Count="0" />
-      <LineId Id="141" Count="4" />
+      <LineId Id="241" Count="1" />
+      <LineId Id="252" Count="61" />
+      <LineId Id="145" Count="0" />
     </LineIds>
     <LineIds Name="FB_Axis.clear_cmd_req">
       <LineId Id="3" Count="1" />
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Axis.mACTION">
-      <LineId Id="20" Count="1" />
-      <LineId Id="31" Count="0" />
+    <LineIds Name="FB_Axis.mAXIS_STATE_MACHINE">
       <LineId Id="5" Count="0" />
+      <LineId Id="44" Count="3" />
       <LineId Id="7" Count="0" />
-      <LineId Id="56" Count="0" />
-      <LineId Id="103" Count="0" />
-      <LineId Id="8" Count="0" />
-      <LineId Id="36" Count="1" />
-      <LineId Id="57" Count="0" />
-      <LineId Id="102" Count="0" />
-      <LineId Id="35" Count="0" />
-      <LineId Id="34" Count="0" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="10" Count="0" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="104" Count="0" />
-      <LineId Id="64" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="16" Count="0" />
-      <LineId Id="18" Count="0" />
-      <LineId Id="78" Count="0" />
-      <LineId Id="58" Count="0" />
-      <LineId Id="76" Count="0" />
-      <LineId Id="96" Count="0" />
-      <LineId Id="24" Count="0" />
-      <LineId Id="28" Count="1" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="10" Count="1" />
       <LineId Id="60" Count="0" />
-      <LineId Id="67" Count="0" />
-      <LineId Id="80" Count="0" />
-      <LineId Id="30" Count="0" />
-      <LineId Id="81" Count="0" />
-      <LineId Id="83" Count="1" />
-      <LineId Id="87" Count="2" />
-      <LineId Id="85" Count="1" />
-      <LineId Id="82" Count="0" />
-      <LineId Id="42" Count="0" />
-      <LineId Id="44" Count="1" />
-      <LineId Id="105" Count="0" />
-      <LineId Id="65" Count="0" />
-      <LineId Id="46" Count="3" />
-      <LineId Id="52" Count="0" />
-      <LineId Id="79" Count="0" />
-      <LineId Id="97" Count="0" />
-      <LineId Id="53" Count="2" />
-      <LineId Id="61" Count="0" />
-      <LineId Id="68" Count="0" />
-      <LineId Id="43" Count="0" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="90" Count="5" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="13" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="25" Count="8" />
+      <LineId Id="103" Count="0" />
+      <LineId Id="34" Count="4" />
+      <LineId Id="104" Count="0" />
+      <LineId Id="39" Count="1" />
       <LineId Id="12" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Axis.mHOME">
-      <LineId Id="46" Count="1" />
+      <LineId Id="50" Count="9" />
       <LineId Id="41" Count="0" />
-      <LineId Id="44" Count="0" />
-      <LineId Id="71" Count="0" />
-      <LineId Id="43" Count="0" />
-      <LineId Id="7" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="8" Count="0" />
-      <LineId Id="10" Count="0" />
-      <LineId Id="51" Count="0" />
+      <LineId Id="69" Count="3" />
+      <LineId Id="106" Count="0" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="78" Count="1" />
       <LineId Id="83" Count="0" />
-      <LineId Id="52" Count="0" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="85" Count="0" />
-      <LineId Id="72" Count="3" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="13" Count="1" />
-      <LineId Id="56" Count="1" />
-      <LineId Id="59" Count="1" />
-      <LineId Id="58" Count="0" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="15" Count="1" />
-      <LineId Id="54" Count="0" />
-      <LineId Id="18" Count="0" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="48" Count="2" />
-      <LineId Id="19" Count="1" />
+      <LineId Id="80" Count="1" />
       <LineId Id="84" Count="0" />
-      <LineId Id="21" Count="1" />
-      <LineId Id="61" Count="3" />
-      <LineId Id="24" Count="1" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="26" Count="2" />
-      <LineId Id="31" Count="0" />
-      <LineId Id="55" Count="0" />
-      <LineId Id="34" Count="0" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="35" Count="1" />
-      <LineId Id="65" Count="0" />
-      <LineId Id="77" Count="1" />
-      <LineId Id="81" Count="0" />
-      <LineId Id="86" Count="0" />
-      <LineId Id="79" Count="1" />
-      <LineId Id="82" Count="0" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="107" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="114" Count="0" />
+      <LineId Id="139" Count="0" />
+      <LineId Id="115" Count="0" />
+      <LineId Id="137" Count="0" />
+      <LineId Id="116" Count="4" />
+      <LineId Id="140" Count="0" />
+      <LineId Id="122" Count="1" />
+      <LineId Id="141" Count="0" />
+      <LineId Id="124" Count="0" />
+      <LineId Id="142" Count="0" />
+      <LineId Id="129" Count="2" />
+      <LineId Id="138" Count="0" />
+      <LineId Id="132" Count="0" />
+      <LineId Id="135" Count="0" />
+      <LineId Id="175" Count="0" />
+      <LineId Id="109" Count="2" />
+      <LineId Id="85" Count="1" />
+      <LineId Id="92" Count="0" />
+      <LineId Id="94" Count="1" />
       <LineId Id="87" Count="0" />
-      <LineId Id="76" Count="0" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="45" Count="0" />
-      <LineId Id="53" Count="0" />
+      <LineId Id="144" Count="2" />
+      <LineId Id="143" Count="0" />
+      <LineId Id="150" Count="21" />
+      <LineId Id="174" Count="0" />
+      <LineId Id="96" Count="0" />
+      <LineId Id="173" Count="0" />
+      <LineId Id="98" Count="4" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="147" Count="2" />
+      <LineId Id="88" Count="2" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="13" Count="1" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="82" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="61" Count="1" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="63" Count="1" />
+      <LineId Id="176" Count="0" />
       <LineId Id="66" Count="0" />
-      <LineId Id="38" Count="1" />
-      <LineId Id="29" Count="0" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="75" Count="1" />
       <LineId Id="9" Count="0" />
     </LineIds>
   </POU>

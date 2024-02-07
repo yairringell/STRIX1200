@@ -12,16 +12,20 @@ VAR_INPUT
 	bHOME_ALL:BOOL;
 	bOPEN_ALL:BOOL;
 	bCLOSE_ALL:BOOL;
-	actionSTATE: E_ACTION_STATE;
+	tACTION:TON;
+	rACTION_TIMEOUT:TIME:=T#20S;
 	tHOMING:TON;
-	rHOMING_TIMEOUT: TIME:=T#50S;
+	rHOMING_TIMEOUT: TIME:=T#20S;
 	tOPEN:TON;
-	rOPEN_TIMEOUT: TIME:=T#50S;
+	rOPEN_TIMEOUT: TIME:=T#20S;
 	tCLOSE:TON;
-	rCLOSE_TIMEOUT: TIME:=T#50S;
+	rCLOSE_TIMEOUT: TIME:=T#20S;
 END_VAR
 VAR_OUTPUT
-	bERROR:BOOL;
+	sACTION_STATE:STRING:='UNINIT';
+	bSTART_ACTION:BOOL;
+	iACTION_STATE:INT:=98;
+	bACTION_ERROR:BOOL;
 	bALL_HOMED:BOOL;
 	bALL_OPENED:BOOL;
 	bALL_CLOSED:BOOL;
@@ -30,12 +34,88 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-mHOME_ALL();
-mOPEN_ALL();
-mCLOSE_ALL();
+      <ST><![CDATA[mACTION_STATE_MACHINE();
+//mHOME_ALL();
+//mOPEN_ALL();
+//mCLOSE_ALL();
 ]]></ST>
     </Implementation>
+    <Method Name="mACTION_STATE_MACHINE" Id="{3aea7e34-a6ec-43c3-a03c-1c552f7c93cb}">
+      <Declaration><![CDATA[METHOD mACTION_STATE_MACHINE : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[tACTION(IN:= bSTART_ACTION, PT:=rACTION_TIMEOUT , Q=> , ET=> );
+
+CASE iACTION_STATE OF
+	
+	1://======================================  HOME ALL	
+		//HOME XY
+		sACTION_STATE:='HOMING XY';
+		bHOME_ALL:=FALSE; bALL_HOMED:=FALSE;bALL_OPENED:=FALSE;bOPEN_ALL:=FALSE;bALL_CLOSED:=FALSE;bCLOSE_ALL:=FALSE;
+		XY.bHome:=TRUE;
+		bSTART_ACTION:=TRUE;
+		iACTION_STATE:=2; 
+	2:
+		XY.bHome:=FALSE;
+		IF XY.bHOMED THEN
+			bSTART_ACTION:=FALSE;
+			iACTION_STATE:=3;
+		END_IF
+		IF tACTION.Q THEN
+			iACTION_STATE:=99;
+			bSTART_ACTION:=FALSE;
+			bACTION_ERROR:=TRUE;
+		END_IF	
+	3://HOME LIFT
+		sACTION_STATE:='HOMING LIFT';
+		LIFT.bHome:=TRUE;
+		bSTART_ACTION:=TRUE;
+		iACTION_STATE:=4;
+	4:
+		LIFT.bHome:=FALSE;
+		IF LIFT.bHOMED THEN
+			bSTART_ACTION:=FALSE;
+			iACTION_STATE:=5;
+		END_IF
+		IF tHOMING.Q THEN
+			iACTION_STATE:=99;
+			bSTART_ACTION:=FALSE;
+			bACTION_ERROR:=TRUE;
+		END_IF
+	5://HOME PISTON
+		sACTION_STATE:='HOMING PISTON';
+		bSTART_ACTION:=TRUE;
+		PIST1.bOPEN_SWR:=FALSE;
+		IF PIST1.bCLOSED THEN
+			bSTART_ACTION:=FALSE;
+			iACTION_STATE:=100;
+			bALL_HOMED:=TRUE;
+		END_IF
+
+	98://===================================== UNINIT
+		IF bHOME_ALL THEN
+			iACTION_STATE:=1;
+			bACTION_ERROR:=FALSE;
+		END_IF
+		
+	99://===================================== ERROR
+		IF bHOME_ALL THEN
+			iACTION_STATE:=1;
+			bACTION_ERROR:=FALSE;
+		END_IF
+	
+	100://===================================== HOMED
+		IF bHOME_ALL THEN
+			iACTION_STATE:=1;
+			bACTION_ERROR:=FALSE;
+		END_IF	
+	
+	
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="mCLOSE_ALL" Id="{cf59c8b3-c774-4eb1-8d58-f6761a49104d}">
       <Declaration><![CDATA[METHOD mCLOSE_ALL : BOOL
 VAR_INPUT
@@ -49,6 +129,7 @@ IF bCLOSE_ALL AND iCLOSE_STATE>5  AND (bALL_HOMED OR bALL_OPENED) THEN
 	bALL_CLOSED:=FALSE;
 	bALL_OPENED:=FALSE;
 	bCLOSE_ALL:=FALSE;
+	//bERROR:=FALSE;
 END_IF
 		
 CASE iCLOSE_STATE OF
@@ -67,6 +148,7 @@ CASE iCLOSE_STATE OF
 		END_IF
 		IF tCLOSE.Q THEN
 			iCLOSE_STATE:=99;
+			//bERROR:=TRUE;
 		END_IF
 		
 	3://CLOSE LIFT
@@ -82,6 +164,7 @@ CASE iCLOSE_STATE OF
 		END_IF
 		IF tCLOSE.Q THEN
 			iCLOSE_STATE:=99;
+			//bERROR:=TRUE;
 		END_IF
 		
 	5://HOME PISTON
@@ -105,6 +188,7 @@ END_VAR
         <ST><![CDATA[tHOMING(IN:= bSTART_HOMING, PT:=rHOMING_TIMEOUT , Q=> , ET=> );
 IF bHOME_ALL AND iHOME_STATE>5 THEN
 	iHOME_STATE:=1;
+	//bERROR:=FALSE;
 	bALL_HOMED:=FALSE;
 	bHOME_ALL:=FALSE;
 	bALL_OPENED:=FALSE;
@@ -127,6 +211,7 @@ CASE iHOME_STATE OF
 		END_IF
 		IF tHOMING.Q THEN
 			iHOME_STATE:=99;
+			//bERROR:=TRUE;
 		END_IF
 		
 	3://HOME LIFT
@@ -142,6 +227,7 @@ CASE iHOME_STATE OF
 		END_IF
 		IF tHOMING.Q THEN
 			iHOME_STATE:=99;
+			//bERROR:=TRUE;
 		END_IF
 		
 	5://HOME PISTON
@@ -169,6 +255,7 @@ IF bOPEN_ALL AND iOPEN_STATE>5  AND (bALL_HOMED OR bALL_CLOSED) THEN
 	bALL_OPENED:=FALSE;
 	bALL_CLOSED:=FALSE;
 	bOPEN_ALL:=FALSE;
+	//bERROR:=FALSE;
 END_IF
 		
 CASE iOPEN_STATE OF
@@ -183,6 +270,7 @@ CASE iOPEN_STATE OF
 		END_IF
 		IF tOPEN.Q THEN
 			iOPEN_STATE:=99;
+			//bERROR:=TRUE;
 		END_IF
 		
 	2:// OPEN LIFT
@@ -197,6 +285,7 @@ CASE iOPEN_STATE OF
 		END_IF
 		IF tOPEN.Q THEN
 			iOPEN_STATE:=99;
+			//bERROR:=TRUE;
 		END_IF
 		
 	4:// OPEN XY
@@ -212,6 +301,7 @@ CASE iOPEN_STATE OF
 		END_IF
 		IF tOPEN.Q THEN
 			iOPEN_STATE:=99;
+			//bERROR:=TRUE;
 		END_IF
 		
 	
@@ -226,16 +316,62 @@ END_CASE]]></ST>
       <LineId Id="85" Count="1" />
       <LineId Id="9" Count="0" />
     </LineIds>
+    <LineIds Name="FB_ACTION.mACTION_STATE_MACHINE">
+      <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="20" Count="1" />
+      <LineId Id="23" Count="7" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="31" Count="1" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="35" Count="2" />
+      <LineId Id="39" Count="7" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="47" Count="1" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="51" Count="5" />
+      <LineId Id="11" Count="1" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="68" Count="3" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="76" Count="2" />
+      <LineId Id="60" Count="1" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
     <LineIds Name="FB_ACTION.mCLOSE_ALL">
       <LineId Id="6" Count="4" />
       <LineId Id="103" Count="0" />
-      <LineId Id="11" Count="2" />
-      <LineId Id="61" Count="41" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="106" Count="0" />
+      <LineId Id="12" Count="1" />
+      <LineId Id="61" Count="15" />
+      <LineId Id="104" Count="0" />
+      <LineId Id="77" Count="14" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="92" Count="10" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_ACTION.mHOME_ALL">
       <LineId Id="6" Count="0" />
       <LineId Id="46" Count="1" />
+      <LineId Id="84" Count="0" />
       <LineId Id="49" Count="0" />
       <LineId Id="53" Count="0" />
       <LineId Id="80" Count="1" />
@@ -253,9 +389,11 @@ END_CASE]]></ST>
       <LineId Id="56" Count="1" />
       <LineId Id="63" Count="0" />
       <LineId Id="58" Count="2" />
+      <LineId Id="82" Count="0" />
       <LineId Id="55" Count="0" />
       <LineId Id="61" Count="0" />
       <LineId Id="64" Count="12" />
+      <LineId Id="83" Count="0" />
       <LineId Id="24" Count="0" />
       <LineId Id="35" Count="1" />
       <LineId Id="40" Count="0" />
@@ -271,16 +409,22 @@ END_CASE]]></ST>
       <LineId Id="61" Count="0" />
       <LineId Id="8" Count="1" />
       <LineId Id="88" Count="0" />
-      <LineId Id="10" Count="6" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="11" Count="5" />
       <LineId Id="55" Count="4" />
       <LineId Id="19" Count="0" />
       <LineId Id="67" Count="1" />
+      <LineId Id="90" Count="0" />
       <LineId Id="66" Count="0" />
       <LineId Id="20" Count="2" />
       <LineId Id="62" Count="3" />
-      <LineId Id="23" Count="6" />
+      <LineId Id="23" Count="5" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="29" Count="0" />
       <LineId Id="73" Count="0" />
       <LineId Id="75" Count="12" />
+      <LineId Id="92" Count="0" />
       <LineId Id="74" Count="0" />
       <LineId Id="30" Count="0" />
       <LineId Id="34" Count="1" />
