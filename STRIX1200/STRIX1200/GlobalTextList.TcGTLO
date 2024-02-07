@@ -31,6 +31,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"513"</v>
+              <v n="TextDefault">"CLOSE ALL"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"293"</v>
               <v n="TextDefault">"CLOSED LIMIT"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -103,6 +108,11 @@
             <o>
               <v n="TextID">"189"</v>
               <v n="TextDefault">"OPEN"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"149"</v>
+              <v n="TextDefault">"OPEN ALL"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
