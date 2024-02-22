@@ -30,6 +30,10 @@
     <Compile Include="POUs\ACTION\FB_ACTION.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\ACTION\vACTION.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
     <Compile Include="POUs\Axes\AXES_CYCLE.TcPOU">
       <SubType>Code</SubType>
     </Compile>

@@ -3,11 +3,14 @@
   <GVL Name="GVL_MAIN" Id="{7384caef-394f-40b5-a173-7cc02d269eff}">
     <Declaration><![CDATA[//{attribute 'qualified_only'}
 VAR_GLOBAL
-	LIFT:FB_Axis;
-	XY:FB_Axis;
+	LIFT1:FB_Axis;
+	XY1:FB_Axis;
+	LIFT2:FB_Axis;
+	XY2:FB_Axis;
 	PIST1: FB_PISTON;
 	PIST2: FB_PISTON;
 	ACTION1:FB_ACTION;
+	ACTION2:FB_ACTION;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
