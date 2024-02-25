@@ -44,7 +44,7 @@ grp1();
                         <v n="BoxType">"FB_PISTON"</v>
                         <o n="Instance" t="Operand">
                           <v n="Operand">"PIST1"</v>
-                          <v n="Type">""</v>
+                          <v n="Type">"FB_PISTON"</v>
                           <v n="Comment">""</v>
                           <v n="SymbolComment">""</v>
                           <v n="Address">""</v>
@@ -62,7 +62,7 @@ grp1();
                           <l2 n="OutputItems" cet="Operand">
                             <o>
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -71,14 +71,14 @@ grp1();
                                 <v n="Fixed">true</v>
                                 <v n="Extensible">false</v>
                               </o>
-                              <v n="LValue">false</v>
+                              <v n="LValue">true</v>
                               <v n="Boolean">false</v>
                               <v n="IsInstance">false</v>
                               <v n="Id">4L</v>
                             </o>
                             <o>
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -87,14 +87,14 @@ grp1();
                                 <v n="Fixed">true</v>
                                 <v n="Extensible">false</v>
                               </o>
-                              <v n="LValue">false</v>
+                              <v n="LValue">true</v>
                               <v n="Boolean">false</v>
                               <v n="IsInstance">false</v>
                               <v n="Id">5L</v>
                             </o>
                             <o>
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -103,14 +103,14 @@ grp1();
                                 <v n="Fixed">true</v>
                                 <v n="Extensible">false</v>
                               </o>
-                              <v n="LValue">false</v>
+                              <v n="LValue">true</v>
                               <v n="Boolean">false</v>
                               <v n="IsInstance">false</v>
                               <v n="Id">6L</v>
                             </o>
                             <o>
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -119,14 +119,14 @@ grp1();
                                 <v n="Fixed">true</v>
                                 <v n="Extensible">false</v>
                               </o>
-                              <v n="LValue">false</v>
+                              <v n="LValue">true</v>
                               <v n="Boolean">false</v>
                               <v n="IsInstance">false</v>
                               <v n="Id">7L</v>
                             </o>
                             <o>
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -135,14 +135,14 @@ grp1();
                                 <v n="Fixed">true</v>
                                 <v n="Extensible">false</v>
                               </o>
-                              <v n="LValue">false</v>
+                              <v n="LValue">true</v>
                               <v n="Boolean">false</v>
                               <v n="IsInstance">false</v>
                               <v n="Id">8L</v>
                             </o>
                             <o>
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -151,7 +151,7 @@ grp1();
                                 <v n="Fixed">true</v>
                                 <v n="Extensible">false</v>
                               </o>
-                              <v n="LValue">false</v>
+                              <v n="LValue">true</v>
                               <v n="Boolean">false</v>
                               <v n="IsInstance">false</v>
                               <v n="Id">9L</v>
@@ -168,7 +168,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -187,7 +187,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">"'TEST'"</v>
-                              <v n="Type">""</v>
+                              <v n="Type">"STRING(INT#4)"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -206,7 +206,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -224,8 +224,8 @@ grp1();
                           </o>
                           <o>
                             <o n="Operand" t="Operand">
-                              <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <v n="Operand">"E_PISTON_TYPE.NO_SENSORS"</v>
+                              <v n="Type">"E_PISTON_TYPE"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -244,7 +244,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -263,7 +263,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">"T#1s"</v>
-                              <v n="Type">""</v>
+                              <v n="Type">"TIME"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -282,7 +282,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">"T#1s"</v>
-                              <v n="Type">""</v>
+                              <v n="Type">"TIME"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -301,7 +301,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">"T#5s"</v>
-                              <v n="Type">""</v>
+                              <v n="Type">"TIME"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -320,7 +320,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">"T#5s"</v>
-                              <v n="Type">""</v>
+                              <v n="Type">"TIME"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -339,7 +339,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -358,7 +358,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -377,7 +377,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -396,7 +396,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -415,7 +415,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -434,7 +434,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -453,7 +453,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -472,7 +472,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -573,7 +573,7 @@ grp1();
                         <v n="BoxType">"FB_PISTON"</v>
                         <o n="Instance" t="Operand">
                           <v n="Operand">"PIST2"</v>
-                          <v n="Type">""</v>
+                          <v n="Type">"FB_PISTON"</v>
                           <v n="Comment">""</v>
                           <v n="SymbolComment">""</v>
                           <v n="Address">""</v>
@@ -591,7 +591,7 @@ grp1();
                           <l2 n="OutputItems" cet="Operand">
                             <o>
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -600,14 +600,14 @@ grp1();
                                 <v n="Fixed">true</v>
                                 <v n="Extensible">false</v>
                               </o>
-                              <v n="LValue">false</v>
+                              <v n="LValue">true</v>
                               <v n="Boolean">false</v>
                               <v n="IsInstance">false</v>
                               <v n="Id">47L</v>
                             </o>
                             <o>
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -616,14 +616,14 @@ grp1();
                                 <v n="Fixed">true</v>
                                 <v n="Extensible">false</v>
                               </o>
-                              <v n="LValue">false</v>
+                              <v n="LValue">true</v>
                               <v n="Boolean">false</v>
                               <v n="IsInstance">false</v>
                               <v n="Id">48L</v>
                             </o>
                             <o>
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -632,14 +632,14 @@ grp1();
                                 <v n="Fixed">true</v>
                                 <v n="Extensible">false</v>
                               </o>
-                              <v n="LValue">false</v>
+                              <v n="LValue">true</v>
                               <v n="Boolean">false</v>
                               <v n="IsInstance">false</v>
                               <v n="Id">49L</v>
                             </o>
                             <o>
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -648,14 +648,14 @@ grp1();
                                 <v n="Fixed">true</v>
                                 <v n="Extensible">false</v>
                               </o>
-                              <v n="LValue">false</v>
+                              <v n="LValue">true</v>
                               <v n="Boolean">false</v>
                               <v n="IsInstance">false</v>
                               <v n="Id">50L</v>
                             </o>
                             <o>
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -664,14 +664,14 @@ grp1();
                                 <v n="Fixed">true</v>
                                 <v n="Extensible">false</v>
                               </o>
-                              <v n="LValue">false</v>
+                              <v n="LValue">true</v>
                               <v n="Boolean">false</v>
                               <v n="IsInstance">false</v>
                               <v n="Id">51L</v>
                             </o>
                             <o>
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -680,7 +680,7 @@ grp1();
                                 <v n="Fixed">true</v>
                                 <v n="Extensible">false</v>
                               </o>
-                              <v n="LValue">false</v>
+                              <v n="LValue">true</v>
                               <v n="Boolean">false</v>
                               <v n="IsInstance">false</v>
                               <v n="Id">52L</v>
@@ -697,7 +697,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -716,7 +716,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">"'PIST2'"</v>
-                              <v n="Type">""</v>
+                              <v n="Type">"STRING(INT#5)"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -735,7 +735,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -753,8 +753,8 @@ grp1();
                           </o>
                           <o>
                             <o n="Operand" t="Operand">
-                              <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <v n="Operand">"E_PISTON_TYPE.NO_SENSORS"</v>
+                              <v n="Type">"E_PISTON_TYPE"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -773,7 +773,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -792,7 +792,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">"T#1s"</v>
-                              <v n="Type">""</v>
+                              <v n="Type">"TIME"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -811,7 +811,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">"T#1s"</v>
-                              <v n="Type">""</v>
+                              <v n="Type">"TIME"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -830,7 +830,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">"T#6s"</v>
-                              <v n="Type">""</v>
+                              <v n="Type">"TIME"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -849,7 +849,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">"T#6s"</v>
-                              <v n="Type">""</v>
+                              <v n="Type">"TIME"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -868,7 +868,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -887,7 +887,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -906,7 +906,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -925,7 +925,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -944,7 +944,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -963,7 +963,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -982,7 +982,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -1001,7 +1001,7 @@ grp1();
                           <o>
                             <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
-                              <v n="Type">""</v>
+                              <n n="Type" />
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>

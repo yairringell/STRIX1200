@@ -3,6 +3,7 @@
   <POU Name="FB_ACTION" Id="{77b4196e-a6d2-4735-ae2e-ed59e88b663e}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_ACTION
 VAR_INPUT
+	sNAME: STRING;
 	PIST: REFERENCE TO FB_PISTON;
 	aLIFT:REFERENCE TO FB_Axis;
 	aXY:REFERENCE TO FB_Axis;
@@ -43,6 +44,53 @@ END_VAR
 //mCLOSE_ALL();
 ]]></ST>
     </Implementation>
+    <Action Name="aACTION_ERROR" Id="{18ded634-2282-4c0c-b5aa-75bbf974bd96}">
+      <Implementation>
+        <ST><![CDATA[gEventType:= 'action Alarm'; 
+gEventSeverity:= 'Error';
+
+gEventName:= sNAME;
+IF iACTION_STATE=2  THEN
+	gEventText:='action XY homing';
+	gEventIdentity:=5001;
+END_IF
+IF iACTION_STATE=2  THEN
+	gEventText:='action LIFT homing';
+	gEventIdentity:=5002;
+END_IF
+IF iACTION_STATE=5  THEN
+	gEventText:='action PISTON homing';
+	gEventIdentity:=5003;
+END_IF
+//---------------------------------------------------
+IF iACTION_STATE=14  THEN
+	gEventText:='action XY opening';
+	gEventIdentity:=5011;
+END_IF
+IF iACTION_STATE=12  THEN
+	gEventText:='action LIFT opening';
+	gEventIdentity:=5012;
+END_IF
+IF iACTION_STATE=10  THEN
+	gEventText:='action PISTON opening';
+	gEventIdentity:=5013;
+END_IF
+//---------------------------------------------------
+IF iACTION_STATE=32  THEN
+	gEventText:='action XY closing';
+	gEventIdentity:=5021;
+END_IF
+IF iACTION_STATE=34  THEN
+	gEventText:='action LIFT closing';
+	gEventIdentity:=5022;
+END_IF
+IF iACTION_STATE=35  THEN
+	gEventText:='action PISTON closing';
+	gEventIdentity:=5023;
+END_IF
+fbEventLogger.mAdd();]]></ST>
+      </Implementation>
+    </Action>
     <Method Name="mACTION_STATE_MACHINE" Id="{3aea7e34-a6ec-43c3-a03c-1c552f7c93cb}">
       <Declaration><![CDATA[METHOD mACTION_STATE_MACHINE : BOOL
 VAR_INPUT
@@ -68,6 +116,7 @@ CASE iACTION_STATE OF
 		END_IF
 		IF aXY.bSTATE_ERROR THEN
 			iACTION_STATE:=99;
+			aACTION_ERROR();
 			bSTART_ACTION:=FALSE;
 			bACTION_ERROR:=TRUE;
 		END_IF
@@ -84,6 +133,7 @@ CASE iACTION_STATE OF
 			iACTION_STATE:=5;
 		END_IF
 		IF aLIFT.bSTATE_ERROR THEN
+			aACTION_ERROR();
 			iACTION_STATE:=99;
 			bSTART_ACTION:=FALSE;
 			bACTION_ERROR:=TRUE;
@@ -98,6 +148,7 @@ CASE iACTION_STATE OF
 			bALL_HOMED:=TRUE;
 		END_IF
 		IF PIST.bERROR THEN
+			aACTION_ERROR();
 			iACTION_STATE:=99;
 			bSTART_ACTION:=FALSE;
 			bACTION_ERROR:=TRUE;
@@ -113,6 +164,7 @@ CASE iACTION_STATE OF
 			iACTION_STATE:=11;
 		END_IF
 		IF PIST.bERROR THEN
+			aACTION_ERROR();
 			iACTION_STATE:=99;
 			bSTART_ACTION:=FALSE;
 			bACTION_ERROR:=TRUE;
@@ -129,6 +181,7 @@ CASE iACTION_STATE OF
 			iACTION_STATE:=13;
 		END_IF
 		IF aLIFT.bSTATE_ERROR THEN
+			aACTION_ERROR();
 			iACTION_STATE:=99;
 			bSTART_ACTION:=FALSE;
 			bACTION_ERROR:=TRUE;
@@ -146,6 +199,7 @@ CASE iACTION_STATE OF
 			iACTION_STATE:=20;
 		END_IF
 		IF aXY.bSTATE_ERROR THEN
+			aACTION_ERROR();
 			iACTION_STATE:=99;
 			bSTART_ACTION:=FALSE;
 			bACTION_ERROR:=TRUE;
@@ -175,6 +229,7 @@ CASE iACTION_STATE OF
 			iACTION_STATE:=33;
 		END_IF
 		IF aXY.bSTATE_ERROR THEN
+			aACTION_ERROR();
 			iACTION_STATE:=99;
 			bSTART_ACTION:=FALSE;
 			bACTION_ERROR:=TRUE;
@@ -191,6 +246,7 @@ CASE iACTION_STATE OF
 			iACTION_STATE:=35;
 		END_IF
 		IF aLIFT.bSTATE_ERROR THEN
+			aACTION_ERROR();
 			iACTION_STATE:=99;
 			bSTART_ACTION:=FALSE;
 			bACTION_ERROR:=TRUE;
@@ -205,6 +261,7 @@ CASE iACTION_STATE OF
 			bALL_CLOSED:=TRUE;
 		END_IF
 		IF PIST.bERROR THEN
+			aACTION_ERROR();
 			iACTION_STATE:=99;
 			bSTART_ACTION:=FALSE;
 			bACTION_ERROR:=TRUE;
@@ -254,6 +311,18 @@ END_CASE]]></ST>
       <LineId Id="85" Count="1" />
       <LineId Id="9" Count="0" />
     </LineIds>
+    <LineIds Name="FB_ACTION.aACTION_ERROR">
+      <LineId Id="2" Count="7" />
+      <LineId Id="19" Count="2" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="22" Count="2" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="26" Count="11" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="39" Count="11" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="1" Count="0" />
+    </LineIds>
     <LineIds Name="FB_ACTION.mACTION_STATE_MACHINE">
       <LineId Id="5" Count="0" />
       <LineId Id="7" Count="0" />
@@ -267,20 +336,24 @@ END_CASE]]></ST>
       <LineId Id="20" Count="1" />
       <LineId Id="23" Count="5" />
       <LineId Id="205" Count="0" />
-      <LineId Id="208" Count="1" />
+      <LineId Id="208" Count="0" />
+      <LineId Id="227" Count="0" />
+      <LineId Id="209" Count="0" />
       <LineId Id="206" Count="1" />
       <LineId Id="32" Count="0" />
       <LineId Id="34" Count="0" />
       <LineId Id="73" Count="0" />
       <LineId Id="35" Count="2" />
-      <LineId Id="39" Count="7" />
+      <LineId Id="39" Count="6" />
+      <LineId Id="228" Count="0" />
+      <LineId Id="46" Count="0" />
       <LineId Id="59" Count="0" />
       <LineId Id="47" Count="1" />
       <LineId Id="50" Count="0" />
       <LineId Id="74" Count="0" />
       <LineId Id="51" Count="5" />
       <LineId Id="11" Count="0" />
-      <LineId Id="210" Count="0" />
+      <LineId Id="229" Count="1" />
       <LineId Id="213" Count="1" />
       <LineId Id="211" Count="1" />
       <LineId Id="12" Count="0" />
@@ -289,15 +362,21 @@ END_CASE]]></ST>
       <LineId Id="204" Count="0" />
       <LineId Id="98" Count="4" />
       <LineId Id="91" Count="0" />
-      <LineId Id="216" Count="3" />
+      <LineId Id="216" Count="0" />
+      <LineId Id="231" Count="0" />
+      <LineId Id="217" Count="2" />
       <LineId Id="215" Count="0" />
       <LineId Id="96" Count="0" />
-      <LineId Id="106" Count="13" />
+      <LineId Id="106" Count="10" />
+      <LineId Id="232" Count="0" />
+      <LineId Id="117" Count="2" />
       <LineId Id="104" Count="1" />
       <LineId Id="123" Count="0" />
       <LineId Id="125" Count="6" />
       <LineId Id="140" Count="0" />
-      <LineId Id="132" Count="5" />
+      <LineId Id="132" Count="2" />
+      <LineId Id="233" Count="0" />
+      <LineId Id="135" Count="2" />
       <LineId Id="121" Count="1" />
       <LineId Id="120" Count="0" />
       <LineId Id="138" Count="0" />
@@ -308,9 +387,15 @@ END_CASE]]></ST>
       <LineId Id="203" Count="0" />
       <LineId Id="147" Count="0" />
       <LineId Id="146" Count="0" />
-      <LineId Id="150" Count="38" />
+      <LineId Id="150" Count="10" />
+      <LineId Id="234" Count="0" />
+      <LineId Id="161" Count="15" />
+      <LineId Id="235" Count="0" />
+      <LineId Id="177" Count="11" />
       <LineId Id="148" Count="0" />
-      <LineId Id="220" Count="3" />
+      <LineId Id="220" Count="0" />
+      <LineId Id="236" Count="0" />
+      <LineId Id="221" Count="2" />
       <LineId Id="189" Count="0" />
       <LineId Id="194" Count="0" />
       <LineId Id="190" Count="3" />

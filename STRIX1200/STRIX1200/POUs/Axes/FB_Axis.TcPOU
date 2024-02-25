@@ -141,6 +141,27 @@ mAXIS_STATE_MACHINE();
 //	mHOME(bLIMIT_CLOSED);
 //END_IF]]></ST>
     </Implementation>
+    <Action Name="aAXIS_ERROR" Id="{d9bff058-7cd6-4042-808e-812c3696c258}">
+      <Implementation>
+        <ST><![CDATA[gEventType:= 'axis Alarm'; 
+gEventSeverity:= 'Error';
+
+gEventName:= sNAME;
+IF iAXIS_STATE=1  THEN
+	gEventText:='axis homing';
+	gEventIdentity:=2001;
+END_IF
+IF iAXIS_STATE=20  THEN
+	gEventText:='axis opening';
+	gEventIdentity:=2002;
+END_IF
+IF iAXIS_STATE=40  THEN
+	gEventText:='axis closing';
+	gEventIdentity:=2003;
+END_IF
+fbEventLogger.mAdd();]]></ST>
+      </Implementation>
+    </Action>
     <Method Name="clear_cmd_req" Id="{c115c33f-8377-4dd1-8142-a1b93e7b6e59}">
       <Declaration><![CDATA[METHOD clear_cmd_req : BOOL
 VAR_INPUT
@@ -2923,6 +2944,7 @@ CASE iAXIS_STATE OF
 		END_IF
 		IF tACTION.Q THEN
 			bSTART_ACTION:=FALSE;
+			aAXIS_ERROR();
 			iAXIS_STATE:=99;
 			bSTATE_ERROR:=TRUE;
 		END_IF
@@ -2966,6 +2988,7 @@ CASE iAXIS_STATE OF
 		END_IF
 		IF tACTION.Q THEN
 			bSTART_ACTION:=FALSE;
+			aAXIS_ERROR();
 			iAXIS_STATE:=99;
 			bSTATE_ERROR:=TRUE;
 		END_IF
@@ -3002,6 +3025,7 @@ CASE iAXIS_STATE OF
 		END_IF
 		IF tACTION.Q THEN
 			bSTART_ACTION:=FALSE;
+			aAXIS_ERROR();
 			iAXIS_STATE:=99;
 			bSTATE_ERROR:=TRUE;
 		END_IF
@@ -3051,6 +3075,14 @@ END_CASE]]></ST>
       <LineId Id="252" Count="61" />
       <LineId Id="145" Count="0" />
     </LineIds>
+    <LineIds Name="FB_Axis.aAXIS_ERROR">
+      <LineId Id="2" Count="7" />
+      <LineId Id="22" Count="2" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="26" Count="2" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="1" Count="0" />
+    </LineIds>
     <LineIds Name="FB_Axis.clear_cmd_req">
       <LineId Id="3" Count="1" />
       <LineId Id="2" Count="0" />
@@ -3069,6 +3101,7 @@ END_CASE]]></ST>
       <LineId Id="103" Count="0" />
       <LineId Id="34" Count="4" />
       <LineId Id="104" Count="0" />
+      <LineId Id="181" Count="0" />
       <LineId Id="39" Count="1" />
       <LineId Id="12" Count="0" />
       <LineId Id="50" Count="9" />
@@ -3092,6 +3125,7 @@ END_CASE]]></ST>
       <LineId Id="140" Count="0" />
       <LineId Id="122" Count="1" />
       <LineId Id="141" Count="0" />
+      <LineId Id="182" Count="0" />
       <LineId Id="124" Count="0" />
       <LineId Id="142" Count="0" />
       <LineId Id="129" Count="2" />
@@ -3106,7 +3140,9 @@ END_CASE]]></ST>
       <LineId Id="87" Count="0" />
       <LineId Id="144" Count="2" />
       <LineId Id="143" Count="0" />
-      <LineId Id="150" Count="21" />
+      <LineId Id="150" Count="13" />
+      <LineId Id="183" Count="0" />
+      <LineId Id="164" Count="7" />
       <LineId Id="174" Count="0" />
       <LineId Id="96" Count="0" />
       <LineId Id="173" Count="0" />

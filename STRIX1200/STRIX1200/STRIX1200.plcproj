@@ -34,20 +34,43 @@
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
     </Compile>
-    <Compile Include="POUs\Axes\AXES_CYCLE.TcPOU">
+    <Compile Include="POUs\AXES\AXES_CYCLE.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Axes\E_AXIS_STATE.TcDUT">
+    <Compile Include="POUs\AXES\E_AXIS_STATE.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Axes\FB_Axis.TcPOU">
+    <Compile Include="POUs\AXES\FB_Axis.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Axes\GVL_AXES.TcGVL">
+    <Compile Include="POUs\AXES\GVL_AXES.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="POUs\Axes\vAXIS.TcVIS">
+    <Compile Include="POUs\AXES\vAXIS.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="POUs\EVENT_LOGGER\E_EventType.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\EVENT_LOGGER\FB_EventLogger.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\EVENT_LOGGER\GVL_EVENT_LOGGER.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="POUs\EVENT_LOGGER\ST_Event.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\EVENT_LOGGER\UpdateEventTimestampWithSystemTime.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\EVENT_LOGGER\UpdateTimeStamp.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\EVENT_LOGGER\vEVENT_LOGGER.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
     </Compile>
@@ -80,7 +103,7 @@
     <Compile Include="Visualization Manager.TcVMO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="VISUs\VISUs\Visualization.TcVIS">
+    <Compile Include="VISUs\VISUs\vMAIN.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
     </Compile>
@@ -88,8 +111,9 @@
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
-    <Folder Include="POUs\Axes" />
+    <Folder Include="POUs\AXES" />
     <Folder Include="POUs\ACTION" />
+    <Folder Include="POUs\EVENT_LOGGER" />
     <Folder Include="POUs\PISTONS" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
@@ -149,6 +173,9 @@
     <PlaceholderReference Include="Tc2_System">
       <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_System</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_Utilities">
+      <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>

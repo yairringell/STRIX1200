@@ -6,7 +6,7 @@ VAR_INPUT
 	sSTATE:STRING:='UNINIT';
 	sNAME:STRING;
 	bLOCAL_MANUAL: BOOL:=FALSE;
-	pist_TYPE: E_PISTON_TYPE:=E_PISTON_TYPE.NO_SENSORS;
+	pist_TYPE: E_PISTON_TYPE;
 	pist_STATE: E_PISTON_STATE:=E_PISTON_STATE.uninit;
 	rOPEN_TIME: TIME;
 	rCLOSE_TIME: TIME;
@@ -68,9 +68,11 @@ CASE pist_STATE OF
 		bERROR:=FALSE;
 		IF bOPEN_CMD  THEN
 			bOPEN_VALVE:=TRUE;
+			bCLOSE_VALVE:=FALSE;
 			pist_STATE:=E_PISTON_STATE.opening;
 		ELSE
 			bOPEN_VALVE:=FALSE;
+			bCLOSE_VALVE:=TRUE;
 			pist_STATE:=E_PISTON_STATE.closing;
 		END_IF
 //================================================== OPENING =====================================================
@@ -89,6 +91,7 @@ CASE pist_STATE OF
 		END_IF
 		IF T_OPEN_TIMEOUT.Q THEN
 			bOPEN_CMD:=FALSE;
+			aPISTON_ERROR();
 			pist_STATE:=E_PISTON_STATE.error;
 		END_IF
 		//----------------------------- only open sensor
@@ -98,6 +101,7 @@ CASE pist_STATE OF
 		END_IF
 		IF T_OPEN_TIMEOUT.Q THEN
 			bOPEN_CMD:=FALSE;
+			aPISTON_ERROR();
 			pist_STATE:=E_PISTON_STATE.error;
 		END_IF
 		//----------------------------- only close sensor
@@ -131,6 +135,7 @@ CASE pist_STATE OF
 		END_IF
 		IF T_CLOSE_TIMEOUT.Q THEN
 			bOPEN_CMD:=TRUE;
+			aPISTON_ERROR();
 			pist_STATE:=E_PISTON_STATE.error;
 		END_IF
 		//----------------------------- only close sensor
@@ -146,18 +151,21 @@ CASE pist_STATE OF
 	IF NOT bOPEN_CMD  THEN
 		pist_STATE:=E_PISTON_STATE.closing;
 		bOPEN_VALVE:=FALSE;
+		bCLOSE_VALVE:=TRUE;
 	END_IF
 	CASE pist_TYPE OF
 		//-------------------------------------- both sensors
 		E_PISTON_TYPE.BOTH:
 		IF NOT bOPEN_LIMIT THEN
 			bOPEN_CMD:=FALSE;
+			aPISTON_ERROR();
 			pist_STATE:=E_PISTON_STATE.error;
 		END_IF
 		//-------------------------------------- only open sensor
 		E_PISTON_TYPE.ONLY_OPEN:
 		IF NOT bOPEN_LIMIT THEN
 			bOPEN_CMD:=FALSE;
+			aPISTON_ERROR();
 			pist_STATE:=E_PISTON_STATE.error;
 		END_IF
 	END_CASE
@@ -168,18 +176,21 @@ CASE pist_STATE OF
 	IF bOPEN_CMD  THEN
 		pist_STATE:=E_PISTON_STATE.opening;
 		bOPEN_VALVE:=TRUE;
+		bCLOSE_VALVE:=FALSE;
 	END_IF
 	CASE pist_TYPE OF
 		//-------------------------------------- both sensors
 		E_PISTON_TYPE.BOTH:
 		IF NOT bCLOSED_LIMIT THEN
 			bOPEN_CMD:=TRUE;
+			aPISTON_ERROR();
 			pist_STATE:=E_PISTON_STATE.error;
 		END_IF
 		//-------------------------------------- only close sensor
 		E_PISTON_TYPE.ONLY_CLOSE:
 		IF NOT bCLOSED_LIMIT THEN
 			bOPEN_CMD:=TRUE;
+			aPISTON_ERROR();
 			pist_STATE:=E_PISTON_STATE.error;
 		END_IF
 	END_CASE
@@ -195,9 +206,73 @@ END_CASE
 
 ]]></ST>
     </Implementation>
+    <Action Name="aPISTON_ERROR" Id="{1b759e5b-d5dc-4ee8-b4b9-3114018bbeff}">
+      <Implementation>
+        <ST><![CDATA[gEventType:= 'piston Alarm'; 
+gEventSeverity:= 'Error';
+
+gEventName:= sNAME;
+IF pist_STATE=E_PISTON_STATE.opening  THEN
+	gEventText:='piston opening';
+	gEventIdentity:=1001;
+END_IF
+IF pist_STATE=E_PISTON_STATE.closing THEN
+	gEventText:='piston closing';
+	gEventIdentity:=1002;
+END_IF
+IF pist_STATE=E_PISTON_STATE.closed THEN
+	gEventText:='piston closed';
+	gEventIdentity:=1003;
+END_IF
+IF pist_STATE=E_PISTON_STATE.opened THEN
+	gEventText:='piston opened';
+	gEventIdentity:=1004;
+END_IF
+fbEventLogger.mAdd();]]></ST>
+      </Implementation>
+    </Action>
     <LineIds Name="FB_PISTON">
-      <LineId Id="3" Count="152" />
+      <LineId Id="3" Count="27" />
+      <LineId Id="193" Count="0" />
+      <LineId Id="31" Count="2" />
+      <LineId Id="194" Count="0" />
+      <LineId Id="34" Count="17" />
+      <LineId Id="199" Count="0" />
+      <LineId Id="52" Count="8" />
+      <LineId Id="200" Count="0" />
+      <LineId Id="61" Count="32" />
+      <LineId Id="201" Count="0" />
+      <LineId Id="94" Count="14" />
+      <LineId Id="195" Count="0" />
+      <LineId Id="109" Count="5" />
+      <LineId Id="202" Count="0" />
+      <LineId Id="115" Count="5" />
+      <LineId Id="203" Count="0" />
+      <LineId Id="121" Count="9" />
+      <LineId Id="198" Count="0" />
+      <LineId Id="131" Count="5" />
+      <LineId Id="204" Count="0" />
+      <LineId Id="137" Count="5" />
+      <LineId Id="205" Count="0" />
+      <LineId Id="143" Count="12" />
       <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_PISTON.aPISTON_ERROR">
+      <LineId Id="2" Count="3" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="11" Count="1" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="15" Count="1" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="17" Count="1" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="1" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
