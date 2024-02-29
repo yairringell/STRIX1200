@@ -39,10 +39,13 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[mACTION_STATE_MACHINE();
-//mHOME_ALL();
-//mOPEN_ALL();
-//mCLOSE_ALL();
-]]></ST>
+IF bALL_HOMED THEN
+	IF NOT aLIFT.bHOMED OR NOT aXY.bHOMED THEN
+		bALL_HOMED:=FALSE;
+		iACTION_STATE:=98;
+	END_IF
+END_IF
+ ]]></ST>
     </Implementation>
     <Action Name="aACTION_ERROR" Id="{18ded634-2282-4c0c-b5aa-75bbf974bd96}">
       <Implementation>
@@ -307,9 +310,14 @@ END_CASE]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_ACTION">
-      <LineId Id="11" Count="1" />
-      <LineId Id="85" Count="1" />
-      <LineId Id="9" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="127" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="124" Count="0" />
+      <LineId Id="126" Count="0" />
+      <LineId Id="123" Count="0" />
+      <LineId Id="128" Count="0" />
+      <LineId Id="125" Count="0" />
     </LineIds>
     <LineIds Name="FB_ACTION.aACTION_ERROR">
       <LineId Id="2" Count="7" />
