@@ -5927,14 +5927,14 @@
             <o n="Background" t="BackgroundSettings">
               <n n="BgGradient" />
               <a n="BgNamedColor" et="Object">
-                <v>-16745985</v>
-                <v>"Element-XYChart-Secondary-CursorColor"</v>
-                <v>"XY Chart secondary cursor color"</v>
+                <v>-2830136</v>
+                <v>"Element-XYChart-Axis-Background-Color"</v>
+                <v>"XY Chart axis background color"</v>
               </a>
               <v n="BgBmpId">""</v>
               <v n="BgUseBmp">false</v>
               <v n="BgColor">true</v>
-              <v n="BgUseColor">-16745985</v>
+              <v n="BgUseColor">-2830136</v>
               <v n="BgUseGradient">false</v>
             </o>
           </o>

@@ -47,7 +47,15 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
+    <Compile Include="POUs\AXES\vAXES2.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
     <Compile Include="POUs\AXES\vAXIS.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="POUs\AXES\vAXES1.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
     </Compile>
@@ -102,6 +110,10 @@
     </Compile>
     <Compile Include="Visualization Manager.TcVMO">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="VISUs\VISUs\vCOMM.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
     </Compile>
     <Compile Include="VISUs\VISUs\vMAIN.TcVIS">
       <SubType>Code</SubType>
