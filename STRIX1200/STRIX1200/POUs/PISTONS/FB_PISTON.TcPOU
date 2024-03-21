@@ -147,6 +147,7 @@ CASE pist_STATE OF
 //================================================== OPENED =====================================================	
 	E_PISTON_STATE.opened:
 	sSTATE:='OPENED';
+	bOPEN_VALVE:=FALSE;
 	bBUSY:=FALSE; bOPENED:=TRUE; bCLOSED:=FALSE;
 	IF NOT bOPEN_CMD  THEN
 		pist_STATE:=E_PISTON_STATE.closing;
@@ -172,6 +173,7 @@ CASE pist_STATE OF
 //================================================== CLOSED =====================================================	
 	E_PISTON_STATE.closed:
 	sSTATE:='CLOSED';
+	bCLOSE_VALVE:=FALSE;
 	bBUSY:=FALSE; bOPENED:=FALSE; bCLOSED:=TRUE;
 	IF bOPEN_CMD  THEN
 		pist_STATE:=E_PISTON_STATE.opening;
@@ -198,6 +200,8 @@ CASE pist_STATE OF
 	E_PISTON_STATE.error:
 	sSTATE:='ERROR';
 	bERROR:=TRUE;
+	bCLOSE_VALVE:=FALSE;
+	bOPEN_VALVE:=FALSE;
 	//
 END_CASE	
 	
@@ -242,19 +246,25 @@ fbEventLogger.mAdd();]]></ST>
       <LineId Id="200" Count="0" />
       <LineId Id="61" Count="32" />
       <LineId Id="201" Count="0" />
-      <LineId Id="94" Count="14" />
+      <LineId Id="94" Count="10" />
+      <LineId Id="243" Count="0" />
+      <LineId Id="105" Count="3" />
       <LineId Id="195" Count="0" />
       <LineId Id="109" Count="5" />
       <LineId Id="202" Count="0" />
       <LineId Id="115" Count="5" />
       <LineId Id="203" Count="0" />
-      <LineId Id="121" Count="9" />
+      <LineId Id="121" Count="5" />
+      <LineId Id="244" Count="0" />
+      <LineId Id="127" Count="3" />
       <LineId Id="198" Count="0" />
       <LineId Id="131" Count="5" />
       <LineId Id="204" Count="0" />
       <LineId Id="137" Count="5" />
       <LineId Id="205" Count="0" />
-      <LineId Id="143" Count="12" />
+      <LineId Id="143" Count="6" />
+      <LineId Id="245" Count="1" />
+      <LineId Id="150" Count="5" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_PISTON.aPISTON_ERROR">
