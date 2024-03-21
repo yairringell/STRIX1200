@@ -186,8 +186,8 @@ grp1();
                           </o>
                           <o>
                             <o n="Operand" t="Operand">
-                              <v n="Operand">"'TEST'"</v>
-                              <v n="Type">"STRING(INT#4)"</v>
+                              <v n="Operand">"'PIST1'"</v>
+                              <v n="Type">"STRING(INT#5)"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
