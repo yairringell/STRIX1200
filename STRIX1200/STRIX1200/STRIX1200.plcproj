@@ -30,6 +30,9 @@
     <Compile Include="POUs\ACTION\FB_ACTION.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\ACTION\FB_AnalogSensor.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\ACTION\vACTION.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
@@ -210,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <SubObject Include="AXES_CYCLE.GRP1" />
+    <SubObject Include="FB_AnalogSensor.METH_LinearScaling" />
     <SubObject Include="FB_Axis.clear_cmd_req" />
     <SubObject Include="FB_Axis.CMDs" />
     <SubObject Include="PIST_CYCLE.grp1" />

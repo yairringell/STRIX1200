@@ -1760,7 +1760,7 @@ External Setpoint Generation:
 				<Axis Id="2" CreateSymbols="true" AxisType="1" AddAxisIoType="105">
 					<Name>XY1</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="1500" DecelerationMaximum="1500" Acceleration="2030" Deceleration="2344.04" Jerk="1373630"/>
+						<Dynamic AccelerationMaximum="1500" DecelerationMaximum="1500" Acceleration="2030.00007279981" Deceleration="2344.04088011516" Jerk="1373630.09852217"/>
 						<Velo Maximum="200"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
@@ -2228,11 +2228,14 @@ External Setpoint Generation:
 				<Axis Id="1" CreateSymbols="true" AxisType="1" AddAxisIoType="105">
 					<Name>LIFT1</Name>
 					<AxisPara>
-						<Velo Maximum="300"/>
+						<Dynamic AccelerationMaximum="300" DecelerationMaximum="300" Acceleration="2030" Deceleration="2344.04" Jerk="1373630"/>
+						<Velo Maximum="200"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
 					<Encoder Name="Enc" EncType="4">
-						<EncPara ScaleFactorNumerator="0.001" MaxCount="#xffffffff"/>
+						<EncPara ScaleFactorNumerator="0.001" EncMode="3" MaxCount="#xffffffff">
+							<TimeComp TimeCompMode="1"/>
+						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
 							<Var>
@@ -2291,8 +2294,8 @@ External Setpoint Generation:
 					</Encoder>
 					<Drive Name="Drive" DrvType="5">
 						<DrvPara>
-							<Analog VeloReferenz="300" TorqueSetpointScale="10" ScaleFactorActTorque="0.1"/>
-							<TimeComp TaskDelayCycles="1"/>
+							<Analog VeloReferenz="200" TorqueSetpointScale="10" ScaleFactorActTorque="0.1"/>
+							<TimeComp TimeCompMode="1" TaskDelayCycles="1"/>
 						</DrvPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
@@ -2386,11 +2389,15 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{CA1013CD-D2D4-4D21-B7E4-1998D10D30A6}" Name="STRIX1200" PrjFilePath="STRIX1200\STRIX1200.plcproj" TmcFilePath="STRIX1200\STRIX1200.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="STRIX1200\STRIX1200.tmc" TmcHash="{3094CB03-210B-0351-449D-F8B2FA21FECA}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="STRIX1200\STRIX1200.tmc" TmcHash="{4354F164-0975-8320-4B3A-3F232063E6A6}">
 					<Name>STRIX1200 Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>GVL_MAIN.iVOLTAGE1</Name>
+							<Type>INT</Type>
+						</Var>
 						<Var>
 							<Name>GVL_MAIN.XY1openedLimit</Name>
 							<Type>BOOL</Type>
@@ -2440,6 +2447,14 @@ External Setpoint Generation:
 							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 						</Var>
 						<Var>
+							<Name>GVL_MAIN.ACTION1.fbAnalogSensor.iAnalogIn</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION1.fbAnalogSensor.InputStatus</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
 							<Name>GVL_MAIN.LIFT2openedLimit</Name>
 							<Type>BOOL</Type>
 						</Var>
@@ -2458,6 +2473,14 @@ External Setpoint Generation:
 						<Var>
 							<Name>GVL_MAIN.inputs</Name>
 							<Type GUID="{C8E96A02-83F6-5EB4-1284-F3763D0B70E7}">ARRAY [1..1] OF sEL1809</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION2.fbAnalogSensor.iAnalogIn</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION2.fbAnalogSensor.InputStatus</Name>
+							<Type>UINT</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -3469,6 +3492,9 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Outputs^GVL_MAIN.PTCon" VarB="Channel 4^Output"/>
 				<Link VarA="PlcTask Outputs^GVL_MAIN.WARNING1" VarB="Channel 6^Output"/>
 				<Link VarA="PlcTask Outputs^GVL_MAIN.WARNING2" VarB="Channel 7^Output"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1100)^Term 5 (EL3064)">
+				<Link VarA="PlcTask Inputs^GVL_MAIN.iVOLTAGE1" VarB="AI Standard Channel 1^Value"/>
 			</OwnerB>
 			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^LIFT1">
 				<Link VarA="PlcTask Inputs^GVL_MAIN.LIFT1.Axis.NcToPlc" VarB="Outputs^ToPlc"/>

@@ -3,6 +3,7 @@
   <POU Name="FB_ACTION" Id="{77b4196e-a6d2-4735-ae2e-ed59e88b663e}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_ACTION
 VAR_INPUT
+	fbAnalogSensor: FB_AnalogSensor;
 	sNAME: STRING;
 	PIST: REFERENCE TO FB_PISTON;
 	aLIFT:REFERENCE TO FB_Axis;
@@ -24,6 +25,9 @@ VAR_INPUT
 	rOPEN_TIMEOUT: TIME:=T#20S;
 	tCLOSE:TON;
 	rCLOSE_TIMEOUT: TIME:=T#20S;
+	bCHARGE:BOOL:=FALSE;
+	iVOLTAGE_IN :INT;
+	iVOLTAGE_SHOW:REAL;
 END_VAR
 VAR_OUTPUT
 	sACTION_STATE:STRING:='UNINIT';
@@ -45,6 +49,22 @@ IF bALL_HOMED THEN
 		iACTION_STATE:=98;
 	END_IF
 END_IF
+
+fbAnalogSensor(
+	iAnalogIn:=iVOLTAGE_IN, 
+	InputStatus:= , 
+	IoMax:=9000 , 
+	IoMin:= 0, 
+	EngMin:= 0, 
+	EngMax:= 100, 
+	bHighLevelAlarmSp:= , 
+	bLowLevelAlarmSp:= , 
+	iCyclesFilter:= 100, 
+	rSensorVal=>iVOLTAGE_SHOW , 
+	bHighLevelAlarm=> , 
+	bLowLevelAlarm=> , 
+	bIoError=> );
+
  ]]></ST>
     </Implementation>
     <Action Name="aACTION_ERROR" Id="{18ded634-2282-4c0c-b5aa-75bbf974bd96}">
@@ -317,6 +337,9 @@ END_CASE]]></ST>
       <LineId Id="126" Count="0" />
       <LineId Id="123" Count="0" />
       <LineId Id="128" Count="0" />
+      <LineId Id="169" Count="13" />
+      <LineId Id="168" Count="0" />
+      <LineId Id="167" Count="0" />
       <LineId Id="125" Count="0" />
     </LineIds>
     <LineIds Name="FB_ACTION.aACTION_ERROR">

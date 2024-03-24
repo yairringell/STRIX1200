@@ -11,6 +11,16 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"199"</v>
+              <v n="TextDefault">"%d"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"55"</v>
+              <v n="TextDefault">"%f"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"952"</v>
               <v n="TextDefault">"%s"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -28,6 +38,11 @@
             <o>
               <v n="TextID">"188"</v>
               <v n="TextDefault">"BUSY"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"784"</v>
+              <v n="TextDefault">"CHARGER ON"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -213,6 +228,11 @@
             <o>
               <v n="TextID">"60"</v>
               <v n="TextDefault">"Vel: %.2f"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"291"</v>
+              <v n="TextDefault">"VOLTAGE:"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
           </l>

@@ -40,6 +40,8 @@ VAR_GLOBAL
 	WARNING1 AT %Q* :BOOL;
 	WARNING2 AT %Q* :BOOL;
 	
+	iVOLTAGE1   AT %I* :INT;
+	
 	inputs AT %I* : ARRAY [1..1]  OF sEL1809;
 	outputs AT %Q* : ARRAY [1..1]  OF sEL2809;
 END_VAR]]></Declaration>

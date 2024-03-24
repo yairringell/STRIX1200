@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_AnalogSensor" Id="{0c9258af-91ac-48fd-953f-1a4609ed8080}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_AnalogSensor
+VAR_INPUT
+	iAnalogIn AT%I*:INT;
+	InputStatus AT%I*:UINT;
+	IoMax:REAL:=32767;
+	IoMin:REAL:=0;
+	EngMin:REAL;
+	EngMax:REAL;
+	bHighLevelAlarmSp:REAL;
+	bLowLevelAlarmSp:REAL;
+	iCyclesFilter:INT:=1;
+END_VAR
+VAR_OUTPUT
+	rSensorVal:REAL;
+	bHighLevelAlarm:BOOL;
+	bLowLevelAlarm:BOOL;
+	bIoError:BOOL;
+END_VAR
+VAR
+	rAvg:LREAL:=0;
+	iCycleCounter:INT:=0;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+//Sensor Filter
+IF iCycleCounter < iCyclesFilter THEN
+	rAvg:= rAvg + METH_LinearScaling(iAnalogIn,IoMin,IoMax,EngMin,EngMax);
+	iCycleCounter:=iCycleCounter+1;
+ELSE
+	IF iCycleCounter > 0 THEN
+		rSensorVal:= rAvg/iCycleCounter;
+		iCycleCounter:=0;
+		rAvg:=0;
+	END_IF
+END_IF
+
+//Sensor Alarms
+IF rSensorVal > bHighLevelAlarmSp THEN
+	bHighLevelAlarm:=TRUE;
+ELSE
+	bHighLevelAlarm:=FALSE;
+END_IF
+
+IF rSensorVal < bLowLevelAlarmSp THEN
+	bLowLevelAlarm:=TRUE;
+ELSE
+	bLowLevelAlarm:=FALSE;
+END_IF
+
+IF InputStatus.0 OR InputStatus.1 OR InputStatus.4 THEN
+	bIoError:=TRUE;
+ELSE
+	bIoError:=FALSE;
+END_IF]]></ST>
+    </Implementation>
+    <Method Name="METH_LinearScaling" Id="{417cb73d-eafa-4ad5-b2d3-382b03a4a684}">
+      <Declaration><![CDATA[METHOD PRIVATE METH_LinearScaling : real
+VAR_INPUT
+	analog_read:INT;
+	IO_min, IO_max, eng_min, eng_max:REAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF  (IO_max - IO_min) > 0 THEN
+	METH_LinearScaling :=  ((eng_max - eng_min)/(IO_max - IO_min))*(analog_read - IO_max) + eng_max;
+ELSE
+	METH_LinearScaling :=  0;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_AnalogSensor">
+      <LineId Id="3" Count="29" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_AnalogSensor.METH_LinearScaling">
+      <LineId Id="3" Count="3" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

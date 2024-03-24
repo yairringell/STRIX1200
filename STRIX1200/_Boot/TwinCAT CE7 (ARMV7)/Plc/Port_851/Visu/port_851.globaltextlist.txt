@@ -1,9 +1,12 @@
 Id;Default
 450;%.2f
+199;%d
+55;%f
 952;%s
 396;ACC
 267;Actions
 188;BUSY
+784;CHARGER ON
 997;CLOSE
 513;CLOSE ALL
 293;CLOSED LIMIT
@@ -41,3 +44,4 @@ Id;Default
 963;System2
 964;VEL
 60;Vel: %.2f
+291;VOLTAGE:
