@@ -17,7 +17,7 @@ VAR_INPUT
 	bMoveRel:BOOL:=FALSE;
 	bMoveRelBusy:BOOL;
 	rPos:LREAL;
-	rVel:LREAL;
+	rVel:LREAL:=30;
 	rAcc:LREAL;
 	rDec:LREAL;
 	rJerk:LREAL;
