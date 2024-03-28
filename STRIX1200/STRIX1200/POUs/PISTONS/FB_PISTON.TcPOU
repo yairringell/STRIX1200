@@ -20,6 +20,7 @@ VAR_INPUT
 	bCLOSE_SWR: BOOL;
 	bCONDITION: BOOL:=TRUE;
 	bLOCAL_RESET:BOOL;
+	bHOME_FIRST: BOOL:=FALSE;
 END_VAR
 VAR_OUTPUT
 	bOPEN_VALVE: BOOL;
@@ -66,15 +67,17 @@ END_IF
 CASE pist_STATE OF
 	E_PISTON_STATE.uninit:
 		bERROR:=FALSE;
-		IF bOPEN_CMD  THEN
-			bOPEN_VALVE:=TRUE;
-			bCLOSE_VALVE:=FALSE;
-			pist_STATE:=E_PISTON_STATE.opening;
-		ELSE
-			bOPEN_VALVE:=FALSE;
-			bCLOSE_VALVE:=TRUE;
-			pist_STATE:=E_PISTON_STATE.closing;
-		END_IF
+		//IF bHOME_FIRST THEN
+			IF bOPEN_CMD  THEN
+				bOPEN_VALVE:=TRUE;
+				bCLOSE_VALVE:=FALSE;
+				pist_STATE:=E_PISTON_STATE.opening;
+			ELSE
+				bOPEN_VALVE:=FALSE;
+				bCLOSE_VALVE:=TRUE;
+				pist_STATE:=E_PISTON_STATE.closing;
+			END_IF
+		//END_IF
 //================================================== OPENING =====================================================
 	E_PISTON_STATE.opening:
 	sSTATE:='OPENING';
@@ -82,11 +85,13 @@ CASE pist_STATE OF
 	CASE pist_TYPE OF//------------------------------no sensors
 		E_PISTON_TYPE.NO_SENSORS:
 		IF T_OPEN.Q THEN
+			bOPEN_VALVE:=FALSE;
 			pist_STATE:=E_PISTON_STATE.opened;
 		END_IF
 		//----------------------------- both sensors
 		E_PISTON_TYPE.BOTH:
 		IF bOPEN_LIMIT THEN
+			bOPEN_VALVE:=FALSE;
 			pist_STATE:=E_PISTON_STATE.opened;
 		END_IF
 		IF T_OPEN_TIMEOUT.Q THEN
@@ -118,11 +123,13 @@ CASE pist_STATE OF
 		E_PISTON_TYPE.NO_SENSORS:
 		IF T_CLOSE.Q THEN
 			pist_STATE:=E_PISTON_STATE.closed;
+			bCLOSE_VALVE:=FALSE;
 		END_IF
 		//-------------------------------------- both sensors
 		E_PISTON_TYPE.BOTH:
 		IF bCLOSED_LIMIT THEN
 			pist_STATE:=E_PISTON_STATE.closed;
+			bCLOSE_VALVE:=FALSE;
 		END_IF
 		IF T_CLOSE_TIMEOUT.Q THEN
 			bOPEN_CMD:=TRUE;
@@ -236,15 +243,27 @@ fbEventLogger.mAdd();]]></ST>
       </Implementation>
     </Action>
     <LineIds Name="FB_PISTON">
-      <LineId Id="3" Count="27" />
+      <LineId Id="3" Count="25" />
+      <LineId Id="285" Count="0" />
+      <LineId Id="29" Count="1" />
       <LineId Id="193" Count="0" />
       <LineId Id="31" Count="2" />
       <LineId Id="194" Count="0" />
-      <LineId Id="34" Count="17" />
+      <LineId Id="34" Count="1" />
+      <LineId Id="286" Count="0" />
+      <LineId Id="36" Count="6" />
+      <LineId Id="290" Count="0" />
+      <LineId Id="43" Count="4" />
+      <LineId Id="291" Count="0" />
+      <LineId Id="48" Count="3" />
       <LineId Id="199" Count="0" />
       <LineId Id="52" Count="8" />
       <LineId Id="200" Count="0" />
-      <LineId Id="61" Count="32" />
+      <LineId Id="61" Count="15" />
+      <LineId Id="288" Count="0" />
+      <LineId Id="77" Count="4" />
+      <LineId Id="287" Count="0" />
+      <LineId Id="82" Count="11" />
       <LineId Id="201" Count="0" />
       <LineId Id="94" Count="10" />
       <LineId Id="243" Count="0" />

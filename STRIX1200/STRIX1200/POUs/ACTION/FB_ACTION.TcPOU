@@ -162,9 +162,14 @@ CASE iACTION_STATE OF
 			bACTION_ERROR:=TRUE;
 		END_IF
 	5://HOME PISTON
-		sACTION_STATE:='HOMING ALL PISTON';
+		sACTION_STATE:='HOMING PISTONS';
 		bSTART_ACTION:=TRUE;
 		PIST.bOPEN_SWR:=FALSE;
+		PIST.bHOME_FIRST:=TRUE;
+		PIST.bLOCAL_RESET:=TRUE;
+		iACTION_STATE:=6;
+		
+	6://WAIT HOME PISTON
 		IF PIST.bCLOSED THEN
 			bSTART_ACTION:=FALSE;
 			iACTION_STATE:=100;
@@ -382,7 +387,12 @@ END_CASE]]></ST>
       <LineId Id="47" Count="1" />
       <LineId Id="50" Count="0" />
       <LineId Id="74" Count="0" />
-      <LineId Id="51" Count="5" />
+      <LineId Id="51" Count="1" />
+      <LineId Id="240" Count="2" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="244" Count="0" />
+      <LineId Id="243" Count="0" />
+      <LineId Id="54" Count="2" />
       <LineId Id="11" Count="0" />
       <LineId Id="229" Count="1" />
       <LineId Id="213" Count="1" />

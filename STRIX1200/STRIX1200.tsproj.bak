@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.50">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.55">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-000000000035}" TcBaseType="true" HideType="true">UINTARR2</Name>
@@ -2389,15 +2389,11 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{CA1013CD-D2D4-4D21-B7E4-1998D10D30A6}" Name="STRIX1200" PrjFilePath="STRIX1200\STRIX1200.plcproj" TmcFilePath="STRIX1200\STRIX1200.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="STRIX1200\STRIX1200.tmc" TmcHash="{FCE5EC35-4938-3D7E-BA14-249CCC4D074D}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="STRIX1200\STRIX1200.tmc" TmcHash="{0A7D2539-9E98-1FD9-9711-1B8C7FD15F73}">
 					<Name>STRIX1200 Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
-						<Var>
-							<Name>GVL_MAIN.iVOLTAGE1</Name>
-							<Type>INT</Type>
-						</Var>
 						<Var>
 							<Name>GVL_MAIN.XY1openedLimit</Name>
 							<Type>BOOL</Type>
@@ -2427,10 +2423,6 @@ External Setpoint Generation:
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_MAIN.XY2closedLimit</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>GVL_MAIN.LIFT1.Axis.NcToPlc</Name>
 							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 						</Var>
@@ -2455,6 +2447,18 @@ External Setpoint Generation:
 							<Type>UINT</Type>
 						</Var>
 						<Var>
+							<Name>GVL_MAIN.ACTION2.fbAnalogSensor.iAnalogIn</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION2.fbAnalogSensor.InputStatus</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.XY2closedLimit</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>GVL_MAIN.LIFT2openedLimit</Name>
 							<Type>BOOL</Type>
 						</Var>
@@ -2471,16 +2475,12 @@ External Setpoint Generation:
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_MAIN.inputs</Name>
-							<Type GUID="{C8E96A02-83F6-5EB4-1284-F3763D0B70E7}">ARRAY [1..1] OF sEL1809</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION2.fbAnalogSensor.iAnalogIn</Name>
+							<Name>GVL_MAIN.iVOLTAGE1</Name>
 							<Type>INT</Type>
 						</Var>
 						<Var>
-							<Name>GVL_MAIN.ACTION2.fbAnalogSensor.InputStatus</Name>
-							<Type>UINT</Type>
+							<Name>GVL_MAIN.inputs</Name>
+							<Type GUID="{C8E96A02-83F6-5EB4-1284-F3763D0B70E7}">ARRAY [1..1] OF sEL1809</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -3481,6 +3481,8 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1100)^Term 2 (EL1809)">
 				<Link VarA="PlcTask Inputs^GVL_MAIN.LIFT1closedLimit" VarB="Channel 3^Input"/>
 				<Link VarA="PlcTask Inputs^GVL_MAIN.LIFT1openedLimit" VarB="Channel 4^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_MAIN.PIST1closed" VarB="Channel 5^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_MAIN.PIST1opened" VarB="Channel 6^Input"/>
 				<Link VarA="PlcTask Inputs^GVL_MAIN.XY1closedLimit" VarB="Channel 1^Input"/>
 				<Link VarA="PlcTask Inputs^GVL_MAIN.XY1openedLimit" VarB="Channel 2^Input"/>
 			</OwnerB>
