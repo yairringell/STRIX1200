@@ -18,13 +18,13 @@ VAR_INPUT
 	bOPEN_ALL:BOOL;
 	bCLOSE_ALL:BOOL;
 	tACTION:TON;
-	rACTION_TIMEOUT:TIME:=T#20S;
+	rACTION_TIMEOUT:TIME:=T#60S;
 	tHOMING:TON;
-	rHOMING_TIMEOUT: TIME:=T#20S;
+	rHOMING_TIMEOUT: TIME:=T#60S;
 	tOPEN:TON;
-	rOPEN_TIMEOUT: TIME:=T#20S;
+	rOPEN_TIMEOUT: TIME:=T#60S;
 	tCLOSE:TON;
-	rCLOSE_TIMEOUT: TIME:=T#20S;
+	rCLOSE_TIMEOUT: TIME:=T#60S;
 	bCHARGE:BOOL:=FALSE;
 	iVOLTAGE_IN :INT;
 	iVOLTAGE_SHOW:REAL;
@@ -136,12 +136,14 @@ CASE iACTION_STATE OF
 		IF aXY.bHOMED THEN
 			bSTART_ACTION:=FALSE;
 			iACTION_STATE:=3;
+			//aXY.bEnable:=FALSE;
 		END_IF
 		IF aXY.bSTATE_ERROR THEN
 			iACTION_STATE:=99;
 			aACTION_ERROR();
 			bSTART_ACTION:=FALSE;
 			bACTION_ERROR:=TRUE;
+			//aXY.bEnable:=FALSE;
 		END_IF
 			
 	3://HOME LIFT
@@ -154,14 +156,18 @@ CASE iACTION_STATE OF
 		IF aLIFT.bHOMED THEN
 			bSTART_ACTION:=FALSE;
 			iACTION_STATE:=5;
+			//aLIFT.bENABLE:=FALSE;
 		END_IF
 		IF aLIFT.bSTATE_ERROR THEN
 			aACTION_ERROR();
 			iACTION_STATE:=99;
 			bSTART_ACTION:=FALSE;
 			bACTION_ERROR:=TRUE;
+			//aLIFT.bENABLE:=FALSE;
 		END_IF
 	5://HOME PISTON
+		aXY.bENABLE:=FALSE;//////////////
+		aLIFT.bENABLE:=FALSE;/////////////////
 		sACTION_STATE:='HOMING PISTONS';
 		bSTART_ACTION:=TRUE;
 		PIST.bOPEN_SWR:=FALSE;
@@ -187,6 +193,8 @@ CASE iACTION_STATE OF
 		sACTION_STATE:='OPENING ALL PISTON';
 		bSTART_ACTION:=TRUE;
 		PIST.bOPEN_SWR:=TRUE;
+		aXY.bENABLE:=FALSE;//////////////////////
+		aLIFT.bENABLE:=FALSE;////////////////////
 		IF PIST.bOPENED THEN
 			bSTART_ACTION:=FALSE;
 			iACTION_STATE:=11;
@@ -207,12 +215,14 @@ CASE iACTION_STATE OF
 		IF aLIFT.bOPENED THEN
 			bSTART_ACTION:=FALSE;
 			iACTION_STATE:=13;
+			//aLIFT.bENABLE:=FALSE;
 		END_IF
 		IF aLIFT.bSTATE_ERROR THEN
 			aACTION_ERROR();
 			iACTION_STATE:=99;
 			bSTART_ACTION:=FALSE;
 			bACTION_ERROR:=TRUE;
+			//aLIFT.bENABLE:=FALSE;
 		END_IF
 	13://OPEN ALL XY
 		sACTION_STATE:='OPENING ALL XY';
@@ -225,12 +235,14 @@ CASE iACTION_STATE OF
 			bSTART_ACTION:=FALSE;
 			bALL_OPENED:=TRUE;
 			iACTION_STATE:=20;
+			//aXY.bENABLE:=FALSE;
 		END_IF
 		IF aXY.bSTATE_ERROR THEN
 			aACTION_ERROR();
 			iACTION_STATE:=99;
 			bSTART_ACTION:=FALSE;
 			bACTION_ERROR:=TRUE;
+			//aXY.bENABLE:=FALSE;
 		END_IF	
 
 	20:// ==================================== OPENED
@@ -255,12 +267,14 @@ CASE iACTION_STATE OF
 		IF aXY.bCLOSED THEN
 			bSTART_ACTION:=FALSE;
 			iACTION_STATE:=33;
+			//aXY.bENABLE:=FALSE;
 		END_IF
 		IF aXY.bSTATE_ERROR THEN
 			aACTION_ERROR();
 			iACTION_STATE:=99;
 			bSTART_ACTION:=FALSE;
 			bACTION_ERROR:=TRUE;
+			//aXY.bENABLE:=FALSE;
 		END_IF	
 	33://HOME LIFT
 		sACTION_STATE:='CLOSING ALL LIFT';
@@ -272,14 +286,18 @@ CASE iACTION_STATE OF
 		IF aLIFT.bCLOSED THEN
 			bSTART_ACTION:=FALSE;
 			iACTION_STATE:=35;
+			//aLIFT.bENABLE:=FALSE;
 		END_IF
 		IF aLIFT.bSTATE_ERROR THEN
 			aACTION_ERROR();
 			iACTION_STATE:=99;
 			bSTART_ACTION:=FALSE;
 			bACTION_ERROR:=TRUE;
+			//aLIFT.bENABLE:=FALSE;
 		END_IF
 	35://CLOSE ALL PISTON
+		aXY.bENABLE:=FALSE;//////////////////////
+		aLIFT.bENABLE:=FALSE;////////////////////
 		sACTION_STATE:='CLOSING ALL PISTON';
 		bSTART_ACTION:=TRUE;
 		PIST.bOPEN_SWR:=FALSE;
@@ -370,29 +388,39 @@ END_CASE]]></ST>
       <LineId Id="19" Count="0" />
       <LineId Id="57" Count="0" />
       <LineId Id="20" Count="1" />
-      <LineId Id="23" Count="5" />
+      <LineId Id="23" Count="4" />
+      <LineId Id="245" Count="0" />
+      <LineId Id="28" Count="0" />
       <LineId Id="205" Count="0" />
       <LineId Id="208" Count="0" />
       <LineId Id="227" Count="0" />
       <LineId Id="209" Count="0" />
-      <LineId Id="206" Count="1" />
+      <LineId Id="206" Count="0" />
+      <LineId Id="246" Count="0" />
+      <LineId Id="207" Count="0" />
       <LineId Id="32" Count="0" />
       <LineId Id="34" Count="0" />
       <LineId Id="73" Count="0" />
       <LineId Id="35" Count="2" />
-      <LineId Id="39" Count="6" />
+      <LineId Id="39" Count="4" />
+      <LineId Id="247" Count="0" />
+      <LineId Id="44" Count="1" />
       <LineId Id="228" Count="0" />
       <LineId Id="46" Count="0" />
       <LineId Id="59" Count="0" />
-      <LineId Id="47" Count="1" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="248" Count="0" />
+      <LineId Id="48" Count="0" />
       <LineId Id="50" Count="0" />
+      <LineId Id="257" Count="1" />
       <LineId Id="74" Count="0" />
       <LineId Id="51" Count="1" />
       <LineId Id="240" Count="2" />
       <LineId Id="53" Count="0" />
       <LineId Id="244" Count="0" />
       <LineId Id="243" Count="0" />
-      <LineId Id="54" Count="2" />
+      <LineId Id="54" Count="1" />
+      <LineId Id="260" Count="0" />
       <LineId Id="11" Count="0" />
       <LineId Id="229" Count="1" />
       <LineId Id="213" Count="1" />
@@ -401,23 +429,31 @@ END_CASE]]></ST>
       <LineId Id="97" Count="0" />
       <LineId Id="103" Count="0" />
       <LineId Id="204" Count="0" />
-      <LineId Id="98" Count="4" />
+      <LineId Id="98" Count="1" />
+      <LineId Id="261" Count="1" />
+      <LineId Id="100" Count="2" />
       <LineId Id="91" Count="0" />
       <LineId Id="216" Count="0" />
       <LineId Id="231" Count="0" />
       <LineId Id="217" Count="2" />
       <LineId Id="215" Count="0" />
       <LineId Id="96" Count="0" />
-      <LineId Id="106" Count="10" />
+      <LineId Id="106" Count="8" />
+      <LineId Id="249" Count="0" />
+      <LineId Id="115" Count="1" />
       <LineId Id="232" Count="0" />
       <LineId Id="117" Count="2" />
+      <LineId Id="250" Count="0" />
       <LineId Id="104" Count="1" />
       <LineId Id="123" Count="0" />
       <LineId Id="125" Count="6" />
       <LineId Id="140" Count="0" />
-      <LineId Id="132" Count="2" />
+      <LineId Id="132" Count="0" />
+      <LineId Id="251" Count="0" />
+      <LineId Id="133" Count="1" />
       <LineId Id="233" Count="0" />
       <LineId Id="135" Count="2" />
+      <LineId Id="252" Count="0" />
       <LineId Id="121" Count="1" />
       <LineId Id="120" Count="0" />
       <LineId Id="138" Count="0" />
@@ -428,11 +464,21 @@ END_CASE]]></ST>
       <LineId Id="203" Count="0" />
       <LineId Id="147" Count="0" />
       <LineId Id="146" Count="0" />
-      <LineId Id="150" Count="10" />
+      <LineId Id="150" Count="8" />
+      <LineId Id="253" Count="0" />
+      <LineId Id="159" Count="1" />
       <LineId Id="234" Count="0" />
-      <LineId Id="161" Count="15" />
+      <LineId Id="161" Count="2" />
+      <LineId Id="254" Count="0" />
+      <LineId Id="164" Count="10" />
+      <LineId Id="255" Count="0" />
+      <LineId Id="175" Count="1" />
       <LineId Id="235" Count="0" />
-      <LineId Id="177" Count="11" />
+      <LineId Id="177" Count="2" />
+      <LineId Id="256" Count="0" />
+      <LineId Id="180" Count="1" />
+      <LineId Id="263" Count="1" />
+      <LineId Id="182" Count="6" />
       <LineId Id="148" Count="0" />
       <LineId Id="220" Count="0" />
       <LineId Id="236" Count="0" />

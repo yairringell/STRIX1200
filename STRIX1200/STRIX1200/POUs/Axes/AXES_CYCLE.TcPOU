@@ -44,7 +44,7 @@ END_VAR
                           <v n="LValue">false</v>
                           <v n="Boolean">false</v>
                           <v n="IsInstance">true</v>
-                          <v n="Id">235L</v>
+                          <v n="Id">477L</v>
                         </o>
                         <o n="OutputItems" t="OutputItemList">
                           <l2 n="OutputItems" cet="Operand">
@@ -224,6 +224,22 @@ END_VAR
                               <v n="Boolean">false</v>
                               <v n="IsInstance">false</v>
                               <v n="Id">195L</v>
+                            </o>
+                            <o>
+                              <v n="Operand">"bDISABLE_LIFT1"</v>
+                              <v n="Type">"BOOL"</v>
+                              <v n="Comment">""</v>
+                              <v n="SymbolComment">""</v>
+                              <v n="Address">""</v>
+                              <o n="Flags" t="Flags">
+                                <v n="Flags">0</v>
+                                <v n="Fixed">false</v>
+                                <v n="Extensible">false</v>
+                              </o>
+                              <v n="LValue">true</v>
+                              <v n="Boolean">false</v>
+                              <v n="IsInstance">false</v>
+                              <v n="Id">479L</v>
                             </o>
                           </l2>
                         </o>
@@ -806,7 +822,7 @@ END_VAR
                           </o>
                           <o>
                             <o n="Operand" t="Operand">
-                              <v n="Operand">"30"</v>
+                              <v n="Operand">"10"</v>
                               <v n="Type">"INT"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
@@ -822,6 +838,25 @@ END_VAR
                               <v n="Id">186L</v>
                             </o>
                             <v n="Id">185L</v>
+                          </o>
+                          <o>
+                            <o n="Operand" t="Operand">
+                              <v n="Operand">""</v>
+                              <n n="Type" />
+                              <v n="Comment">""</v>
+                              <v n="SymbolComment">""</v>
+                              <v n="Address">""</v>
+                              <o n="Flags" t="Flags">
+                                <v n="Flags">0</v>
+                                <v n="Fixed">false</v>
+                                <v n="Extensible">false</v>
+                              </o>
+                              <v n="LValue">false</v>
+                              <v n="Boolean">false</v>
+                              <v n="IsInstance">false</v>
+                              <v n="Id">481L</v>
+                            </o>
+                            <v n="Id">480L</v>
                           </o>
                         </l2>
                         <o n="InputParam" t="ParamList">
@@ -857,6 +892,7 @@ END_VAR
                             <v>bLIMIT</v>
                             <v>rACTION_TIMEOUT</v>
                             <v>jogVEL</v>
+                            <v>bSTOP</v>
                           </l2>
                           <l2 n="Types" cet="String">
                             <v>STRING</v>
@@ -890,6 +926,7 @@ END_VAR
                             <v>BOOL</v>
                             <v>TIME</v>
                             <v>REAL</v>
+                            <v>BOOL</v>
                           </l2>
                         </o>
                         <o n="OutputParam" t="ParamList">
@@ -906,6 +943,7 @@ END_VAR
                             <v>bRelDone</v>
                             <v>bAbsDone</v>
                             <v>bHaltDone</v>
+                            <v>bNOT_ENABLE</v>
                           </l2>
                           <l2 n="Types" cet="String">
                             <v>BOOL</v>
@@ -920,6 +958,7 @@ END_VAR
                             <v>BOOL</v>
                             <v>BOOL</v>
                             <v>BOOL</v>
+                            <v>BOOL</v>
                           </l2>
                         </o>
                         <v n="CallType" t="Operator">FunctionBlock</v>
@@ -928,7 +967,7 @@ END_VAR
                         <n n="STSnippet" />
                         <v n="ContainsExtensibleInputs">false</v>
                         <v n="ProvidesSTSnippet">false</v>
-                        <v n="Id">236L</v>
+                        <v n="Id">478L</v>
                       </o>
                     </l2>
                     <l2 n="Connectors" />
@@ -960,7 +999,7 @@ END_VAR
                           <v n="LValue">false</v>
                           <v n="Boolean">false</v>
                           <v n="IsInstance">true</v>
-                          <v n="Id">241L</v>
+                          <v n="Id">482L</v>
                         </o>
                         <o n="OutputItems" t="OutputItemList">
                           <l2 n="OutputItems" cet="Operand">
@@ -1140,6 +1179,22 @@ END_VAR
                               <v n="Boolean">false</v>
                               <v n="IsInstance">false</v>
                               <v n="Id">198L</v>
+                            </o>
+                            <o>
+                              <v n="Operand">"bDISABLE_XY1"</v>
+                              <v n="Type">"BOOL"</v>
+                              <v n="Comment">""</v>
+                              <v n="SymbolComment">""</v>
+                              <v n="Address">""</v>
+                              <o n="Flags" t="Flags">
+                                <v n="Flags">0</v>
+                                <v n="Fixed">false</v>
+                                <v n="Extensible">false</v>
+                              </o>
+                              <v n="LValue">true</v>
+                              <v n="Boolean">false</v>
+                              <v n="IsInstance">false</v>
+                              <v n="Id">484L</v>
                             </o>
                           </l2>
                         </o>
@@ -1722,7 +1777,7 @@ END_VAR
                           </o>
                           <o>
                             <o n="Operand" t="Operand">
-                              <v n="Operand">"30"</v>
+                              <v n="Operand">"10"</v>
                               <v n="Type">"INT"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
@@ -1738,6 +1793,25 @@ END_VAR
                               <v n="Id">192L</v>
                             </o>
                             <v n="Id">191L</v>
+                          </o>
+                          <o>
+                            <o n="Operand" t="Operand">
+                              <v n="Operand">""</v>
+                              <n n="Type" />
+                              <v n="Comment">""</v>
+                              <v n="SymbolComment">""</v>
+                              <v n="Address">""</v>
+                              <o n="Flags" t="Flags">
+                                <v n="Flags">0</v>
+                                <v n="Fixed">false</v>
+                                <v n="Extensible">false</v>
+                              </o>
+                              <v n="LValue">false</v>
+                              <v n="Boolean">false</v>
+                              <v n="IsInstance">false</v>
+                              <v n="Id">486L</v>
+                            </o>
+                            <v n="Id">485L</v>
                           </o>
                         </l2>
                         <o n="InputParam" t="ParamList">
@@ -1773,6 +1847,7 @@ END_VAR
                             <v>bLIMIT</v>
                             <v>rACTION_TIMEOUT</v>
                             <v>jogVEL</v>
+                            <v>bSTOP</v>
                           </l2>
                           <l2 n="Types" cet="String">
                             <v>STRING</v>
@@ -1806,6 +1881,7 @@ END_VAR
                             <v>BOOL</v>
                             <v>TIME</v>
                             <v>REAL</v>
+                            <v>BOOL</v>
                           </l2>
                         </o>
                         <o n="OutputParam" t="ParamList">
@@ -1822,6 +1898,7 @@ END_VAR
                             <v>bRelDone</v>
                             <v>bAbsDone</v>
                             <v>bHaltDone</v>
+                            <v>bNOT_ENABLE</v>
                           </l2>
                           <l2 n="Types" cet="String">
                             <v>BOOL</v>
@@ -1836,6 +1913,7 @@ END_VAR
                             <v>BOOL</v>
                             <v>BOOL</v>
                             <v>BOOL</v>
+                            <v>BOOL</v>
                           </l2>
                         </o>
                         <v n="CallType" t="Operator">FunctionBlock</v>
@@ -1844,7 +1922,7 @@ END_VAR
                         <n n="STSnippet" />
                         <v n="ContainsExtensibleInputs">false</v>
                         <v n="ProvidesSTSnippet">false</v>
-                        <v n="Id">242L</v>
+                        <v n="Id">483L</v>
                       </o>
                     </l2>
                     <l2 n="Connectors" />

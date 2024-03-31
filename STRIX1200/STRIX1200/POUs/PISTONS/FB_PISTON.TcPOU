@@ -7,7 +7,7 @@ VAR_INPUT
 	sNAME:STRING;
 	bLOCAL_MANUAL: BOOL:=FALSE;
 	pist_TYPE: E_PISTON_TYPE;
-	pist_STATE: E_PISTON_STATE:=E_PISTON_STATE.uninit;
+	pist_STATE: E_PISTON_STATE:=E_PISTON_STATE.ununinit;
 	rOPEN_TIME: TIME;
 	rCLOSE_TIME: TIME;
 	rOPEN_TIMEOUT: TIME;
@@ -37,7 +37,7 @@ VAR
 	T_CLOSE_TIMEOUT: TON;
 	bOPEN_DEFAULT: BOOL:=FALSE;
 	bFIRST_DONE: BOOL:=FALSE;
-	
+	bHOMED_FIRST:BOOL:=FALSE;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -63,6 +63,12 @@ IF NOT bFIRST_DONE THEN  // ============== check default mode ===============
 		bOPEN_CMD:=FALSE;
 	END_IF
 END_IF
+
+IF bHOME_FIRST AND NOT bHOMED_FIRST THEN
+	bHOMED_FIRST:=TRUE;
+	pist_STATE:=E_PISTON_STATE.uninit;
+END_IF
+
 //================================================== UNINIT =====================================================
 CASE pist_STATE OF
 	E_PISTON_STATE.uninit:
@@ -134,6 +140,7 @@ CASE pist_STATE OF
 		IF T_CLOSE_TIMEOUT.Q THEN
 			bOPEN_CMD:=TRUE;
 			pist_STATE:=E_PISTON_STATE.error;
+			
 		END_IF
 		//-------------------------------------- only close sensor
 		E_PISTON_TYPE.ONLY_CLOSE:
@@ -243,7 +250,13 @@ fbEventLogger.mAdd();]]></ST>
       </Implementation>
     </Action>
     <LineIds Name="FB_PISTON">
-      <LineId Id="3" Count="25" />
+      <LineId Id="3" Count="21" />
+      <LineId Id="297" Count="0" />
+      <LineId Id="296" Count="0" />
+      <LineId Id="302" Count="0" />
+      <LineId Id="298" Count="1" />
+      <LineId Id="295" Count="0" />
+      <LineId Id="25" Count="3" />
       <LineId Id="285" Count="0" />
       <LineId Id="29" Count="1" />
       <LineId Id="193" Count="0" />
@@ -263,7 +276,9 @@ fbEventLogger.mAdd();]]></ST>
       <LineId Id="288" Count="0" />
       <LineId Id="77" Count="4" />
       <LineId Id="287" Count="0" />
-      <LineId Id="82" Count="11" />
+      <LineId Id="82" Count="3" />
+      <LineId Id="301" Count="0" />
+      <LineId Id="86" Count="7" />
       <LineId Id="201" Count="0" />
       <LineId Id="94" Count="10" />
       <LineId Id="243" Count="0" />

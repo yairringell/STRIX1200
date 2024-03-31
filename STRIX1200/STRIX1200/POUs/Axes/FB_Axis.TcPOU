@@ -17,7 +17,7 @@ VAR_INPUT
 	bMoveRel:BOOL:=FALSE;
 	bMoveRelBusy:BOOL;
 	rPos:LREAL;
-	rVel:LREAL:=30;
+	rVel:LREAL:=20;
 	rAcc:LREAL;
 	rDec:LREAL;
 	rJerk:LREAL;
@@ -33,7 +33,7 @@ VAR_INPUT
 	bLIMIT_OPENED:BOOL;
 	bLIMIT_CLOSED:BOOL;
 	bLIMIT:BOOL;
-	rACTION_TIMEOUT:TIME:=T#10S;
+	rACTION_TIMEOUT:TIME:=T#60S;
 	jogVEL: REAL;
 	bSTOP:BOOL;
 END_VAR
@@ -51,6 +51,7 @@ VAR_OUTPUT
 	bRelDone:BOOL;
 	bAbsDone:BOOL;
 	bHaltDone:BOOL;
+	bNOT_ENABLE:BOOL;
 END_VAR
 VAR
 	bSTART_ACTION:BOOL;
@@ -79,7 +80,7 @@ END_VAR
 	RESET.Execute:=TRUE;
 	 bFirst_run:=TRUE;
 END_IF
-
+bNOT_ENABLE:=NOT bENABLE;
 rActPos:=Axis.NcToPlc.ActPos;
 rActVel:=Axis.NcToPlc.ActVelo;
 

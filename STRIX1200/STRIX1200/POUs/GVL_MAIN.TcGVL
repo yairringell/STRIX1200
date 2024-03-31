@@ -15,6 +15,12 @@ VAR_GLOBAL
 	
 // IO
 	CARGHERon AT %Q* :BOOL;
+	bDISABLE_LIFT1 AT %Q* :BOOL;//OUT14
+	bDISABLE_LIFT2 AT %Q* :BOOL;
+	bDISABLE_XY1 AT %Q* :BOOL;// OUT15
+	bDISABLE_XY2 AT %Q* :BOOL;
+	
+	
 	XY1openedLimit   AT %I* :BOOL;
 	XY1closedLimit   AT %I* :BOOL;
 	LIFT1openedLimit   AT %I* :BOOL;
