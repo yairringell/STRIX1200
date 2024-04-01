@@ -10,7 +10,7 @@
       <Children>
         <Node>
           <Title>DataPool</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -27,6 +27,12 @@
             </Node>
             <Node>
               <Title>ActVelo</Title>
+              <Expanded>False</Expanded>
+              <FileName></FileName>
+              <Children />
+            </Node>
+            <Node>
+              <Title>Frequency value</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
@@ -107,6 +113,19 @@
                 </Node>
                 <Node>
                   <Title>SetPos</Title>
+                  <Expanded>False</Expanded>
+                  <FileName></FileName>
+                  <Children />
+                </Node>
+              </Children>
+            </Node>
+            <Node>
+              <Title>Axis Group (3)</Title>
+              <Expanded>True</Expanded>
+              <FileName></FileName>
+              <Children>
+                <Node>
+                  <Title>Frequency value</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />

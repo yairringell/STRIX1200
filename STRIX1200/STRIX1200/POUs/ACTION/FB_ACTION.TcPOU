@@ -28,6 +28,7 @@ VAR_INPUT
 	bCHARGE:BOOL:=FALSE;
 	iVOLTAGE_IN :INT;
 	iVOLTAGE_SHOW:REAL;
+	bSTOP_ALL:BOOL:=FALSE;
 END_VAR
 VAR_OUTPUT
 	sACTION_STATE:STRING:='UNINIT';
@@ -121,6 +122,13 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[tACTION(IN:= bSTART_ACTION, PT:=rACTION_TIMEOUT , Q=> , ET=> );
+
+IF bSTOP_ALL THEN
+	PIST.bSTOP_ALL:=TRUE;
+	aXY.bSTOP_ALL:=TRUE;
+	aLIFT.bSTOP_ALL:=TRUE;
+	iACTION_STATE:=99;
+END_IF
 
 CASE iACTION_STATE OF
 	
@@ -326,12 +334,19 @@ CASE iACTION_STATE OF
 	98://===================================== UNINIT
 		sACTION_STATE:='UNINIT';
 		IF bHOME_ALL THEN
-			iACTION_STATE:=1;
+			aLIFT.bReset:=TRUE;
+			aXY.bReset:=TRUE;
+			aLIFT.clear_cmd_req();
+			aXY.clear_cmd_req();
+			iACTION_STATE:=980;
 			bACTION_ERROR:=FALSE;
 		END_IF
+	980://=====================================to homing
+		iACTION_STATE:=1;
 		
 	99://===================================== ERROR
 		sACTION_STATE:='ERROR';
+		bSTOP_ALL:=FALSE;
 		IF bHOME_ALL THEN
 			iACTION_STATE:=1;
 			bACTION_ERROR:=FALSE;
@@ -379,7 +394,14 @@ END_CASE]]></ST>
     </LineIds>
     <LineIds Name="FB_ACTION.mACTION_STATE_MACHINE">
       <LineId Id="5" Count="0" />
+      <LineId Id="277" Count="0" />
       <LineId Id="7" Count="0" />
+      <LineId Id="289" Count="0" />
+      <LineId Id="278" Count="0" />
+      <LineId Id="284" Count="0" />
+      <LineId Id="286" Count="0" />
+      <LineId Id="279" Count="0" />
+      <LineId Id="287" Count="0" />
       <LineId Id="6" Count="0" />
       <LineId Id="8" Count="0" />
       <LineId Id="18" Count="0" />
@@ -493,11 +515,15 @@ END_CASE]]></ST>
       <LineId Id="195" Count="0" />
       <LineId Id="13" Count="0" />
       <LineId Id="84" Count="0" />
+      <LineId Id="268" Count="3" />
       <LineId Id="15" Count="0" />
       <LineId Id="17" Count="0" />
       <LineId Id="16" Count="0" />
       <LineId Id="66" Count="0" />
+      <LineId Id="273" Count="0" />
+      <LineId Id="272" Count="0" />
       <LineId Id="68" Count="1" />
+      <LineId Id="290" Count="0" />
       <LineId Id="85" Count="0" />
       <LineId Id="70" Count="1" />
       <LineId Id="67" Count="0" />

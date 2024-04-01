@@ -44,7 +44,7 @@ END_VAR
                           <v n="LValue">false</v>
                           <v n="Boolean">false</v>
                           <v n="IsInstance">true</v>
-                          <v n="Id">477L</v>
+                          <v n="Id">503L</v>
                         </o>
                         <o n="OutputItems" t="OutputItemList">
                           <l2 n="OutputItems" cet="Operand">
@@ -841,6 +841,63 @@ END_VAR
                           </o>
                           <o>
                             <o n="Operand" t="Operand">
+                              <v n="Operand">"15"</v>
+                              <v n="Type">"INT"</v>
+                              <v n="Comment">""</v>
+                              <v n="SymbolComment">""</v>
+                              <v n="Address">""</v>
+                              <o n="Flags" t="Flags">
+                                <v n="Flags">0</v>
+                                <v n="Fixed">false</v>
+                                <v n="Extensible">false</v>
+                              </o>
+                              <v n="LValue">false</v>
+                              <v n="Boolean">false</v>
+                              <v n="IsInstance">false</v>
+                              <v n="Id">490L</v>
+                            </o>
+                            <v n="Id">489L</v>
+                          </o>
+                          <o>
+                            <o n="Operand" t="Operand">
+                              <v n="Operand">"15"</v>
+                              <v n="Type">"INT"</v>
+                              <v n="Comment">""</v>
+                              <v n="SymbolComment">""</v>
+                              <v n="Address">""</v>
+                              <o n="Flags" t="Flags">
+                                <v n="Flags">0</v>
+                                <v n="Fixed">false</v>
+                                <v n="Extensible">false</v>
+                              </o>
+                              <v n="LValue">false</v>
+                              <v n="Boolean">false</v>
+                              <v n="IsInstance">false</v>
+                              <v n="Id">492L</v>
+                            </o>
+                            <v n="Id">491L</v>
+                          </o>
+                          <o>
+                            <o n="Operand" t="Operand">
+                              <v n="Operand">"30"</v>
+                              <v n="Type">"INT"</v>
+                              <v n="Comment">""</v>
+                              <v n="SymbolComment">""</v>
+                              <v n="Address">""</v>
+                              <o n="Flags" t="Flags">
+                                <v n="Flags">0</v>
+                                <v n="Fixed">false</v>
+                                <v n="Extensible">false</v>
+                              </o>
+                              <v n="LValue">false</v>
+                              <v n="Boolean">false</v>
+                              <v n="IsInstance">false</v>
+                              <v n="Id">494L</v>
+                            </o>
+                            <v n="Id">493L</v>
+                          </o>
+                          <o>
+                            <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
                               <n n="Type" />
                               <v n="Comment">""</v>
@@ -892,6 +949,9 @@ END_VAR
                             <v>bLIMIT</v>
                             <v>rACTION_TIMEOUT</v>
                             <v>jogVEL</v>
+                            <v>jogHOME_VEL</v>
+                            <v>jogOPEN_VEL</v>
+                            <v>jogCLOSE_VEL</v>
                             <v>bSTOP</v>
                           </l2>
                           <l2 n="Types" cet="String">
@@ -925,6 +985,9 @@ END_VAR
                             <v>BOOL</v>
                             <v>BOOL</v>
                             <v>TIME</v>
+                            <v>REAL</v>
+                            <v>REAL</v>
+                            <v>REAL</v>
                             <v>REAL</v>
                             <v>BOOL</v>
                           </l2>
@@ -967,7 +1030,7 @@ END_VAR
                         <n n="STSnippet" />
                         <v n="ContainsExtensibleInputs">false</v>
                         <v n="ProvidesSTSnippet">false</v>
-                        <v n="Id">478L</v>
+                        <v n="Id">504L</v>
                       </o>
                     </l2>
                     <l2 n="Connectors" />
@@ -999,7 +1062,7 @@ END_VAR
                           <v n="LValue">false</v>
                           <v n="Boolean">false</v>
                           <v n="IsInstance">true</v>
-                          <v n="Id">482L</v>
+                          <v n="Id">495L</v>
                         </o>
                         <o n="OutputItems" t="OutputItemList">
                           <l2 n="OutputItems" cet="Operand">
@@ -1796,6 +1859,63 @@ END_VAR
                           </o>
                           <o>
                             <o n="Operand" t="Operand">
+                              <v n="Operand">"10"</v>
+                              <v n="Type">"INT"</v>
+                              <v n="Comment">""</v>
+                              <v n="SymbolComment">""</v>
+                              <v n="Address">""</v>
+                              <o n="Flags" t="Flags">
+                                <v n="Flags">0</v>
+                                <v n="Fixed">false</v>
+                                <v n="Extensible">false</v>
+                              </o>
+                              <v n="LValue">false</v>
+                              <v n="Boolean">false</v>
+                              <v n="IsInstance">false</v>
+                              <v n="Id">498L</v>
+                            </o>
+                            <v n="Id">497L</v>
+                          </o>
+                          <o>
+                            <o n="Operand" t="Operand">
+                              <v n="Operand">"30"</v>
+                              <v n="Type">"INT"</v>
+                              <v n="Comment">""</v>
+                              <v n="SymbolComment">""</v>
+                              <v n="Address">""</v>
+                              <o n="Flags" t="Flags">
+                                <v n="Flags">0</v>
+                                <v n="Fixed">false</v>
+                                <v n="Extensible">false</v>
+                              </o>
+                              <v n="LValue">false</v>
+                              <v n="Boolean">false</v>
+                              <v n="IsInstance">false</v>
+                              <v n="Id">500L</v>
+                            </o>
+                            <v n="Id">499L</v>
+                          </o>
+                          <o>
+                            <o n="Operand" t="Operand">
+                              <v n="Operand">"30"</v>
+                              <v n="Type">"INT"</v>
+                              <v n="Comment">""</v>
+                              <v n="SymbolComment">""</v>
+                              <v n="Address">""</v>
+                              <o n="Flags" t="Flags">
+                                <v n="Flags">0</v>
+                                <v n="Fixed">false</v>
+                                <v n="Extensible">false</v>
+                              </o>
+                              <v n="LValue">false</v>
+                              <v n="Boolean">false</v>
+                              <v n="IsInstance">false</v>
+                              <v n="Id">502L</v>
+                            </o>
+                            <v n="Id">501L</v>
+                          </o>
+                          <o>
+                            <o n="Operand" t="Operand">
                               <v n="Operand">""</v>
                               <n n="Type" />
                               <v n="Comment">""</v>
@@ -1847,6 +1967,9 @@ END_VAR
                             <v>bLIMIT</v>
                             <v>rACTION_TIMEOUT</v>
                             <v>jogVEL</v>
+                            <v>jogHOME_VEL</v>
+                            <v>jogOPEN_VEL</v>
+                            <v>jogCLOSE_VEL</v>
                             <v>bSTOP</v>
                           </l2>
                           <l2 n="Types" cet="String">
@@ -1880,6 +2003,9 @@ END_VAR
                             <v>BOOL</v>
                             <v>BOOL</v>
                             <v>TIME</v>
+                            <v>REAL</v>
+                            <v>REAL</v>
+                            <v>REAL</v>
                             <v>REAL</v>
                             <v>BOOL</v>
                           </l2>
@@ -1922,7 +2048,7 @@ END_VAR
                         <n n="STSnippet" />
                         <v n="ContainsExtensibleInputs">false</v>
                         <v n="ProvidesSTSnippet">false</v>
-                        <v n="Id">483L</v>
+                        <v n="Id">496L</v>
                       </o>
                     </l2>
                     <l2 n="Connectors" />

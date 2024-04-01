@@ -35,7 +35,11 @@ VAR_INPUT
 	bLIMIT:BOOL;
 	rACTION_TIMEOUT:TIME:=T#60S;
 	jogVEL: REAL;
+	jogHOME_VEL: REAL;
+	jogOPEN_VEL: REAL;
+	jogCLOSE_VEL: REAL;
 	bSTOP:BOOL;
+	bSTOP_ALL:BOOL;
 END_VAR
 
 VAR_OUTPUT
@@ -2895,6 +2899,10 @@ ELSE
 	bLIMIT:=bLIMIT_CLOSED;
 END_IF
 
+IF bSTOP_ALL THEN
+	iAXIS_STATE:=99;
+	bSTOP_ALL:=FALSE;
+END_IF
 
 CASE iAXIS_STATE OF
 	1:// ============================================== HOMING
@@ -2902,7 +2910,7 @@ CASE iAXIS_STATE OF
 		sAXIS_STATE:='HOMING - TO SENSOR';
 		bOPENED:=FALSE;bCLOSED:=FALSE;bOPEN:=FALSE;bCLOSE:=FALSE;bHOMED:=FALSE;bHOME:=FALSE;
 		bENABLE:=TRUE;
-		rVel:= jogVEL;
+		rVel:= jogHOME_VEL;
 		IF bHOME_DIR THEN
 			bJogPos:=TRUE;
 		ELSE
@@ -2924,7 +2932,8 @@ CASE iAXIS_STATE OF
 	2://FROM LIMIT
 			sAXIS_STATE:= 'HOMING- FROM SENSOR';
 			IF Axis.NcToPlc.ActVelo= 0 THEN
-				rVel:= jogVEL/5;
+				//rVel:= jogHOME_VEL/3;
+				rVel:= 3;
 				IF bHOME_DIR THEN
 					bJogNeg:=TRUE;
 				ELSE
@@ -2952,7 +2961,7 @@ CASE iAXIS_STATE OF
 		bSTART_ACTION:=TRUE;
 		bOPENED:=FALSE;bCLOSED:=FALSE;bOPEN:=FALSE;bCLOSE:=FALSE;bHOMED:=FALSE;bHOME:=FALSE;
 		bENABLE:=TRUE;
-		rVel:= jogVEL;
+		rVel:= jogOPEN_VEL;
 		bJogPos:=TRUE;
 		IF bLIMIT_OPENED THEN
 			iAXIS_STATE:=21;// to deccell
@@ -2968,7 +2977,8 @@ CASE iAXIS_STATE OF
 		
 		21:
 			sAXIS_STATE:= 'OPEN DECCELERATING';
-			IF Axis.NcToPlc.ActVelo= 0 THEN
+			IF Axis.NcToPlc.ActVelo=0 THEN
+				bENABLE:=FALSE;//////////////////////
 				iAXIS_STATE:=100;
 				bOPENED:=TRUE;
 			END_IF
@@ -2978,7 +2988,7 @@ CASE iAXIS_STATE OF
 		bSTART_ACTION:=TRUE;
 		bOPENED:=FALSE;bCLOSED:=FALSE;bOPEN:=FALSE;bCLOSE:=FALSE;bHOMED:=FALSE;bHOME:=FALSE;
 		bENABLE:=TRUE;
-		rVel:= jogVEL;
+		rVel:= jogCLOSE_VEL;
 		bJogNeg:=TRUE;
 		IF bLIMIT_CLOSED THEN
 			iAXIS_STATE:=41;// to deccell
@@ -2994,7 +3004,8 @@ CASE iAXIS_STATE OF
 		
 		41:
 			sAXIS_STATE:= 'CLOSE DECCELERATING';
-			IF Axis.NcToPlc.ActVelo= 0 THEN
+			IF Axis.NcToPlc.ActVelo=0 THEN
+				bENABLE:=FALSE;//////////////////////
 				iAXIS_STATE:=100;
 				bCLOSED:=TRUE;
 			END_IF
@@ -3035,6 +3046,7 @@ CASE iAXIS_STATE OF
 		bJogNeg:=FALSE;
 		bJogPos:=FALSE;
 		bHOMED:=FALSE;
+		clear_cmd_req();
 		IF bHOME THEN
 			iAXIS_STATE:=1;
 			bSTATE_ERROR:=FALSE;
@@ -3098,7 +3110,11 @@ END_CASE]]></ST>
       <LineId Id="5" Count="0" />
       <LineId Id="44" Count="3" />
       <LineId Id="7" Count="0" />
+      <LineId Id="277" Count="0" />
       <LineId Id="49" Count="0" />
+      <LineId Id="278" Count="0" />
+      <LineId Id="280" Count="0" />
+      <LineId Id="279" Count="0" />
       <LineId Id="48" Count="0" />
       <LineId Id="6" Count="0" />
       <LineId Id="10" Count="1" />
@@ -3111,7 +3127,9 @@ END_CASE]]></ST>
       <LineId Id="181" Count="0" />
       <LineId Id="39" Count="1" />
       <LineId Id="12" Count="0" />
-      <LineId Id="50" Count="9" />
+      <LineId Id="50" Count="3" />
+      <LineId Id="272" Count="0" />
+      <LineId Id="54" Count="5" />
       <LineId Id="41" Count="0" />
       <LineId Id="69" Count="3" />
       <LineId Id="106" Count="0" />
@@ -3138,13 +3156,16 @@ END_CASE]]></ST>
       <LineId Id="129" Count="2" />
       <LineId Id="138" Count="0" />
       <LineId Id="132" Count="0" />
+      <LineId Id="270" Count="0" />
       <LineId Id="135" Count="0" />
       <LineId Id="175" Count="0" />
       <LineId Id="109" Count="0" />
       <LineId Id="194" Count="0" />
       <LineId Id="150" Count="13" />
       <LineId Id="183" Count="0" />
-      <LineId Id="164" Count="7" />
+      <LineId Id="164" Count="6" />
+      <LineId Id="271" Count="0" />
+      <LineId Id="171" Count="0" />
       <LineId Id="174" Count="0" />
       <LineId Id="96" Count="0" />
       <LineId Id="214" Count="0" />
@@ -3173,6 +3194,7 @@ END_CASE]]></ST>
       <LineId Id="15" Count="0" />
       <LineId Id="63" Count="1" />
       <LineId Id="176" Count="0" />
+      <LineId Id="281" Count="0" />
       <LineId Id="66" Count="0" />
       <LineId Id="68" Count="0" />
       <LineId Id="91" Count="0" />

@@ -21,6 +21,7 @@ VAR_INPUT
 	bCONDITION: BOOL:=TRUE;
 	bLOCAL_RESET:BOOL;
 	bHOME_FIRST: BOOL:=FALSE;
+	bSTOP_ALL:BOOL:=FALSE;
 END_VAR
 VAR_OUTPUT
 	bOPEN_VALVE: BOOL;
@@ -45,6 +46,11 @@ END_VAR
 T_CLOSE(IN:=  NOT bOPEN_CMD, PT:=rCLOSE_TIME , Q=> , ET=> );
 T_OPEN_TIMEOUT(IN:= bOPEN_CMD , PT:= rOPEN_TIMEOUT, Q=> , ET=> );
 T_CLOSE_TIMEOUT(IN:=  NOT bOPEN_CMD , PT:= tCLOSE_TIMEOUT, Q=> , ET=> );
+
+IF bSTOP_ALL THEN//======================================== STOP ========
+	pist_STATE:=E_PISTON_STATE.error;
+	bSTOP_ALL:=FALSE;
+END_IF
 
 IF bLOCAL_RESET THEN//========================== RESET================
 	bLOCAL_RESET:=FALSE;
@@ -136,8 +142,8 @@ CASE pist_STATE OF
 		IF bCLOSED_LIMIT THEN
 			pist_STATE:=E_PISTON_STATE.closed;
 			bCLOSE_VALVE:=FALSE;
-		END_IF
-		IF T_CLOSE_TIMEOUT.Q THEN
+		
+		ELSIF T_CLOSE_TIMEOUT.Q THEN
 			bOPEN_CMD:=TRUE;
 			pist_STATE:=E_PISTON_STATE.error;
 			
@@ -250,7 +256,11 @@ fbEventLogger.mAdd();]]></ST>
       </Implementation>
     </Action>
     <LineIds Name="FB_PISTON">
-      <LineId Id="3" Count="21" />
+      <LineId Id="3" Count="3" />
+      <LineId Id="342" Count="2" />
+      <LineId Id="346" Count="0" />
+      <LineId Id="345" Count="0" />
+      <LineId Id="7" Count="17" />
       <LineId Id="297" Count="0" />
       <LineId Id="296" Count="0" />
       <LineId Id="302" Count="0" />

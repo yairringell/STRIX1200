@@ -1760,13 +1760,13 @@ External Setpoint Generation:
 				<Axis Id="2" CreateSymbols="true" AxisType="1" AddAxisIoType="105">
 					<Name>XY1</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="1500" DecelerationMaximum="1500" Acceleration="2030.00007279981" Deceleration="2344.04088011516" Jerk="1373630.09852217"/>
-						<Velo Maximum="200"/>
+						<Dynamic AccelerationMaximum="1500" DecelerationMaximum="1500" Acceleration="2020000000" Deceleration="2020000000" Jerk="2.0402e+18"/>
+						<Velo SlowManual="3" FastManual="6" Maximum="200"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
 					<Encoder Name="Enc" EncType="4">
 						<EncPara ScaleFactorNumerator="0.001" EncMode="3" MaxCount="#xffffffff">
-							<TimeComp TimeCompMode="1"/>
+							<TimeComp TimeCompMode="1" EncDelayCycles="4"/>
 						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
@@ -1899,6 +1899,7 @@ External Setpoint Generation:
 					<Controller Name="Ctrl" CtrType="1">
 						<CtrPara PriorControlFactor="1">
 							<PosDiffControl Enable="false"/>
+							<PID PosKp="50"/>
 							<Observer BandWidth="20"/>
 						</CtrPara>
 					</Controller>
@@ -2389,7 +2390,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{CA1013CD-D2D4-4D21-B7E4-1998D10D30A6}" Name="STRIX1200" PrjFilePath="STRIX1200\STRIX1200.plcproj" TmcFilePath="STRIX1200\STRIX1200.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="STRIX1200\STRIX1200.tmc" TmcHash="{122C2073-5B23-C0D3-A10C-CE588DF70364}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="STRIX1200\STRIX1200.tmc" TmcHash="{D7DB5E54-EACF-B726-E85D-880268701F9E}">
 					<Name>STRIX1200 Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -2423,22 +2424,6 @@ External Setpoint Generation:
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_MAIN.ACTION1.fbAnalogSensor.iAnalogIn</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION1.fbAnalogSensor.InputStatus</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION2.fbAnalogSensor.iAnalogIn</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION2.fbAnalogSensor.InputStatus</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
 							<Name>GVL_MAIN.XY2closedLimit</Name>
 							<Type>BOOL</Type>
 						</Var>
@@ -2465,6 +2450,22 @@ External Setpoint Generation:
 						<Var>
 							<Name>GVL_MAIN.inputs</Name>
 							<Type GUID="{C8E96A02-83F6-5EB4-1284-F3763D0B70E7}">ARRAY [1..1] OF sEL1809</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION1.fbAnalogSensor.iAnalogIn</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION1.fbAnalogSensor.InputStatus</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION2.fbAnalogSensor.iAnalogIn</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION2.fbAnalogSensor.InputStatus</Name>
+							<Type>UINT</Type>
 						</Var>
 						<Var>
 							<Name>GVL_MAIN.LIFT1.Axis.NcToPlc</Name>
@@ -2627,10 +2628,10 @@ External Setpoint Generation:
 						<IntCtrlOffs>640</IntCtrlOffs>
 					</Ccat>
 				</AddressInfo>
-				<Image Id="2" AddrType="9" ImageType="3">
+				<Image Id="2" ImageFlags="#x00000030" AddrType="9" ImageType="3">
 					<Name>Image</Name>
 				</Image>
-				<Image Id="4" AddrType="10" ImageType="3">
+				<Image Id="4" ImageFlags="#x00000030" AddrType="10" ImageType="3">
 					<Name>Image-2</Name>
 				</Image>
 				<Box Id="1" BoxType="9099">

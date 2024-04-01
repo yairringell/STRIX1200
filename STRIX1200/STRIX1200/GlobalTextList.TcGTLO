@@ -191,6 +191,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"707"</v>
+              <v n="TextDefault">"STOP !!"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"627"</v>
               <v n="TextDefault">"SYS1"</v>
               <l n="LanguageTexts" t="ArrayList" />
