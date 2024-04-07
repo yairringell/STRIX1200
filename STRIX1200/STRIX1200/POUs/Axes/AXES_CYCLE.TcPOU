@@ -822,8 +822,8 @@ END_VAR
                           </o>
                           <o>
                             <o n="Operand" t="Operand">
-                              <v n="Operand">"10"</v>
-                              <v n="Type">"INT"</v>
+                              <v n="Operand">"LIFT1_JOG_VEL"</v>
+                              <v n="Type">"LREAL"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -841,8 +841,8 @@ END_VAR
                           </o>
                           <o>
                             <o n="Operand" t="Operand">
-                              <v n="Operand">"15"</v>
-                              <v n="Type">"INT"</v>
+                              <v n="Operand">"LIFT1_HOME_VEL"</v>
+                              <v n="Type">"LREAL"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -860,8 +860,8 @@ END_VAR
                           </o>
                           <o>
                             <o n="Operand" t="Operand">
-                              <v n="Operand">"15"</v>
-                              <v n="Type">"INT"</v>
+                              <v n="Operand">"LIFT1_UP_VEL"</v>
+                              <v n="Type">"LREAL"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -879,8 +879,8 @@ END_VAR
                           </o>
                           <o>
                             <o n="Operand" t="Operand">
-                              <v n="Operand">"30"</v>
-                              <v n="Type">"INT"</v>
+                              <v n="Operand">"LIFT1_DOWN_VEL"</v>
+                              <v n="Type">"LREAL"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -1840,8 +1840,8 @@ END_VAR
                           </o>
                           <o>
                             <o n="Operand" t="Operand">
-                              <v n="Operand">"10"</v>
-                              <v n="Type">"INT"</v>
+                              <v n="Operand">"XY1_JOG_VEL"</v>
+                              <v n="Type">"LREAL"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -1859,8 +1859,8 @@ END_VAR
                           </o>
                           <o>
                             <o n="Operand" t="Operand">
-                              <v n="Operand">"10"</v>
-                              <v n="Type">"INT"</v>
+                              <v n="Operand">"XY1_HOME_VEL"</v>
+                              <v n="Type">"LREAL"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -1878,8 +1878,8 @@ END_VAR
                           </o>
                           <o>
                             <o n="Operand" t="Operand">
-                              <v n="Operand">"30"</v>
-                              <v n="Type">"INT"</v>
+                              <v n="Operand">"XY1_OPEN_VEL"</v>
+                              <v n="Type">"LREAL"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>
@@ -1897,8 +1897,8 @@ END_VAR
                           </o>
                           <o>
                             <o n="Operand" t="Operand">
-                              <v n="Operand">"30"</v>
-                              <v n="Type">"INT"</v>
+                              <v n="Operand">"XY1_CLOSE_VEL"</v>
+                              <v n="Type">"LREAL"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
                               <v n="Address">""</v>

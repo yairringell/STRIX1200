@@ -56,13 +56,33 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"608"</v>
+              <v n="TextDefault">"CLOSE VEL"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"307"</v>
+              <v n="TextDefault">"CLOSE XY VEL"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"293"</v>
               <v n="TextDefault">"CLOSED LIMIT"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"159"</v>
+              <v n="TextDefault">"CURRENT:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"446"</v>
               <v n="TextDefault">"DIST"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"831"</v>
+              <v n="TextDefault">"DOWN VEL"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -141,6 +161,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"287"</v>
+              <v n="TextDefault">"OFFSET"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"189"</v>
               <v n="TextDefault">"OPEN"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -151,13 +176,38 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"347"</v>
+              <v n="TextDefault">"OPEN VEL"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"725"</v>
+              <v n="TextDefault">"OPEN XY VEL"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"299"</v>
               <v n="TextDefault">"OPENED LIMIT"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"920"</v>
+              <v n="TextDefault">"PISTON 1"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"309"</v>
+              <v n="TextDefault">"PISTON 2"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"419"</v>
               <v n="TextDefault">"Pistons"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"100"</v>
+              <v n="TextDefault">"PISTONS"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -173,6 +223,16 @@
             <o>
               <v n="TextID">"563"</v>
               <v n="TextDefault">"POWER"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"355"</v>
+              <v n="TextDefault">"PTC ON"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"945"</v>
+              <v n="TextDefault">"PTC ON/OFF"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -216,6 +276,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"388"</v>
+              <v n="TextDefault">"SYSTEM 2"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"826"</v>
               <v n="TextDefault">"System1"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -223,6 +288,21 @@
             <o>
               <v n="TextID">"963"</v>
               <v n="TextDefault">"System2"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"83"</v>
+              <v n="TextDefault">"TEMP"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"256"</v>
+              <v n="TextDefault">"TEMP:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"973"</v>
+              <v n="TextDefault">"UP VEL"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>

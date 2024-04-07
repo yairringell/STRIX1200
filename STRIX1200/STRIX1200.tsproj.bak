@@ -2393,17 +2393,29 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{CA1013CD-D2D4-4D21-B7E4-1998D10D30A6}" Name="STRIX1200" PrjFilePath="STRIX1200\STRIX1200.plcproj" TmcFilePath="STRIX1200\STRIX1200.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="STRIX1200\STRIX1200.tmc" TmcHash="{4B711AF3-2C8E-20C0-59BE-19F8D98EFAA3}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="STRIX1200\STRIX1200.tmc" TmcHash="{E5FB5AC0-7369-2F30-8C2F-527BA32B07F4}">
 					<Name>STRIX1200 Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>GVL_MAIN.iCURRENT1</Name>
+							<Type>INT</Type>
+						</Var>
 						<Var>
 							<Name>GVL_MAIN.XY1openedLimit</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>GVL_MAIN.XY1closedLimit</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.LIFT1openedLimit</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.LIFT1closedLimit</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -2423,12 +2435,12 @@ External Setpoint Generation:
 							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 						</Var>
 						<Var>
-							<Name>GVL_MAIN.LIFT1openedLimit</Name>
-							<Type>BOOL</Type>
+							<Name>GVL_MAIN.ACTION1.fbAnalogSensor.iAnalogIn</Name>
+							<Type>INT</Type>
 						</Var>
 						<Var>
-							<Name>GVL_MAIN.LIFT1closedLimit</Name>
-							<Type>BOOL</Type>
+							<Name>GVL_MAIN.ACTION1.fbAnalogSensor.InputStatus</Name>
+							<Type>UINT</Type>
 						</Var>
 						<Var>
 							<Name>GVL_MAIN.PIST1opened</Name>
@@ -2471,14 +2483,6 @@ External Setpoint Generation:
 							<Type GUID="{C8E96A02-83F6-5EB4-1284-F3763D0B70E7}">ARRAY [1..1] OF sEL1809</Type>
 						</Var>
 						<Var>
-							<Name>GVL_MAIN.ACTION1.fbAnalogSensor.iAnalogIn</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION1.fbAnalogSensor.InputStatus</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
 							<Name>GVL_MAIN.ACTION2.fbAnalogSensor.iAnalogIn</Name>
 							<Type>INT</Type>
 						</Var>
@@ -2491,7 +2495,7 @@ External Setpoint Generation:
 						<Name>PlcTask Outputs</Name>
 						<Var>
 							<Name>GVL_MAIN.CARGHERon</Name>
-							<Comment><![CDATA[ IO]]></Comment>
+							<Comment><![CDATA[OUT1]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -2546,6 +2550,7 @@ External Setpoint Generation:
 						</Var>
 						<Var>
 							<Name>GVL_MAIN.PTCon</Name>
+							<Comment><![CDATA[OUT4]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>

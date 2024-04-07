@@ -113,6 +113,10 @@
     <Compile Include="POUs\PISTONS\ST_PISTON.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\PISTONS\vPISTONS.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
     <Compile Include="POUs\PISTONS\vPISTON.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
