@@ -162,6 +162,7 @@ __VisualizationStyle; ;Element-Clock-Gray;element-clock-gray.bmp;
 __VisualizationStyle; ;Element-Clock-Green;element-clock-green.bmp;
 __VisualizationStyle; ;Element-Clock-Red;element-clock-red.bmp;
 __VisualizationStyle; ;Element-Clock-Yellow;element-clock-yellow.bmp;
+ImagePool; ;LOGO;logo.png;
 IP_ElementImages;VisuElemMeter;Histogram;histogram.bmp;
 IP_ElementImages;VisuElems;RoundRectangle;roundrectangle.bmp;
 IP_ElementImages;VisuElems;Ellipse;ellipse.bmp;
