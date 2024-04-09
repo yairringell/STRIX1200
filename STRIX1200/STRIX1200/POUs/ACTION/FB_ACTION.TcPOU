@@ -3,7 +3,11 @@
   <POU Name="FB_ACTION" Id="{77b4196e-a6d2-4735-ae2e-ed59e88b663e}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_ACTION
 VAR_INPUT
-	fbAnalogSensor: FB_AnalogSensor;
+	fbAnalogSensor1: FB_AnalogSensor;
+	fbAnalogSensor2: FB_AnalogSensor;
+	fbAnalogSensor3: FB_AnalogSensor;
+	fbAnalogSensor4: FB_AnalogSensor;
+	
 	sNAME: STRING;
 	PIST: REFERENCE TO FB_PISTON;
 	aLIFT:REFERENCE TO FB_Axis;
@@ -27,11 +31,13 @@ VAR_INPUT
 	rCLOSE_TIMEOUT: TIME:=T#60S;
 	iOFFSET:INT:=20;
 	iVOLTAGE_IN :INT;
-	iCURRENT_IN :INT;
+	iCURRENT_CHARGE_IN :INT;
+	iCURRENT_PISTON_IN :INT;
 	iTEMP_IN:INT;
 	iHUMID_IN:INT;
 	iVOLTAGE_SHOW:REAL;
-	iCURRENT_SHOW:REAL;
+	iCURRENT_CHARGE_SHOW:REAL;
+	iCURRENT_PISTON_SHOW:REAL;
 	iTEMP_SHOW:REAL;
 	iHUMID_SHOW:REAL;
 	bSTOP_ALL:BOOL:=FALSE;
@@ -60,13 +66,13 @@ IF bALL_HOMED THEN
 	END_IF
 END_IF
 
-fbAnalogSensor(
+fbAnalogSensor1(
 	iAnalogIn:=iVOLTAGE_IN, 
 	InputStatus:= , 
-	IoMax:=9000 , 
-	IoMin:= 0, 
+	IoMax:=4180 , 
+	IoMin:= 373, 
 	EngMin:= 0, 
-	EngMax:= 100, 
+	EngMax:= 25.37, 
 	bHighLevelAlarmSp:= , 
 	bLowLevelAlarmSp:= , 
 	iCyclesFilter:= 100, 
@@ -75,47 +81,32 @@ fbAnalogSensor(
 	bLowLevelAlarm=> , 
 	bIoError=> );
 	
-fbAnalogSensor(
-	iAnalogIn:=iCURRENT_IN, 
+fbAnalogSensor2(
+	iAnalogIn:=iCURRENT_CHARGE_IN, 
 	InputStatus:= , 
-	IoMax:=9000 , 
-	IoMin:= 0, 
+	IoMax:=4180 , 
+	IoMin:= 373, 
 	EngMin:= 0, 
-	EngMax:= 100, 
+	EngMax:= 25.37, 
 	bHighLevelAlarmSp:= , 
 	bLowLevelAlarmSp:= , 
 	iCyclesFilter:= 100, 
-	rSensorVal=>iCURRENT_SHOW , 
-	bHighLevelAlarm=> , 
-	bLowLevelAlarm=> , 
-	bIoError=> );
-
- fbAnalogSensor(
-	iAnalogIn:=iTEMP_IN, 
-	InputStatus:= , 
-	IoMax:=9000 , 
-	IoMin:= 0, 
-	EngMin:= 0, 
-	EngMax:= 100, 
-	bHighLevelAlarmSp:= , 
-	bLowLevelAlarmSp:= , 
-	iCyclesFilter:= 100, 
-	rSensorVal=>iTEMP_SHOW , 
+	rSensorVal=>iCURRENT_CHARGE_SHOW , 
 	bHighLevelAlarm=> , 
 	bLowLevelAlarm=> , 
 	bIoError=> );
 	
-fbAnalogSensor(
-	iAnalogIn:=iHUMID_IN, 
+	fbAnalogSensor3(
+	iAnalogIn:=iCURRENT_PISTON_IN, 
 	InputStatus:= , 
-	IoMax:=9000 , 
-	IoMin:= 0, 
+	IoMax:=4180 , 
+	IoMin:= 8540, 
 	EngMin:= 0, 
-	EngMax:= 100, 
+	EngMax:= 25.37, 
 	bHighLevelAlarmSp:= , 
 	bLowLevelAlarmSp:= , 
 	iCyclesFilter:= 100, 
-	rSensorVal=>iHUMID_SHOW , 
+	rSensorVal=>iCURRENT_PISTON_SHOW , 
 	bHighLevelAlarm=> , 
 	bLowLevelAlarm=> , 
 	bIoError=> );]]></ST>
@@ -456,11 +447,11 @@ END_CASE]]></ST>
       <LineId Id="169" Count="13" />
       <LineId Id="168" Count="0" />
       <LineId Id="225" Count="0" />
-      <LineId Id="227" Count="12" />
-      <LineId Id="226" Count="0" />
-      <LineId Id="167" Count="0" />
-      <LineId Id="246" Count="27" />
+      <LineId Id="327" Count="12" />
       <LineId Id="125" Count="0" />
+      <LineId Id="342" Count="0" />
+      <LineId Id="344" Count="12" />
+      <LineId Id="343" Count="0" />
     </LineIds>
     <LineIds Name="FB_ACTION.aACTION_ERROR">
       <LineId Id="2" Count="7" />

@@ -31,7 +31,7 @@ VAR_GLOBAL
 	bDISABLE_LIFT2 AT %Q* :BOOL;
 	bDISABLE_XY1 AT %Q* :BOOL;// OUT15
 	bDISABLE_XY2 AT %Q* :BOOL;
-	
+	LED AT %Q* :BOOL;//OUT6
 	
 	XY1openedLimit   AT %I* :BOOL;
 	XY1closedLimit   AT %I* :BOOL;
@@ -59,7 +59,8 @@ VAR_GLOBAL
 	WARNING2 AT %Q* :BOOL;
 	
 	iVOLTAGE1   AT %I* :INT;
-	iCURRENT1   AT %I* :INT;
+	iCURRENT_CHARGE1   AT %I* :INT;
+	iCURRENT_PISTON1   AT %I* :INT;
 	
 	inputs AT %I* : ARRAY [1..1]  OF sEL1809;
 	outputs AT %Q* : ARRAY [1..1]  OF sEL2809;

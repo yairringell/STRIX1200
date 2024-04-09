@@ -5,24 +5,49 @@
 VAR
 	INTEG:INT;
 	
-	bTest : BOOL;
-	tA: TON:=(PT:=T#10s);
+	bSTART_TIMER : BOOL;
+	tON: TON:=(PT:=T#500ms);
+
 	sVar: STRING;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[tA(IN:= bTest);
-sVar := TIME_TO_STRING(tA.ET); 
+      <ST><![CDATA[tON(IN:= bSTART_TIMER,PT:=T#500MS);
+sVar := TIME_TO_STRING(tON.ET); 
 AXES_CYCLE();
 PIST_CYCLE();
-ACTION1(bPTC_ON=>PTCon, bCHARGE=>CARGHERon,iVOLTAGE_IN:=iVOLTAGE1,iCURRENT_IN:=iCURRENT1, sNAME:='ACTION1', PIST:=PIST1, aXY:=XY1, aLIFT:=LIFT1);
-ACTION2(sNAME:='ACTION2',PIST:=PIST2, aXY:=XY2, aLIFT:=LIFT2);]]></ST>
+ACTION1(bPTC_ON=>PTCon, bCHARGE=>CARGHERon,iVOLTAGE_IN:=iVOLTAGE1,iCURRENT_CHARGE_IN:=iCURRENT_CHARGE1,iCURRENT_PISTON_IN:=iCURRENT_PISTON1, sNAME:='ACTION1', PIST:=PIST1, aXY:=XY1, aLIFT:=LIFT1);
+ACTION2(sNAME:='ACTION2',PIST:=PIST2, aXY:=XY2, aLIFT:=LIFT2);
+A_BLINK();]]></ST>
     </Implementation>
+    <Action Name="A_BLINK" Id="{d96445a9-baf5-40f4-b45b-a764a3589fd1}">
+      <Implementation>
+        <ST><![CDATA[bSTART_TIMER:=TRUE;
+
+IF tON.Q THEN
+	bSTART_TIMER:=FALSE;
+	IF ACTION1.bBUSY THEN
+		LED:=NOT LED;
+	END_IF
+END_IF
+	
+]]></ST>
+      </Implementation>
+    </Action>
     <LineIds Name="MAIN">
       <LineId Id="11" Count="2" />
       <LineId Id="2" Count="0" />
       <LineId Id="22" Count="0" />
       <LineId Id="31" Count="0" />
+      <LineId Id="41" Count="0" />
+    </LineIds>
+    <LineIds Name="MAIN.A_BLINK">
+      <LineId Id="2" Count="0" />
+      <LineId Id="1" Count="0" />
+      <LineId Id="6" Count="1" />
+      <LineId Id="10" Count="2" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="3" Count="1" />
     </LineIds>
   </POU>
 </TcPlcObject>
