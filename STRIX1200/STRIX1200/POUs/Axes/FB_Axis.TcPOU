@@ -92,6 +92,7 @@ rActVel:=Axis.NcToPlc.ActVelo;
 
 IF RELATIVE.Busy OR JOG.Busy OR moveAbsolute.busy THEN
 	bBusy:=TRUE;
+	bHOMED:=FALSE;
 END_IF
 IF NOT RELATIVE.Busy AND NOT JOG.Busy AND NOT moveAbsolute.busy THEN
 	bBusy:=FALSE;
@@ -3091,7 +3092,9 @@ END_CASE]]></ST>
     <LineIds Name="FB_Axis">
       <LineId Id="241" Count="1" />
       <LineId Id="252" Count="4" />
-      <LineId Id="280" Count="28" />
+      <LineId Id="280" Count="4" />
+      <LineId Id="386" Count="0" />
+      <LineId Id="285" Count="23" />
       <LineId Id="145" Count="0" />
     </LineIds>
     <LineIds Name="FB_Axis.aAXIS_ERROR">

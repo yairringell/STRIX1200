@@ -1731,6 +1731,9 @@ External Setpoint Generation:
 	</ImageDatas>
 	<Project ProjectGUID="{1AD8C3F1-2D24-47B1-B663-CC64FCF63C6B}" TargetNetId="5.144.185.122.1.1" ShowHideConfigurations="#x1c6">
 		<System>
+			<Licenses>
+				<Target BkhfOrder="01279183"/>
+			</Licenses>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
 					<Name>PlcTask</Name>
@@ -1760,7 +1763,7 @@ External Setpoint Generation:
 				<Axis Id="2" CreateSymbols="true" AxisType="1" AddAxisIoType="105">
 					<Name>XY1</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="1500" DecelerationMaximum="1500" Acceleration="2020000000" Deceleration="2020000000" Jerk="2.0402e+18"/>
+						<Dynamic AccelerationMaximum="1500" DecelerationMaximum="1500" Acceleration="400" Deceleration="400" Jerk="40000"/>
 						<Velo SlowManual="3" FastManual="6" Maximum="200"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
@@ -2231,7 +2234,7 @@ External Setpoint Generation:
 				<Axis Id="1" CreateSymbols="true" AxisType="1" AddAxisIoType="105">
 					<Name>LIFT1</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="300" DecelerationMaximum="300" Acceleration="2030" Deceleration="2344.04" Jerk="1373630"/>
+						<Dynamic AccelerationMaximum="300" DecelerationMaximum="300" Acceleration="400" Deceleration="400" Jerk="40000"/>
 						<Velo SlowManual="10" FastManual="30" Maximum="200"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
@@ -2393,35 +2396,11 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{CA1013CD-D2D4-4D21-B7E4-1998D10D30A6}" Name="STRIX1200" PrjFilePath="STRIX1200\STRIX1200.plcproj" TmcFilePath="STRIX1200\STRIX1200.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="STRIX1200\STRIX1200.tmc" TmcHash="{A1AF7A8B-1B0F-820A-8125-E6820E9355DE}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="STRIX1200\STRIX1200.tmc" TmcHash="{E5F8369F-EEAF-5417-ECF6-F7BAF99B0F37}">
 					<Name>STRIX1200 Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
-						<Var>
-							<Name>GVL_MAIN.iCURRENT_CHARGE1</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.iCURRENT_PISTON1</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.LIFT1.Axis.NcToPlc</Name>
-							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.XY1.Axis.NcToPlc</Name>
-							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.XY2.Axis.NcToPlc</Name>
-							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.LIFT2.Axis.NcToPlc</Name>
-							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
 						<Var>
 							<Name>GVL_MAIN.XY1openedLimit</Name>
 							<Type>BOOL</Type>
@@ -2433,6 +2412,22 @@ External Setpoint Generation:
 						<Var>
 							<Name>GVL_MAIN.LIFT1openedLimit</Name>
 							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.LIFT1.Axis.NcToPlc</Name>
+							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.XY1.Axis.NcToPlc</Name>
+							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.LIFT2.Axis.NcToPlc</Name>
+							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.XY2.Axis.NcToPlc</Name>
+							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 						</Var>
 						<Var>
 							<Name>GVL_MAIN.LIFT1closedLimit</Name>
@@ -2472,6 +2467,14 @@ External Setpoint Generation:
 						</Var>
 						<Var>
 							<Name>GVL_MAIN.iVOLTAGE1</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.iCURRENT_CHARGE1</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.iCURRENT_PISTON1</Name>
 							<Type>INT</Type>
 						</Var>
 						<Var>
@@ -2560,6 +2563,20 @@ External Setpoint Generation:
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
+							<Name>GVL_MAIN.bDISABLE_XY1</Name>
+							<Comment><![CDATA[ OUT15]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.bDISABLE_XY2</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.LED</Name>
+							<Comment><![CDATA[OUT6]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>GVL_MAIN.LIFT1.Axis.PlcToNc</Name>
 							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
@@ -2574,20 +2591,6 @@ External Setpoint Generation:
 						<Var>
 							<Name>GVL_MAIN.XY2.Axis.PlcToNc</Name>
 							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.bDISABLE_XY1</Name>
-							<Comment><![CDATA[ OUT15]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.bDISABLE_XY2</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.LED</Name>
-							<Comment><![CDATA[OUT6]]></Comment>
-							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>GVL_MAIN.PIST1open</Name>

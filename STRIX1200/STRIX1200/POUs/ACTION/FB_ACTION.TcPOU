@@ -41,8 +41,10 @@ VAR_INPUT
 	iTEMP_SHOW:REAL;
 	iHUMID_SHOW:REAL;
 	bSTOP_ALL:BOOL:=FALSE;
+	bMANUAL:BOOL:=FALSE;
 END_VAR
 VAR_OUTPUT
+	bUNINIT:BOOL:=TRUE;
 	bCHARGE:BOOL:=FALSE;
 	bPTC_ON:BOOL:=FALSE;
 	sACTION_STATE:STRING:='UNINIT';
@@ -53,6 +55,7 @@ VAR_OUTPUT
 	bALL_OPENED:BOOL;
 	bALL_CLOSED:BOOL;
 	bBUSY:BOOL:=FALSE;
+	bSAFE_MODE:BOOL:=FALSE;
 END_VAR
 VAR
 END_VAR
@@ -64,6 +67,12 @@ IF bALL_HOMED THEN
 		bALL_HOMED:=FALSE;
 		iACTION_STATE:=98;
 	END_IF
+END_IF
+
+IF bMANUAL OR bBUSY OR bUNINIT THEN //////==========   BUTTONS LOCK  ===================
+	bSAFE_MODE:=TRUE;
+ELSE
+	bSAFE_MODE:=FALSE;
 END_IF
 
 fbAnalogSensor1(
@@ -99,8 +108,8 @@ fbAnalogSensor2(
 	fbAnalogSensor3(
 	iAnalogIn:=iCURRENT_PISTON_IN, 
 	InputStatus:= , 
-	IoMax:=4180 , 
-	IoMin:= 8540, 
+	IoMax:=8490 , 
+	IoMin:= 0, 
 	EngMin:= 0, 
 	EngMax:= 25.37, 
 	bHighLevelAlarmSp:= , 
@@ -167,10 +176,18 @@ END_VAR
         <ST><![CDATA[tACTION(IN:= bSTART_ACTION, PT:=rACTION_TIMEOUT , Q=> , ET=> );
 
 IF bSTOP_ALL THEN
+	bALL_HOMED:=FALSE;
 	PIST.bSTOP_ALL:=TRUE;
 	aXY.bSTOP_ALL:=TRUE;
 	aLIFT.bSTOP_ALL:=TRUE;
 	iACTION_STATE:=99;
+	bUNINIT:=TRUE;
+END_IF
+
+IF bMANUAL THEN
+	iACTION_STATE:=999;
+	PIST.bLOCAL_MANUAL:=TRUE;
+
 END_IF
 
 CASE iACTION_STATE OF
@@ -178,7 +195,7 @@ CASE iACTION_STATE OF
 	1://======================================  HOME ALL	
 		//HOME XY
 		bBUSY:=TRUE;
-		sACTION_STATE:='HOMING ALL XY';
+		sACTION_STATE:='HOMING XY';
 		bHOME_ALL:=FALSE; bALL_HOMED:=FALSE;bALL_OPENED:=FALSE;bOPEN_ALL:=FALSE;bALL_CLOSED:=FALSE;bCLOSE_ALL:=FALSE;
 		aXY.bHome:=TRUE;
 		bSTART_ACTION:=TRUE;
@@ -197,7 +214,7 @@ CASE iACTION_STATE OF
 		END_IF
 			
 	3://HOME LIFT
-		sACTION_STATE:='HOMING ALL LIFT';
+		sACTION_STATE:='HOMING LIFT';
 		aLIFT.bHome:=TRUE;
 		bSTART_ACTION:=TRUE;
 		iACTION_STATE:=4;
@@ -219,7 +236,7 @@ CASE iACTION_STATE OF
 		aLIFT.bSetPosition:=FALSE;
 		aXY.bENABLE:=FALSE;//////////////
 		aLIFT.bENABLE:=FALSE;/////////////////
-		sACTION_STATE:='HOMING PISTONS';
+		sACTION_STATE:='HOMING PISTON';
 		bSTART_ACTION:=TRUE;
 		PIST.bOPEN_SWR:=FALSE;
 		PIST.bHOME_FIRST:=TRUE;
@@ -242,7 +259,7 @@ CASE iACTION_STATE OF
 		//OPEN PISTON
 		bBUSY:=TRUE;
 		bHOME_ALL:=FALSE; bALL_HOMED:=FALSE;bALL_OPENED:=FALSE;bOPEN_ALL:=FALSE;bALL_CLOSED:=FALSE;bCLOSE_ALL:=FALSE;
-		sACTION_STATE:='OPENING ALL PISTON';
+		sACTION_STATE:='OPENING PISTON';
 		bSTART_ACTION:=TRUE;
 		PIST.bOPEN_SWR:=TRUE;
 		aXY.bENABLE:=FALSE;//////////////////////
@@ -258,7 +275,7 @@ CASE iACTION_STATE OF
 			bACTION_ERROR:=TRUE;
 		END_IF
 	11://OPEN LIFT
-		sACTION_STATE:='OPENING ALL LIFT';
+		sACTION_STATE:='OPENING LIFT';
 		aLIFT.bOPEN:=TRUE;
 		bSTART_ACTION:=TRUE;
 		iACTION_STATE:=12;
@@ -277,7 +294,7 @@ CASE iACTION_STATE OF
 			//aLIFT.bENABLE:=FALSE;
 		END_IF
 	13://OPEN ALL XY
-		sACTION_STATE:='OPENING ALL XY';
+		sACTION_STATE:='OPENING XY';
 		aXY.bOPEN:=TRUE;
 		bSTART_ACTION:=TRUE;
 		iACTION_STATE:=14; 
@@ -311,7 +328,7 @@ CASE iACTION_STATE OF
 		
 	30://===================================== CLOSING ALL XY
 		bBUSY:=TRUE;
-		sACTION_STATE:='CLOSING ALL XY';
+		sACTION_STATE:='CLOSING XY';
 		bHOME_ALL:=FALSE; bALL_HOMED:=FALSE;bALL_OPENED:=FALSE;bOPEN_ALL:=FALSE;bALL_CLOSED:=FALSE;bCLOSE_ALL:=FALSE;
 		aXY.bCLOSE:=TRUE;
 		bSTART_ACTION:=TRUE;
@@ -331,7 +348,7 @@ CASE iACTION_STATE OF
 			//aXY.bENABLE:=FALSE;
 		END_IF	
 	33://HOME LIFT
-		sACTION_STATE:='CLOSING ALL LIFT';
+		sACTION_STATE:='CLOSING LIFT';
 		aLIFT.bCLOSE:=TRUE;
 		bSTART_ACTION:=TRUE;
 		iACTION_STATE:=34;
@@ -371,7 +388,7 @@ CASE iACTION_STATE OF
 	35://CLOSE ALL PISTON
 		aXY.bENABLE:=FALSE;//////////////////////
 		aLIFT.bENABLE:=FALSE;////////////////////
-		sACTION_STATE:='CLOSING ALL PISTON';
+		sACTION_STATE:='CLOSING PISTON';
 		bSTART_ACTION:=TRUE;
 		PIST.bOPEN_SWR:=FALSE;
 		IF PIST.bCLOSED THEN
@@ -409,18 +426,22 @@ CASE iACTION_STATE OF
 			bACTION_ERROR:=FALSE;
 		END_IF
 	980://=====================================to homing
+		bUNINIT:=TRUE;
 		iACTION_STATE:=1;
+		
 		
 	99://===================================== ERROR
 		bBUSY:=FALSE;
 		sACTION_STATE:='ERROR';
+		bACTION_ERROR:=TRUE;
 		bSTOP_ALL:=FALSE;
 		IF bHOME_ALL THEN
 			iACTION_STATE:=1;
 			bACTION_ERROR:=FALSE;
 		END_IF
 	
-	100://===================================== HOMED
+	100://===================================== HOMED===
+		bUNINIT:=FALSE;
 		bBUSY:=FALSE;
 		sACTION_STATE:='HOMED';
 		IF bHOME_ALL THEN
@@ -431,7 +452,19 @@ CASE iACTION_STATE OF
 			iACTION_STATE:=10;
 			bACTION_ERROR:=FALSE;
 		END_IF
-	
+	999://===================================== MANUAL  =================
+		sACTION_STATE:='MANUAL';
+		IF bHOME_ALL THEN
+			PIST.bOPEN_SWR:=PIST.bOPEN_CMD;
+			PIST.bLOCAL_MANUAL:=FALSE;
+			bMANUAL:=FALSE;
+			aLIFT.bReset:=TRUE;
+			aXY.bReset:=TRUE;
+			aLIFT.clear_cmd_req();
+			aXY.clear_cmd_req();
+			iACTION_STATE:=980;
+			bACTION_ERROR:=FALSE;
+		END_IF
 	
 END_CASE]]></ST>
       </Implementation>
@@ -444,6 +477,11 @@ END_CASE]]></ST>
       <LineId Id="126" Count="0" />
       <LineId Id="123" Count="0" />
       <LineId Id="128" Count="0" />
+      <LineId Id="360" Count="0" />
+      <LineId Id="359" Count="0" />
+      <LineId Id="361" Count="0" />
+      <LineId Id="363" Count="1" />
+      <LineId Id="362" Count="0" />
       <LineId Id="169" Count="13" />
       <LineId Id="168" Count="0" />
       <LineId Id="225" Count="0" />
@@ -469,11 +507,19 @@ END_CASE]]></ST>
       <LineId Id="5" Count="0" />
       <LineId Id="277" Count="0" />
       <LineId Id="7" Count="0" />
+      <LineId Id="355" Count="0" />
       <LineId Id="289" Count="0" />
       <LineId Id="278" Count="0" />
       <LineId Id="284" Count="0" />
       <LineId Id="286" Count="0" />
+      <LineId Id="356" Count="0" />
       <LineId Id="279" Count="0" />
+      <LineId Id="333" Count="0" />
+      <LineId Id="332" Count="0" />
+      <LineId Id="334" Count="0" />
+      <LineId Id="344" Count="0" />
+      <LineId Id="347" Count="0" />
+      <LineId Id="335" Count="0" />
       <LineId Id="287" Count="0" />
       <LineId Id="6" Count="0" />
       <LineId Id="8" Count="0" />
@@ -609,10 +655,13 @@ END_CASE]]></ST>
       <LineId Id="17" Count="0" />
       <LineId Id="16" Count="0" />
       <LineId Id="66" Count="0" />
+      <LineId Id="352" Count="0" />
       <LineId Id="273" Count="0" />
+      <LineId Id="348" Count="0" />
       <LineId Id="272" Count="0" />
       <LineId Id="68" Count="1" />
       <LineId Id="300" Count="0" />
+      <LineId Id="351" Count="0" />
       <LineId Id="290" Count="0" />
       <LineId Id="85" Count="0" />
       <LineId Id="70" Count="1" />
@@ -620,6 +669,7 @@ END_CASE]]></ST>
       <LineId Id="75" Count="0" />
       <LineId Id="79" Count="0" />
       <LineId Id="76" Count="0" />
+      <LineId Id="353" Count="0" />
       <LineId Id="301" Count="0" />
       <LineId Id="86" Count="0" />
       <LineId Id="77" Count="1" />
@@ -628,6 +678,13 @@ END_CASE]]></ST>
       <LineId Id="90" Count="0" />
       <LineId Id="89" Count="0" />
       <LineId Id="61" Count="0" />
+      <LineId Id="336" Count="0" />
+      <LineId Id="350" Count="0" />
+      <LineId Id="349" Count="0" />
+      <LineId Id="345" Count="0" />
+      <LineId Id="343" Count="0" />
+      <LineId Id="337" Count="5" />
+      <LineId Id="331" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="9" Count="0" />
     </LineIds>

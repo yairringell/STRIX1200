@@ -41,6 +41,16 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"286"</v>
+              <v n="TextDefault">"A1 MANUAL"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"41"</v>
+              <v n="TextDefault">"A:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"396"</v>
               <v n="TextDefault">"ACC"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -51,8 +61,23 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"361"</v>
+              <v n="TextDefault">"AENT:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"822"</v>
+              <v n="TextDefault">"anualLIMIT"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"188"</v>
               <v n="TextDefault">"BUSY"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"729"</v>
+              <v n="TextDefault">"CHARGER"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -86,8 +111,23 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"986"</v>
+              <v n="TextDefault">"COOLING"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"116"</v>
+              <v n="TextDefault">"current"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"159"</v>
               <v n="TextDefault">"CURRENT:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"965"</v>
+              <v n="TextDefault">"current[A]"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -113,6 +153,16 @@
             <o>
               <v n="TextID">"234"</v>
               <v n="TextDefault">"Error Logs"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"135"</v>
+              <v n="TextDefault">"FAN"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"91"</v>
+              <v n="TextDefault">"FAN ON/OFF"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -163,6 +213,11 @@
             <o>
               <v n="TextID">"412"</v>
               <v n="TextDefault">"MANUAL"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"51"</v>
+              <v n="TextDefault">"manual"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -261,6 +316,16 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"68"</v>
+              <v n="TextDefault">"S1 MANUAL"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"89"</v>
+              <v n="TextDefault">"S2 MANUAL"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"830"</v>
               <v n="TextDefault">"SET"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -306,6 +371,16 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"745"</v>
+              <v n="TextDefault">"TECHNITIAN"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"348"</v>
+              <v n="TextDefault">"Technitian"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"83"</v>
               <v n="TextDefault">"TEMP"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -321,6 +396,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"401"</v>
+              <v n="TextDefault">"V:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"964"</v>
               <v n="TextDefault">"VEL"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -328,6 +408,16 @@
             <o>
               <v n="TextID">"60"</v>
               <v n="TextDefault">"Vel: %.2f"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"888"</v>
+              <v n="TextDefault">"vo"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"567"</v>
+              <v n="TextDefault">"voltage [V]"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>

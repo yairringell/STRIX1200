@@ -18,7 +18,9 @@ AXES_CYCLE();
 PIST_CYCLE();
 ACTION1(bPTC_ON=>PTCon, bCHARGE=>CARGHERon,iVOLTAGE_IN:=iVOLTAGE1,iCURRENT_CHARGE_IN:=iCURRENT_CHARGE1,iCURRENT_PISTON_IN:=iCURRENT_PISTON1, sNAME:='ACTION1', PIST:=PIST1, aXY:=XY1, aLIFT:=LIFT1);
 ACTION2(sNAME:='ACTION2',PIST:=PIST2, aXY:=XY2, aLIFT:=LIFT2);
-A_BLINK();]]></ST>
+A_BLINK();
+
+//http://192.168.1.100/Tc3PlcHmiWeb/Port_851/Visu/webvisu.htm]]></ST>
     </Implementation>
     <Action Name="A_BLINK" Id="{d96445a9-baf5-40f4-b45b-a764a3589fd1}">
       <Implementation>
@@ -28,6 +30,8 @@ IF tON.Q THEN
 	bSTART_TIMER:=FALSE;
 	IF ACTION1.bBUSY THEN
 		LED:=NOT LED;
+	ELSE
+		LED:=FALSE;
 	END_IF
 END_IF
 	
@@ -40,12 +44,16 @@ END_IF
       <LineId Id="22" Count="0" />
       <LineId Id="31" Count="0" />
       <LineId Id="41" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="42" Count="0" />
     </LineIds>
     <LineIds Name="MAIN.A_BLINK">
       <LineId Id="2" Count="0" />
       <LineId Id="1" Count="0" />
       <LineId Id="6" Count="1" />
-      <LineId Id="10" Count="2" />
+      <LineId Id="10" Count="1" />
+      <LineId Id="15" Count="1" />
+      <LineId Id="12" Count="0" />
       <LineId Id="9" Count="0" />
       <LineId Id="3" Count="1" />
     </LineIds>

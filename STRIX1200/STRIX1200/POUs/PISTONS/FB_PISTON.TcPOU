@@ -22,6 +22,7 @@ VAR_INPUT
 	bLOCAL_RESET:BOOL;
 	bHOME_FIRST: BOOL:=FALSE;
 	bSTOP_ALL:BOOL:=FALSE;
+	bEXTRA:BOOL:=FALSE;
 END_VAR
 VAR_OUTPUT
 	bOPEN_VALVE: BOOL;
@@ -32,6 +33,7 @@ VAR_OUTPUT
 	bERROR:BOOL:=FALSE;
 END_VAR
 VAR
+	T_EXTRA: TON;
 	T_OPEN: TON;
 	T_OPEN_TIMEOUT: TON;
 	T_CLOSE: TON;
@@ -46,6 +48,8 @@ END_VAR
 T_CLOSE(IN:=  NOT bOPEN_CMD, PT:=rCLOSE_TIME , Q=> , ET=> );
 T_OPEN_TIMEOUT(IN:= bOPEN_CMD , PT:= rOPEN_TIMEOUT, Q=> , ET=> );
 T_CLOSE_TIMEOUT(IN:=  NOT bOPEN_CMD , PT:= tCLOSE_TIMEOUT, Q=> , ET=> );
+T_EXTRA(IN:= bEXTRA, PT:=T#2S);
+
 
 IF bSTOP_ALL THEN//======================================== STOP ========
 	pist_STATE:=E_PISTON_STATE.error;
@@ -53,6 +57,7 @@ IF bSTOP_ALL THEN//======================================== STOP ========
 END_IF
 
 IF bLOCAL_RESET THEN//========================== RESET================
+	bEXTRA:=FALSE;
 	bLOCAL_RESET:=FALSE;
 	pist_STATE:=E_PISTON_STATE.uninit;
 END_IF
@@ -140,9 +145,12 @@ CASE pist_STATE OF
 		//-------------------------------------- both sensors
 		E_PISTON_TYPE.BOTH:
 		IF bCLOSED_LIMIT THEN
-			pist_STATE:=E_PISTON_STATE.closed;
-			bCLOSE_VALVE:=FALSE;
-		
+			bEXTRA:=TRUE;
+			IF T_EXTRA.Q THEN
+				pist_STATE:=E_PISTON_STATE.closed;
+				bCLOSE_VALVE:=FALSE;
+				bEXTRA:=FALSE;
+			END_IF
 		ELSIF T_CLOSE_TIMEOUT.Q THEN
 			bOPEN_CMD:=TRUE;
 			pist_STATE:=E_PISTON_STATE.error;
@@ -178,9 +186,9 @@ CASE pist_STATE OF
 		//-------------------------------------- both sensors
 		E_PISTON_TYPE.BOTH:
 		IF NOT bOPEN_LIMIT THEN
-			bOPEN_CMD:=FALSE;
-			aPISTON_ERROR();
-			pist_STATE:=E_PISTON_STATE.error;
+			//bOPEN_CMD:=FALSE;
+			//aPISTON_ERROR();
+			//pist_STATE:=E_PISTON_STATE.error;
 		END_IF
 		//-------------------------------------- only open sensor
 		E_PISTON_TYPE.ONLY_OPEN:
@@ -222,6 +230,7 @@ CASE pist_STATE OF
 	bERROR:=TRUE;
 	bCLOSE_VALVE:=FALSE;
 	bOPEN_VALVE:=FALSE;
+	bEXTRA:=FALSE;
 	//
 END_CASE	
 	
@@ -257,10 +266,15 @@ fbEventLogger.mAdd();]]></ST>
     </Action>
     <LineIds Name="FB_PISTON">
       <LineId Id="3" Count="3" />
-      <LineId Id="342" Count="2" />
+      <LineId Id="342" Count="0" />
+      <LineId Id="389" Count="0" />
+      <LineId Id="388" Count="0" />
+      <LineId Id="343" Count="1" />
       <LineId Id="346" Count="0" />
       <LineId Id="345" Count="0" />
-      <LineId Id="7" Count="17" />
+      <LineId Id="7" Count="2" />
+      <LineId Id="395" Count="0" />
+      <LineId Id="10" Count="14" />
       <LineId Id="297" Count="0" />
       <LineId Id="296" Count="0" />
       <LineId Id="302" Count="0" />
@@ -284,8 +298,11 @@ fbEventLogger.mAdd();]]></ST>
       <LineId Id="200" Count="0" />
       <LineId Id="61" Count="15" />
       <LineId Id="288" Count="0" />
-      <LineId Id="77" Count="4" />
+      <LineId Id="77" Count="3" />
+      <LineId Id="391" Count="1" />
+      <LineId Id="81" Count="0" />
       <LineId Id="287" Count="0" />
+      <LineId Id="393" Count="0" />
       <LineId Id="82" Count="3" />
       <LineId Id="301" Count="0" />
       <LineId Id="86" Count="7" />
@@ -308,6 +325,7 @@ fbEventLogger.mAdd();]]></ST>
       <LineId Id="205" Count="0" />
       <LineId Id="143" Count="6" />
       <LineId Id="245" Count="1" />
+      <LineId Id="394" Count="0" />
       <LineId Id="150" Count="5" />
       <LineId Id="2" Count="0" />
     </LineIds>

@@ -341,6 +341,10 @@
                       <v n="Value">false</v>
                     </o>
                     <o>
+                      <v n="Id">2496894244L</v>
+                      <v n="Value">"NOT ACTION1.bMANUAL"</v>
+                    </o>
+                    <o>
                       <v n="Id">823443203L</v>
                       <v n="Value">"615"</v>
                     </o>
@@ -524,6 +528,10 @@
                     <o>
                       <v n="Id">2597686782L</v>
                       <v n="Value">false</v>
+                    </o>
+                    <o>
+                      <v n="Id">2496894244L</v>
+                      <v n="Value">"NOT ACTION2.bMANUAL"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
@@ -1681,7 +1689,7 @@
                     </o>
                     <o>
                       <v n="Id">390574330L</v>
-                      <v n="Value">"PISTONS"</v>
+                      <v n="Value">"Technitian"</v>
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
@@ -1689,7 +1697,7 @@
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"100"</v>
+                      <v n="Value">"348"</v>
                     </o>
                   </l>
                 </o>
