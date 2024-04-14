@@ -33,7 +33,7 @@ VAR_INPUT
 	bLIMIT_OPENED:BOOL;
 	bLIMIT_CLOSED:BOOL;
 	bLIMIT:BOOL;
-	rACTION_TIMEOUT:TIME:=T#60S;
+	rACTION_TIMEOUT:TIME:=T#10S;
 	jogVEL: REAL;
 	jogHOME_VEL: REAL;
 	jogOPEN_VEL: REAL;
@@ -2903,6 +2903,7 @@ END_IF
 IF bSTOP_ALL THEN
 	iAXIS_STATE:=99;
 	bSTOP_ALL:=FALSE;
+	bSTART_ACTION:=FALSE;
 END_IF
 
 CASE iAXIS_STATE OF
@@ -3117,6 +3118,7 @@ END_CASE]]></ST>
       <LineId Id="49" Count="0" />
       <LineId Id="278" Count="0" />
       <LineId Id="280" Count="0" />
+      <LineId Id="286" Count="0" />
       <LineId Id="279" Count="0" />
       <LineId Id="48" Count="0" />
       <LineId Id="6" Count="0" />

@@ -66,6 +66,14 @@ IF NOT bLOCAL_MANUAL THEN//====================== MANUAL ==============
 	bOPEN_CMD:=bOPEN_SWR;
 END_IF
 
+
+
+IF bHOME_FIRST AND NOT bHOMED_FIRST THEN
+	bHOMED_FIRST:=TRUE;
+	pist_STATE:=E_PISTON_STATE.uninit;
+	bFIRST_DONE:=FALSE;//to set command to false to zero timer
+END_IF
+
 IF NOT bFIRST_DONE THEN  // ============== check default mode ===============
 	bFIRST_DONE:=TRUE;
 	IF bOPEN_DEFAULT THEN
@@ -74,12 +82,6 @@ IF NOT bFIRST_DONE THEN  // ============== check default mode ===============
 		bOPEN_CMD:=FALSE;
 	END_IF
 END_IF
-
-IF bHOME_FIRST AND NOT bHOMED_FIRST THEN
-	bHOMED_FIRST:=TRUE;
-	pist_STATE:=E_PISTON_STATE.uninit;
-END_IF
-
 //================================================== UNINIT =====================================================
 CASE pist_STATE OF
 	E_PISTON_STATE.uninit:
@@ -274,11 +276,15 @@ fbEventLogger.mAdd();]]></ST>
       <LineId Id="345" Count="0" />
       <LineId Id="7" Count="2" />
       <LineId Id="395" Count="0" />
-      <LineId Id="10" Count="14" />
+      <LineId Id="10" Count="6" />
+      <LineId Id="24" Count="0" />
       <LineId Id="297" Count="0" />
       <LineId Id="296" Count="0" />
       <LineId Id="302" Count="0" />
-      <LineId Id="298" Count="1" />
+      <LineId Id="298" Count="0" />
+      <LineId Id="396" Count="0" />
+      <LineId Id="299" Count="0" />
+      <LineId Id="397" Count="7" />
       <LineId Id="295" Count="0" />
       <LineId Id="25" Count="3" />
       <LineId Id="285" Count="0" />

@@ -182,6 +182,7 @@ IF bSTOP_ALL THEN
 	aLIFT.bSTOP_ALL:=TRUE;
 	iACTION_STATE:=99;
 	bUNINIT:=TRUE;
+	bSTART_ACTION:=TRUE;
 END_IF
 
 IF bMANUAL THEN
@@ -512,7 +513,7 @@ END_CASE]]></ST>
       <LineId Id="278" Count="0" />
       <LineId Id="284" Count="0" />
       <LineId Id="286" Count="0" />
-      <LineId Id="356" Count="0" />
+      <LineId Id="356" Count="1" />
       <LineId Id="279" Count="0" />
       <LineId Id="333" Count="0" />
       <LineId Id="332" Count="0" />
