@@ -2,8 +2,28 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <GVL Name="GVL_MAIN" Id="{7384caef-394f-40b5-a173-7cc02d269eff}">
     <Declaration><![CDATA[//{attribute 'qualified_only'}
-VAR_GLOBAL
+VAR_GLOBAL PERSISTENT
+    XY1_JOG_VEL:LREAL;
+	XY1_HOME_VEL:LREAL;
+	XY1_OPEN_VEL:LREAL;
+	XY1_CLOSE_VEL:LREAL;
+	
+	LIFT1_JOG_VEL:LREAL;
+	LIFT1_HOME_VEL:LREAL;
+	LIFT1_UP_VEL:LREAL;
+	LIFT1_DOWN_VEL:LREAL;
+END_VAR
+	
 
+
+VAR_GLOBAL
+	fbWritePersistentData : WritePersistentData;
+    fbR_Trig              : R_TRIG;
+	bWP_Start                : BOOL;
+    bWP_Error                : BOOL;
+    bWP_Busy                 : BOOL;
+    nWP_ErrorId              : UDINT;
+	
 	LIFT1:FB_Axis;
 	XY1:FB_Axis;
 	LIFT2:FB_Axis;
@@ -15,15 +35,15 @@ VAR_GLOBAL
 	
 	bSECOND_SYS:BOOL:=FALSE;
 	
-	XY1_JOG_VEL:LREAL:=15;
-	XY1_HOME_VEL:LREAL:=15;
-	XY1_OPEN_VEL:LREAL:=38;
-	XY1_CLOSE_VEL:LREAL:=30;
+	//XY1_JOG_VEL:LREAL:=15;
+	//XY1_HOME_VEL:LREAL:=15;
+	//XY1_OPEN_VEL:LREAL:=38;
+	//XY1_CLOSE_VEL:LREAL:=30;
 	
-	LIFT1_JOG_VEL:LREAL:=15;
-	LIFT1_HOME_VEL:LREAL:=15;
-	LIFT1_UP_VEL:LREAL:=20;
-	LIFT1_DOWN_VEL:LREAL:=30;
+	//LIFT1_JOG_VEL:LREAL:=15;
+	//LIFT1_HOME_VEL:LREAL:=15;
+	//LIFT1_UP_VEL:LREAL:=20;
+	//LIFT1_DOWN_VEL:LREAL:=30;
 	
 // IO
 	CARGHERon AT %Q* :BOOL;//OUT1
