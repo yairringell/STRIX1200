@@ -29,7 +29,7 @@ VAR_INPUT
 	rOPEN_TIMEOUT: TIME:=T#60S;
 	tCLOSE:TON;
 	rCLOSE_TIMEOUT: TIME:=T#60S;
-	iOFFSET:INT:=20;
+	iOFFSET:INT;
 	iVOLTAGE_IN :INT;
 	iCURRENT_CHARGE_IN :INT;
 	iCURRENT_PISTON_IN :INT;
@@ -194,6 +194,7 @@ END_IF
 CASE iACTION_STATE OF
 	
 	1://======================================  HOME ALL	
+		
 		//HOME XY
 		bBUSY:=TRUE;
 		sACTION_STATE:='HOMING XY';
@@ -224,6 +225,7 @@ CASE iACTION_STATE OF
 		IF aLIFT.bHOMED THEN
 			bSTART_ACTION:=FALSE;
 			iACTION_STATE:=5;
+			PIST.bOPEN_CMD:=TRUE;
 			aLIFT.rPos:=0;
 			aLIFT.bSetPosition:=TRUE;
 		END_IF
@@ -526,6 +528,7 @@ END_CASE]]></ST>
       <LineId Id="8" Count="0" />
       <LineId Id="18" Count="0" />
       <LineId Id="80" Count="0" />
+      <LineId Id="361" Count="0" />
       <LineId Id="294" Count="0" />
       <LineId Id="72" Count="0" />
       <LineId Id="19" Count="0" />
@@ -542,6 +545,7 @@ END_CASE]]></ST>
       <LineId Id="73" Count="0" />
       <LineId Id="35" Count="2" />
       <LineId Id="39" Count="4" />
+      <LineId Id="362" Count="0" />
       <LineId Id="327" Count="0" />
       <LineId Id="305" Count="0" />
       <LineId Id="44" Count="1" />
