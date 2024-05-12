@@ -2934,19 +2934,19 @@ CASE iAXIS_STATE OF
 	2://FROM LIMIT
 			sAXIS_STATE:= 'HOMING- FROM SENSOR';
 			IF Axis.NcToPlc.ActVelo= 0 THEN
-				//rVel:= jogHOME_VEL/3;
-				rVel:= 3;
-				IF bHOME_DIR THEN
-					bJogNeg:=TRUE;
-				ELSE
-					bJogPos:=TRUE;
-				END_IF
+				
+				//rVel:= 3;
+				//IF bHOME_DIR THEN
+				//	bJogNeg:=TRUE;
+				//ELSE
+					//bJogPos:=TRUE;
+				//END_IF
 				iAXIS_STATE:=3;
 			END_IF	
 	3:// FINISH
-			IF NOT bLIMIT THEN
-				bJogNeg:=FALSE;
-				bJogPos:=FALSE;
+			//IF NOT bLIMIT THEN
+				//bJogNeg:=FALSE;
+				//bJogPos:=FALSE;
 				IF Axis.NcToPlc.ActVelo= 0 THEN
 					bHOMED:=TRUE;
 					IF bHOME_DIR THEN
@@ -2957,7 +2957,7 @@ CASE iAXIS_STATE OF
 						bCLOSED:=TRUE;
 					END_IF
 				END_IF
-			END_IF
+			//END_IF
 	20://=============================================== OPENING
 		sAXIS_STATE:= 'OPENING';
 		bSTART_ACTION:=TRUE;

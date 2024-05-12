@@ -126,6 +126,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"570"</v>
+              <v n="TextDefault">"CURRENT:[A]"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"965"</v>
               <v n="TextDefault">"current[A]"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -208,6 +213,21 @@
             <o>
               <v n="TextID">"202"</v>
               <v n="TextDefault">"JOG -"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"668"</v>
+              <v n="TextDefault">"LIMIT AMP"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"617"</v>
+              <v n="TextDefault">"LIMIT AMP:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"251"</v>
+              <v n="TextDefault">"LIMIT AMP: [A]"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -388,6 +408,11 @@
             <o>
               <v n="TextID">"256"</v>
               <v n="TextDefault">"TEMP:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"464"</v>
+              <v n="TextDefault">"TEMP:[c]"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>

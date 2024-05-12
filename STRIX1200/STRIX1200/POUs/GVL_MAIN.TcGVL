@@ -14,6 +14,10 @@ VAR_GLOBAL PERSISTENT
 	LIFT1_DOWN_VEL:LREAL;
 	iOFFSET1:INT;
 	iOFFSET2:INT;
+	
+	SAFETY_LIMIT1: INT;
+	SAFETY_LIMIT2: INT;
+	//33
 END_VAR
 	
 
@@ -83,9 +87,11 @@ VAR_GLOBAL
 	iVOLTAGE1   AT %I* :INT;
 	iCURRENT_CHARGE1   AT %I* :INT;
 	iCURRENT_PISTON1   AT %I* :INT;
-	
+	iTEMP1   AT %I* :INT;
 	inputs AT %I* : ARRAY [1..1]  OF sEL1809;
 	outputs AT %Q* : ARRAY [1..1]  OF sEL2809;
+	
+	
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

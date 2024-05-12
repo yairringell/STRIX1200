@@ -2580,7 +2580,7 @@
                     </o>
                     <o>
                       <v n="Id">2496894244L</v>
-                      <v n="Value">"vACTION.bSAFE_MODE"</v>
+                      <v n="Value">""</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
@@ -4580,7 +4580,7 @@
                     </o>
                     <o>
                       <v n="Id">2477733581L</v>
-                      <v n="Value">"vACTION.iCURRENT_CHARGE_SHOW"</v>
+                      <v n="Value">"-vACTION.iCURRENT_CHARGE_SHOW"</v>
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
@@ -4774,7 +4774,7 @@
                     </o>
                     <o>
                       <v n="Id">2496894244L</v>
-                      <v n="Value">"vACTION.bSAFE_MODE"</v>
+                      <v n="Value">""</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>

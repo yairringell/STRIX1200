@@ -69,19 +69,24 @@ IF bALL_HOMED THEN
 	END_IF
 END_IF
 
+
+
+
 IF bMANUAL OR bBUSY OR bUNINIT THEN //////==========   BUTTONS LOCK  ===================
 	bSAFE_MODE:=TRUE;
 ELSE
 	bSAFE_MODE:=FALSE;
 END_IF
 
+
+// 3265 reads for 1 Volt
 fbAnalogSensor1(
 	iAnalogIn:=iVOLTAGE_IN, 
 	InputStatus:= , 
-	IoMax:=4180 , 
-	IoMin:= 373, 
+	IoMax:=4183 , 
+	IoMin:= 391, 
 	EngMin:= 0, 
-	EngMax:= 25.37, 
+	EngMax:= 25.29, 
 	bHighLevelAlarmSp:= , 
 	bLowLevelAlarmSp:= , 
 	iCyclesFilter:= 100, 
@@ -93,10 +98,10 @@ fbAnalogSensor1(
 fbAnalogSensor2(
 	iAnalogIn:=iCURRENT_CHARGE_IN, 
 	InputStatus:= , 
-	IoMax:=4180 , 
-	IoMin:= 373, 
+	IoMax:=8682 , 
+	IoMin:=8415, 
 	EngMin:= 0, 
-	EngMax:= 25.37, 
+	EngMax:= 2.9, 
 	bHighLevelAlarmSp:= , 
 	bLowLevelAlarmSp:= , 
 	iCyclesFilter:= 100, 
@@ -108,14 +113,29 @@ fbAnalogSensor2(
 	fbAnalogSensor3(
 	iAnalogIn:=iCURRENT_PISTON_IN, 
 	InputStatus:= , 
-	IoMax:=8490 , 
-	IoMin:= 0, 
+	IoMax:=10000 , 
+	IoMin:= 8260, 
 	EngMin:= 0, 
-	EngMax:= 25.37, 
+	EngMax:= 10, 
 	bHighLevelAlarmSp:= , 
 	bLowLevelAlarmSp:= , 
 	iCyclesFilter:= 100, 
 	rSensorVal=>iCURRENT_PISTON_SHOW , 
+	bHighLevelAlarm=> , 
+	bLowLevelAlarm=> , 
+	bIoError=> );
+	//V*22.005-29.161
+	fbAnalogSensor4(
+	iAnalogIn:=iTEMP_IN, 
+	InputStatus:= , 
+	IoMax:=16324 , 
+	IoMin:= 8030, 
+	EngMin:= 25, 
+	EngMax:= 80.8, 
+	bHighLevelAlarmSp:= , 
+	bLowLevelAlarmSp:= , 
+	iCyclesFilter:= 100, 
+	rSensorVal=>iTEMP_SHOW , 
 	bHighLevelAlarm=> , 
 	bLowLevelAlarm=> , 
 	bIoError=> );]]></ST>
@@ -175,7 +195,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[tACTION(IN:= bSTART_ACTION, PT:=rACTION_TIMEOUT , Q=> , ET=> );
 
-IF bSTOP_ALL THEN
+IF bSTOP_ALL OR iCURRENT_PISTON_SHOW > SAFETY_LIMIT1 OR iCURRENT_PISTON_SHOW < -SAFETY_LIMIT1 THEN
 	bALL_HOMED:=FALSE;
 	PIST.bSTOP_ALL:=TRUE;
 	aXY.bSTOP_ALL:=TRUE;
@@ -369,12 +389,15 @@ CASE iACTION_STATE OF
 			//aLIFT.bENABLE:=FALSE;
 		END_IF
 		
-	345: aLIFT.rPos:=-iOFFSET;
+	345:// aLIFT.rPos:=-iOFFSET;
+		aLIFT.Dist:=-iOFFSET;
 		 aLIFT.rVel:=10;
 		 aLIFT.bEnable:=TRUE;
-		 aLIFT.bMoveAbs:=TRUE;
+		 //aLIFT.bMoveAbs:=TRUE;
+		 aLIFT.bMoveRel:=TRUE;
 		 iACTION_STATE:=346;
-	346:IF aLIFT.bAbsDone THEN
+	346:IF aLIFT.bRelDone THEN
+		//IF aLIFT.bAbsDone THEN
 			bSTART_ACTION:=FALSE;
 			 iACTION_STATE:=35;
 			 aLIFT.bEnable:=FALSE;
@@ -480,11 +503,15 @@ END_CASE]]></ST>
       <LineId Id="126" Count="0" />
       <LineId Id="123" Count="0" />
       <LineId Id="128" Count="0" />
+      <LineId Id="425" Count="0" />
+      <LineId Id="427" Count="0" />
+      <LineId Id="424" Count="0" />
       <LineId Id="360" Count="0" />
       <LineId Id="359" Count="0" />
       <LineId Id="361" Count="0" />
       <LineId Id="363" Count="1" />
       <LineId Id="362" Count="0" />
+      <LineId Id="428" Count="1" />
       <LineId Id="169" Count="13" />
       <LineId Id="168" Count="0" />
       <LineId Id="225" Count="0" />
@@ -493,6 +520,9 @@ END_CASE]]></ST>
       <LineId Id="342" Count="0" />
       <LineId Id="344" Count="12" />
       <LineId Id="343" Count="0" />
+      <LineId Id="430" Count="0" />
+      <LineId Id="432" Count="12" />
+      <LineId Id="431" Count="0" />
     </LineIds>
     <LineIds Name="FB_ACTION.aACTION_ERROR">
       <LineId Id="2" Count="7" />
@@ -624,10 +654,15 @@ END_CASE]]></ST>
       <LineId Id="177" Count="2" />
       <LineId Id="256" Count="0" />
       <LineId Id="180" Count="0" />
-      <LineId Id="307" Count="2" />
+      <LineId Id="307" Count="1" />
+      <LineId Id="367" Count="0" />
+      <LineId Id="309" Count="0" />
       <LineId Id="324" Count="0" />
       <LineId Id="310" Count="0" />
-      <LineId Id="313" Count="2" />
+      <LineId Id="366" Count="0" />
+      <LineId Id="313" Count="0" />
+      <LineId Id="369" Count="1" />
+      <LineId Id="315" Count="0" />
       <LineId Id="317" Count="0" />
       <LineId Id="325" Count="0" />
       <LineId Id="316" Count="0" />

@@ -23,6 +23,7 @@ Id;Default
 986;COOLING
 116;current
 159;CURRENT:
+570;CURRENT:[A]
 965;current[A]
 446;DIST
 831;DOWN VEL
@@ -40,6 +41,9 @@ Id;Default
 837;JERK
 268;JOG +
 202;JOG -
+668;LIMIT AMP
+617;LIMIT AMP:
+251;LIMIT AMP: [A]
 412;MANUAL
 51;manual
 615;Motors1
@@ -76,6 +80,7 @@ Id;Default
 348;Technitian
 83;TEMP
 256;TEMP:
+464;TEMP:[c]
 973;UP VEL
 401;V:
 964;VEL

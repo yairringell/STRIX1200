@@ -51,7 +51,7 @@ T_CLOSE_TIMEOUT(IN:=  NOT bOPEN_CMD , PT:= tCLOSE_TIMEOUT, Q=> , ET=> );
 T_EXTRA(IN:= bEXTRA, PT:=T#2S);
 
 
-IF bSTOP_ALL THEN//======================================== STOP ========
+IF bSTOP_ALL  THEN//======================================== STOP ========
 	pist_STATE:=E_PISTON_STATE.error;
 	bSTOP_ALL:=FALSE;
 END_IF
