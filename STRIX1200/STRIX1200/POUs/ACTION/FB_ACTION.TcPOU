@@ -98,7 +98,7 @@ fbAnalogSensor1(
 fbAnalogSensor2(
 	iAnalogIn:=iCURRENT_CHARGE_IN, 
 	InputStatus:= , 
-	IoMax:=8682 , 
+	IoMax:=8681 , 
 	IoMin:=8415, 
 	EngMin:= 0, 
 	EngMax:= 2.9, 
