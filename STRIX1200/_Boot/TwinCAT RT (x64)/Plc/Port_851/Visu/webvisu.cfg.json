@@ -1,0 +1,15 @@
+
+{
+	"UpdateRate": 70,
+	"PlcAddress": "851",
+	"UseLocalHost": true,
+	"Application": "Port_851",
+	"StartVisu": "vCOMM",
+	"BestFit": true,
+	"LogLevel": "INFO",
+	"CommBufferSize": 50000,
+    "HasKeyboard": false,
+    "TouchHandlingActive": false,
+    "ScaleTypeIsotropic": false,
+    "BestFitForDialogs": true
+}

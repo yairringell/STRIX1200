@@ -114,7 +114,7 @@ fbAnalogSensor2(
 	iAnalogIn:=iCURRENT_PISTON_IN, 
 	InputStatus:= , 
 	IoMax:=10000 , 
-	IoMin:= 8260, 
+	IoMin:= 8648, 
 	EngMin:= 0, 
 	EngMax:= 10, 
 	bHighLevelAlarmSp:= , 
@@ -194,8 +194,8 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[tACTION(IN:= bSTART_ACTION, PT:=rACTION_TIMEOUT , Q=> , ET=> );
-
 IF bSTOP_ALL OR iCURRENT_PISTON_SHOW > SAFETY_LIMIT1 OR iCURRENT_PISTON_SHOW < -SAFETY_LIMIT1 THEN
+//IF bSTOP_ALL  THEN
 	bALL_HOMED:=FALSE;
 	PIST.bSTOP_ALL:=TRUE;
 	aXY.bSTOP_ALL:=TRUE;
