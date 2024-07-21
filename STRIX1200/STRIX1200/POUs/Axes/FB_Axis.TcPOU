@@ -3048,6 +3048,7 @@ CASE iAXIS_STATE OF
 		bJogNeg:=FALSE;
 		bJogPos:=FALSE;
 		bHOMED:=FALSE;
+		bNOT_ENABLE:=TRUE;
 		clear_cmd_req();
 		IF bHOME THEN
 			iAXIS_STATE:=1;
@@ -3199,6 +3200,7 @@ END_CASE]]></ST>
       <LineId Id="15" Count="0" />
       <LineId Id="63" Count="1" />
       <LineId Id="176" Count="0" />
+      <LineId Id="291" Count="0" />
       <LineId Id="281" Count="0" />
       <LineId Id="66" Count="0" />
       <LineId Id="68" Count="0" />

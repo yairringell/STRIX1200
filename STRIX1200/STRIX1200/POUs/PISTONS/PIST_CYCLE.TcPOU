@@ -795,7 +795,7 @@ grp1();
                           </o>
                           <o>
                             <o n="Operand" t="Operand">
-                              <v n="Operand">"E_PISTON_TYPE.NO_SENSORS"</v>
+                              <v n="Operand">"E_PISTON_TYPE.BOTH"</v>
                               <v n="Type">"E_PISTON_TYPE"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
@@ -871,7 +871,7 @@ grp1();
                           </o>
                           <o>
                             <o n="Operand" t="Operand">
-                              <v n="Operand">"T#6s"</v>
+                              <v n="Operand">"T#15s"</v>
                               <v n="Type">"TIME"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>
@@ -890,7 +890,7 @@ grp1();
                           </o>
                           <o>
                             <o n="Operand" t="Operand">
-                              <v n="Operand">"T#6s"</v>
+                              <v n="Operand">"T#16s"</v>
                               <v n="Type">"TIME"</v>
                               <v n="Comment">""</v>
                               <v n="SymbolComment">""</v>

@@ -98,8 +98,8 @@ fbAnalogSensor1(
 fbAnalogSensor2(
 	iAnalogIn:=iCURRENT_CHARGE_IN, 
 	InputStatus:= , 
-	IoMax:=8681 , 
-	IoMin:=8415, 
+	IoMax:=8882 , 
+	IoMin:=8602, 
 	EngMin:= 0, 
 	EngMax:= 2.9, 
 	bHighLevelAlarmSp:= , 
@@ -114,7 +114,7 @@ fbAnalogSensor2(
 	iAnalogIn:=iCURRENT_PISTON_IN, 
 	InputStatus:= , 
 	IoMax:=10000 , 
-	IoMin:= 8648, 
+	IoMin:= 8690, 
 	EngMin:= 0, 
 	EngMax:= 10, 
 	bHighLevelAlarmSp:= , 
@@ -255,6 +255,8 @@ CASE iACTION_STATE OF
 			bSTART_ACTION:=FALSE;
 			bACTION_ERROR:=TRUE;
 		END_IF
+		
+		
 	5://HOME PISTON
 		aLIFT.bSetPosition:=FALSE;
 		aXY.bENABLE:=FALSE;//////////////
@@ -583,6 +585,8 @@ END_CASE]]></ST>
       <LineId Id="46" Count="0" />
       <LineId Id="59" Count="0" />
       <LineId Id="47" Count="1" />
+      <LineId Id="374" Count="0" />
+      <LineId Id="396" Count="0" />
       <LineId Id="50" Count="0" />
       <LineId Id="306" Count="0" />
       <LineId Id="257" Count="1" />
