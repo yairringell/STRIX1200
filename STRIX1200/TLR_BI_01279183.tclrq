@@ -2,25 +2,25 @@
 <TcLicenseInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2011/11/TcLicenseInfo">
 	<TargetInfo>
 		<TcTargetDesc>
-			<TargetType>CB3011-0001-M900000ST3KO-CE</TargetType>
+			<TargetType>CB3011-0001-M900000ST3L1-CE</TargetType>
 			<TargetVersion>
 				<Version>3</Version>
 				<Revision>1</Revision>
 				<Build>4024</Build>
 			</TargetVersion>
 			<TargetFeatures>
-				<NetId>5.144.185.122.1.1</NetId>
+				<NetId>5.144.184.198.1.1</NetId>
 			</TargetFeatures>
 			<Hardware>
 				<Model>CB3011-0001-M900</Model>
-				<SerialNo>000ST3KO</SerialNo>
+				<SerialNo>000ST3L1</SerialNo>
 				<CPUVersion>3.2</CPUVersion>
 				<Date>18.10.23</Date>
 				<CPUArchitecture>5</CPUArchitecture>
 			</Hardware>
 			<OsImage>
 				<ImageDevice>CB3011</ImageDevice>
-				<ImageVersion>6.10</ImageVersion>
+				<ImageVersion>6.10a</ImageVersion>
 				<ImageLevel>HPS</ImageLevel>
 				<OsName>Windows CE</OsName>
 				<OsVersion>7.0</OsVersion>
@@ -28,9 +28,9 @@
 		</TcTargetDesc>
 	</TargetInfo>
 	<LicenseInfo>
-		<SystemId Level="30" SerialNo="000ST3KO" MacAddress="00010590b97a">{76F6D370-F346-AF11-1199-CD685671C50E}</SystemId>
+		<SystemId Level="30" SerialNo="000ST3L1" MacAddress="00010590b8c6">{6A8107C4-EC91-B040-A56A-9E74281D26F9}</SystemId>
 		<PurchaseOrder><![CDATA[01279183]]></PurchaseOrder>
-		<IssueTime>2024-04-11T11:01:00</IssueTime>
+		<IssueTime>2024-07-21T13:35:00</IssueTime>
 		<License>
 			<LicenseId>{66689887-CCBD-452C-AC9A-039D997C6E66}</LicenseId>
 			<Name>TC3 PLC</Name>

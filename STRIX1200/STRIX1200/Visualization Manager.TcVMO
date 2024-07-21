@@ -13,7 +13,7 @@
             <v n="ClientSizeMode" t="VisualClientSizeMode">AutoDetect</v>
             <v n="ClientSizeX">2000</v>
             <v n="ClientSizeY">2000</v>
-            <v n="ExtendedSettings">false</v>
+            <v n="ExtendedSettings">true</v>
             <v n="PaintBufferSize">50000</v>
             <v n="MemorybufferSize">400000</v>
             <v n="VisuInternal">false</v>
@@ -42,8 +42,8 @@
               <n n="PositionX" />
               <n n="PositionY" />
             </o>
-            <v n="ConvertImages">false</v>
-            <v n="ConversionType">""</v>
+            <v n="ConvertImages">true</v>
+            <v n="ConversionType">"png"</v>
           </o>
           <o n="RegisterDesc" t="GenericFbDescription">
             <d n="FbMethods" t="CaseInsensitiveHashtable" ckt="String" cvt="Guid">

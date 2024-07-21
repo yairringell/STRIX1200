@@ -2408,7 +2408,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{CA1013CD-D2D4-4D21-B7E4-1998D10D30A6}" Name="STRIX1200" PrjFilePath="STRIX1200\STRIX1200.plcproj" TmcFilePath="STRIX1200\STRIX1200.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="STRIX1200\STRIX1200.tmc" TmcHash="{AAC15C9D-B8A1-DFCD-EFCD-DFB0DB2A2388}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="STRIX1200\STRIX1200.tmc" TmcHash="{5B9E8F9E-AC1E-8AD2-DEFF-467D151AC914}">
 					<Name>STRIX1200 Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -2558,10 +2558,6 @@ External Setpoint Generation:
 							<Type>INT</Type>
 						</Var>
 						<Var>
-							<Name>GVL_MAIN.inputs</Name>
-							<Type GUID="{C8E96A02-83F6-5EB4-1284-F3763D0B70E7}">ARRAY [1..1] OF sEL1809</Type>
-						</Var>
-						<Var>
 							<Name>GVL_MAIN.iVOLTAGE2</Name>
 							<Type>INT</Type>
 						</Var>
@@ -2577,12 +2573,21 @@ External Setpoint Generation:
 							<Name>GVL_MAIN.iTEMP2</Name>
 							<Type>INT</Type>
 						</Var>
+						<Var>
+							<Name>GVL_MAIN.inputs</Name>
+							<Type GUID="{C8E96A02-83F6-5EB4-1284-F3763D0B70E7}">ARRAY [1..1] OF sEL1809</Type>
+						</Var>
 					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
 						<Var>
 							<Name>GVL_MAIN.CARGHERon</Name>
 							<Comment><![CDATA[OUT1.1]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.CARGHER2on</Name>
+							<Comment><![CDATA[OUT2.1]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -2606,11 +2611,6 @@ External Setpoint Generation:
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_MAIN.LED</Name>
-							<Comment><![CDATA[OUT1.6]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>GVL_MAIN.LIFT1.Axis.PlcToNc</Name>
 							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
@@ -2625,6 +2625,11 @@ External Setpoint Generation:
 						<Var>
 							<Name>GVL_MAIN.XY2.Axis.PlcToNc</Name>
 							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.LED</Name>
+							<Comment><![CDATA[OUT1.6]]></Comment>
+							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>GVL_MAIN.PIST1open</Name>
@@ -2652,8 +2657,18 @@ External Setpoint Generation:
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
+							<Name>GVL_MAIN.PTCon2</Name>
+							<Comment><![CDATA[OUT2.4]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>GVL_MAIN.PTCoff</Name>
 							<Comment><![CDATA[OUT1.5]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.PTCoff2</Name>
+							<Comment><![CDATA[OUT2.5]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -2667,21 +2682,6 @@ External Setpoint Generation:
 						<Var>
 							<Name>GVL_MAIN.outputs</Name>
 							<Type GUID="{D15CF30F-F062-B5E6-00EE-405B6B7254C5}">ARRAY [1..1] OF sEL2809</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.CARGHER2on</Name>
-							<Comment><![CDATA[OUT2.1]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.PTCon2</Name>
-							<Comment><![CDATA[OUT2.4]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.PTCoff2</Name>
-							<Comment><![CDATA[OUT2.5]]></Comment>
-							<Type>BOOL</Type>
 						</Var>
 					</Vars>
 					<UnrestoredVarLinks ImportTime="2024-02-22T18:23:57">
