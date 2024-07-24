@@ -8,12 +8,13 @@ VAR
 	bSTART_TIMER : BOOL;
 	bSTART_TIMER2 : BOOL;
 	tON: TON:=(PT:=T#500ms);
-	tON2: TON:=(PT:=T#500ms);
+	tON2: TON:=(PT:=T#500MS);
 	sVar: STRING;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[tON(IN:= bSTART_TIMER,PT:=T#501MS);
+tON2(IN:= bSTART_TIMER2,PT:=T#501MS);
 sVar := TIME_TO_STRING(tON.ET); 
 AXES_CYCLE();
 PIST_CYCLE();
@@ -51,7 +52,7 @@ bSTART_TIMER2:=TRUE;
 IF tON2.Q THEN
 	bSTART_TIMER2:=FALSE;
 	IF ACTION2.bBUSY  THEN
-		LED2:=NOT LED;
+		LED2:=NOT LED2;
 	ELSE
 		LED2:=FALSE;
 	END_IF
@@ -60,7 +61,9 @@ END_IF
       </Implementation>
     </Action>
     <LineIds Name="MAIN">
-      <LineId Id="11" Count="2" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="12" Count="1" />
       <LineId Id="2" Count="0" />
       <LineId Id="22" Count="0" />
       <LineId Id="31" Count="0" />

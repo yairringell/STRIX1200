@@ -341,6 +341,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"340"</v>
+              <v n="TextDefault">"S2"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"89"</v>
               <v n="TextDefault">"S2 MANUAL"</v>
               <l n="LanguageTexts" t="ArrayList" />
