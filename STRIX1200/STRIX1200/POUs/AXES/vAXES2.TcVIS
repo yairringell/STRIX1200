@@ -1428,7 +1428,7 @@
                   <v>OnMouseDown</v>
                   <a cet="STSnippetInputAction">
                     <o>
-                      <v n="STSnippet">"ACTION1.bSTOP_ALL:=TRUE;"</v>
+                      <v n="STSnippet">"ACTION2.bSTOP_ALL:=TRUE;"</v>
                     </o>
                   </a>
                 </d>
@@ -1602,7 +1602,7 @@
                   <v>OnMouseDown</v>
                   <a cet="STSnippetInputAction">
                     <o>
-                      <v n="STSnippet">"ACTION1.bSTOP_ALL:=TRUE;"</v>
+                      <v n="STSnippet">"ACTION2.bSTOP_ALL:=TRUE;"</v>
                     </o>
                   </a>
                 </d>
