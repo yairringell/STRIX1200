@@ -70,6 +70,7 @@ VAR_GLOBAL
 	bDISABLE_XY1 AT %Q* :BOOL;// OUT1.15
 	bDISABLE_XY2 AT %Q* :BOOL;// OUT2.15
 	LED AT %Q* :BOOL;//OUT1.6
+	LED2 AT %Q* :BOOL;//OUT2.6
 	
 	XY1openedLimit   AT %I* :BOOL;
 	XY1closedLimit   AT %I* :BOOL;
