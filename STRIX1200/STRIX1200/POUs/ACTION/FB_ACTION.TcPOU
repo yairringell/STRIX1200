@@ -8,6 +8,7 @@ VAR_INPUT
 	fbAnalogSensor3: FB_AnalogSensor;
 	fbAnalogSensor4: FB_AnalogSensor;
 	
+	bCLOSED: BOOL;
 	sNAME: STRING;
 	PIST: REFERENCE TO FB_PISTON;
 	aLIFT:REFERENCE TO FB_Axis;
@@ -22,6 +23,8 @@ VAR_INPUT
 	bOPEN_ALL:BOOL;
 	bCLOSE_ALL:BOOL;
 	tACTION:TON;
+	tCHARGE:TON;
+	rCHARGE_TIMEOUT:TIME:=T#2S;
 	rACTION_TIMEOUT:TIME:=T#60S;
 	tHOMING:TON;
 	rHOMING_TIMEOUT: TIME:=T#60S;
@@ -64,7 +67,11 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[mACTION_STATE_MACHINE();
+      <ST><![CDATA[tCHARGE(IN:= bCHARGE, PT:=rCHARGE_TIMEOUT , Q=> , ET=> );
+
+mACTION_STATE_MACHINE();
+
+
 IF bALL_HOMED THEN
 	IF NOT aLIFT.bHOMED OR NOT aXY.bHOMED THEN
 		bALL_HOMED:=FALSE;
@@ -72,6 +79,16 @@ IF bALL_HOMED THEN
 	END_IF
 END_IF
 
+IF (NOT bCLOSED OR (iCURRENT_CHARGE_SHOW < 1.5 AND tCHARGE.Q)) AND NOT bMANUAL THEN
+	bCHARGE:=FALSE;
+END_IF
+
+IF iTEMP_SHOW > 35 THEN
+	bPTC_ON:=TRUE;
+END_IF
+IF iTEMP_SHOW < 33 THEN
+	bPTC_ON:=FALSE;
+END_IF
 
 
 
@@ -101,10 +118,10 @@ fbAnalogSensor1(
 fbAnalogSensor2(
 	iAnalogIn:=iCURRENT_CHARGE_IN, 
 	InputStatus:= , 
-	IoMax:=8882 , 
-	IoMin:=8602, 
+	IoMax:=9108 , 
+	IoMin:=8647, 
 	EngMin:= 0, 
-	EngMax:= 2.9, 
+	EngMax:= 5, 
 	bHighLevelAlarmSp:= , 
 	bLowLevelAlarmSp:= , 
 	iCyclesFilter:= 100, 
@@ -117,7 +134,7 @@ fbAnalogSensor2(
 	iAnalogIn:=iCURRENT_PISTON_IN, 
 	InputStatus:= , 
 	IoMax:=10000 , 
-	IoMin:= 8690, 
+	IoMin:= 8507, 
 	EngMin:= 0, 
 	EngMax:= 10, 
 	bHighLevelAlarmSp:= , 
@@ -502,15 +519,24 @@ END_CASE]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_ACTION">
+      <LineId Id="513" Count="1" />
       <LineId Id="11" Count="0" />
+      <LineId Id="511" Count="1" />
       <LineId Id="127" Count="0" />
       <LineId Id="12" Count="0" />
       <LineId Id="124" Count="0" />
       <LineId Id="126" Count="0" />
       <LineId Id="123" Count="0" />
       <LineId Id="128" Count="0" />
+      <LineId Id="507" Count="0" />
       <LineId Id="425" Count="0" />
+      <LineId Id="508" Count="1" />
+      <LineId Id="516" Count="0" />
       <LineId Id="427" Count="0" />
+      <LineId Id="517" Count="1" />
+      <LineId Id="521" Count="1" />
+      <LineId Id="520" Count="0" />
+      <LineId Id="519" Count="0" />
       <LineId Id="424" Count="0" />
       <LineId Id="360" Count="0" />
       <LineId Id="359" Count="0" />

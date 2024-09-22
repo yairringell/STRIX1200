@@ -1450,6 +1450,10 @@
                       <v n="Id">823443203L</v>
                       <v n="Value">"340"</v>
                     </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"TRUE"</v>
+                    </o>
                   </l>
                 </o>
                 <v n="VisualElementName">"Button"</v>
@@ -3989,6 +3993,10 @@
                     <o>
                       <v n="Id">743958181L</v>
                       <v n="Value">"bSECOND_SYS"</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"TRUE"</v>
                     </o>
                   </l>
                 </o>
