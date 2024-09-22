@@ -7,7 +7,7 @@ VAR_INPUT
 	fbAnalogSensor2: FB_AnalogSensor;
 	fbAnalogSensor3: FB_AnalogSensor;
 	fbAnalogSensor4: FB_AnalogSensor;
-	
+	bCLOSED:BOOL;
 	sNAME: STRING;
 	PIST: REFERENCE TO FB_PISTON;
 	aLIFT:REFERENCE TO FB_Axis;
@@ -22,11 +22,13 @@ VAR_INPUT
 	bOPEN_ALL:BOOL;
 	bCLOSE_ALL:BOOL;
 	tACTION:TON;
+	tCHARGE:TON;
 	rACTION_TIMEOUT:TIME:=T#60S;
 	tHOMING:TON;
 	rHOMING_TIMEOUT: TIME:=T#60S;
 	tOPEN:TON;
 	rOPEN_TIMEOUT: TIME:=T#60S;
+	rCHARGE_TIMEOUT:TIME:=T#2S;
 	tCLOSE:TON;
 	rCLOSE_TIMEOUT: TIME:=T#60S;
 	iOFFSET:INT;
@@ -61,7 +63,9 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[mACTION_STATE_MACHINE();
+      <ST><![CDATA[tCHARGE(IN:= bCHARGE, PT:=rCHARGE_TIMEOUT , Q=> , ET=> );
+mACTION_STATE_MACHINE();
+
 IF bALL_HOMED THEN
 	IF NOT aLIFT.bHOMED OR NOT aXY.bHOMED THEN
 		bALL_HOMED:=FALSE;
@@ -69,6 +73,16 @@ IF bALL_HOMED THEN
 	END_IF
 END_IF
 
+IF (NOT bCLOSED OR (iCURRENT_CHARGE_SHOW < 1.5 AND tCHARGE.Q)) AND NOT bMANUAL THEN
+	bCHARGE:=FALSE;
+END_IF
+
+IF iTEMP_SHOW > 35 THEN
+	bPTC_ON:=TRUE;
+END_IF
+IF iTEMP_SHOW < 33 THEN
+	bPTC_ON:=FALSE;
+END_IF
 
 
 
@@ -496,7 +510,9 @@ END_CASE]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_ACTION">
+      <LineId Id="506" Count="0" />
       <LineId Id="11" Count="0" />
+      <LineId Id="503" Count="0" />
       <LineId Id="127" Count="0" />
       <LineId Id="12" Count="0" />
       <LineId Id="124" Count="0" />
@@ -504,6 +520,7 @@ END_CASE]]></ST>
       <LineId Id="123" Count="0" />
       <LineId Id="128" Count="0" />
       <LineId Id="425" Count="0" />
+      <LineId Id="509" Count="9" />
       <LineId Id="427" Count="0" />
       <LineId Id="424" Count="0" />
       <LineId Id="360" Count="0" />

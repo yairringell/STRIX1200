@@ -56,7 +56,7 @@ grp1();
                           <v n="LValue">false</v>
                           <v n="Boolean">false</v>
                           <v n="IsInstance">true</v>
-                          <v n="Id">93L</v>
+                          <v n="Id">95L</v>
                         </o>
                         <o n="OutputItems" t="OutputItemList">
                           <l2 n="OutputItems" cet="Operand">
@@ -526,6 +526,44 @@ grp1();
                             </o>
                             <v n="Id">91L</v>
                           </o>
+                          <o>
+                            <o n="Operand" t="Operand">
+                              <v n="Operand">""</v>
+                              <n n="Type" />
+                              <v n="Comment">""</v>
+                              <v n="SymbolComment">""</v>
+                              <v n="Address">""</v>
+                              <o n="Flags" t="Flags">
+                                <v n="Flags">0</v>
+                                <v n="Fixed">false</v>
+                                <v n="Extensible">false</v>
+                              </o>
+                              <v n="LValue">false</v>
+                              <v n="Boolean">false</v>
+                              <v n="IsInstance">false</v>
+                              <v n="Id">98L</v>
+                            </o>
+                            <v n="Id">97L</v>
+                          </o>
+                          <o>
+                            <o n="Operand" t="Operand">
+                              <v n="Operand">"LIFT1closedLimit"</v>
+                              <v n="Type">"BOOL"</v>
+                              <v n="Comment">""</v>
+                              <v n="SymbolComment">""</v>
+                              <v n="Address">""</v>
+                              <o n="Flags" t="Flags">
+                                <v n="Flags">0</v>
+                                <v n="Fixed">false</v>
+                                <v n="Extensible">false</v>
+                              </o>
+                              <v n="LValue">false</v>
+                              <v n="Boolean">false</v>
+                              <v n="IsInstance">false</v>
+                              <v n="Id">100L</v>
+                            </o>
+                            <v n="Id">99L</v>
+                          </o>
                         </l2>
                         <o n="InputParam" t="ParamList">
                           <l2 n="Names" cet="String">
@@ -548,6 +586,8 @@ grp1();
                             <v>bLOCAL_RESET</v>
                             <v>bHOME_FIRST</v>
                             <v>bSTOP_ALL</v>
+                            <v>bEXTRA</v>
+                            <v>bLIFT_DOWN</v>
                           </l2>
                           <l2 n="Types" cet="String">
                             <v>STRING</v>
@@ -559,6 +599,8 @@ grp1();
                             <v>TIME</v>
                             <v>TIME</v>
                             <v>TIME</v>
+                            <v>BOOL</v>
+                            <v>BOOL</v>
                             <v>BOOL</v>
                             <v>BOOL</v>
                             <v>BOOL</v>
@@ -595,7 +637,7 @@ grp1();
                         <n n="STSnippet" />
                         <v n="ContainsExtensibleInputs">false</v>
                         <v n="ProvidesSTSnippet">false</v>
-                        <v n="Id">94L</v>
+                        <v n="Id">96L</v>
                       </o>
                     </l2>
                     <l2 n="Connectors" />
@@ -627,7 +669,7 @@ grp1();
                           <v n="LValue">false</v>
                           <v n="Boolean">false</v>
                           <v n="IsInstance">true</v>
-                          <v n="Id">45L</v>
+                          <v n="Id">101L</v>
                         </o>
                         <o n="OutputItems" t="OutputItemList">
                           <l2 n="OutputItems" cet="Operand">
@@ -731,7 +773,7 @@ grp1();
                         </o>
                         <o n="Flags" t="Flags">
                           <v n="Flags">0</v>
-                          <v n="Fixed">false</v>
+                          <v n="Fixed">true</v>
                           <v n="Extensible">false</v>
                         </o>
                         <n n="InputFlags" />
@@ -1059,6 +1101,82 @@ grp1();
                             </o>
                             <v n="Id">85L</v>
                           </o>
+                          <o>
+                            <o n="Operand" t="Operand">
+                              <v n="Operand">""</v>
+                              <n n="Type" />
+                              <v n="Comment">""</v>
+                              <v n="SymbolComment">""</v>
+                              <v n="Address">""</v>
+                              <o n="Flags" t="Flags">
+                                <v n="Flags">0</v>
+                                <v n="Fixed">false</v>
+                                <v n="Extensible">false</v>
+                              </o>
+                              <v n="LValue">false</v>
+                              <v n="Boolean">false</v>
+                              <v n="IsInstance">false</v>
+                              <v n="Id">104L</v>
+                            </o>
+                            <v n="Id">103L</v>
+                          </o>
+                          <o>
+                            <o n="Operand" t="Operand">
+                              <v n="Operand">""</v>
+                              <n n="Type" />
+                              <v n="Comment">""</v>
+                              <v n="SymbolComment">""</v>
+                              <v n="Address">""</v>
+                              <o n="Flags" t="Flags">
+                                <v n="Flags">0</v>
+                                <v n="Fixed">false</v>
+                                <v n="Extensible">false</v>
+                              </o>
+                              <v n="LValue">false</v>
+                              <v n="Boolean">false</v>
+                              <v n="IsInstance">false</v>
+                              <v n="Id">106L</v>
+                            </o>
+                            <v n="Id">105L</v>
+                          </o>
+                          <o>
+                            <o n="Operand" t="Operand">
+                              <v n="Operand">""</v>
+                              <n n="Type" />
+                              <v n="Comment">""</v>
+                              <v n="SymbolComment">""</v>
+                              <v n="Address">""</v>
+                              <o n="Flags" t="Flags">
+                                <v n="Flags">0</v>
+                                <v n="Fixed">false</v>
+                                <v n="Extensible">false</v>
+                              </o>
+                              <v n="LValue">false</v>
+                              <v n="Boolean">false</v>
+                              <v n="IsInstance">false</v>
+                              <v n="Id">108L</v>
+                            </o>
+                            <v n="Id">107L</v>
+                          </o>
+                          <o>
+                            <o n="Operand" t="Operand">
+                              <v n="Operand">"LIFT2closedLimit"</v>
+                              <v n="Type">"BOOL"</v>
+                              <v n="Comment">""</v>
+                              <v n="SymbolComment">""</v>
+                              <v n="Address">""</v>
+                              <o n="Flags" t="Flags">
+                                <v n="Flags">0</v>
+                                <v n="Fixed">false</v>
+                                <v n="Extensible">false</v>
+                              </o>
+                              <v n="LValue">false</v>
+                              <v n="Boolean">false</v>
+                              <v n="IsInstance">false</v>
+                              <v n="Id">110L</v>
+                            </o>
+                            <v n="Id">109L</v>
+                          </o>
                         </l2>
                         <o n="InputParam" t="ParamList">
                           <l2 n="Names" cet="String">
@@ -1079,6 +1197,10 @@ grp1();
                             <v>bCLOSE_SWR</v>
                             <v>bCONDITION</v>
                             <v>bLOCAL_RESET</v>
+                            <v>bHOME_FIRST</v>
+                            <v>bSTOP_ALL</v>
+                            <v>bEXTRA</v>
+                            <v>bLIFT_DOWN</v>
                           </l2>
                           <l2 n="Types" cet="String">
                             <v>STRING</v>
@@ -1090,6 +1212,10 @@ grp1();
                             <v>TIME</v>
                             <v>TIME</v>
                             <v>TIME</v>
+                            <v>BOOL</v>
+                            <v>BOOL</v>
+                            <v>BOOL</v>
+                            <v>BOOL</v>
                             <v>BOOL</v>
                             <v>BOOL</v>
                             <v>BOOL</v>
@@ -1119,12 +1245,12 @@ grp1();
                           </l2>
                         </o>
                         <v n="CallType" t="Operator">FunctionBlock</v>
-                        <n n="EN" />
-                        <n n="ENO" />
+                        <v n="EN">false</v>
+                        <v n="ENO">false</v>
                         <n n="STSnippet" />
                         <v n="ContainsExtensibleInputs">false</v>
                         <v n="ProvidesSTSnippet">false</v>
-                        <v n="Id">46L</v>
+                        <v n="Id">102L</v>
                       </o>
                     </l2>
                     <l2 n="Connectors" />

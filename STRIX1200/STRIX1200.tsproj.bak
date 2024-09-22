@@ -2396,7 +2396,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{CA1013CD-D2D4-4D21-B7E4-1998D10D30A6}" Name="STRIX1200" PrjFilePath="STRIX1200\STRIX1200.plcproj" TmcFilePath="STRIX1200\STRIX1200.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="STRIX1200\STRIX1200.tmc" TmcHash="{C97455F6-00F8-54E3-C96C-79F502CC6997}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="STRIX1200\STRIX1200.tmc" TmcHash="{8C333A36-E1E7-F7BD-6453-C98B2D5293FF}">
 					<Name>STRIX1200 Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -2416,70 +2416,6 @@ External Setpoint Generation:
 						<Var>
 							<Name>GVL_MAIN.XY2.Axis.NcToPlc</Name>
 							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION1.fbAnalogSensor1.iAnalogIn</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION1.fbAnalogSensor1.InputStatus</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION1.fbAnalogSensor2.iAnalogIn</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION1.fbAnalogSensor2.InputStatus</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION1.fbAnalogSensor3.iAnalogIn</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION1.fbAnalogSensor3.InputStatus</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION1.fbAnalogSensor4.iAnalogIn</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION1.fbAnalogSensor4.InputStatus</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION2.fbAnalogSensor1.iAnalogIn</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION2.fbAnalogSensor1.InputStatus</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION2.fbAnalogSensor2.iAnalogIn</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION2.fbAnalogSensor2.InputStatus</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION2.fbAnalogSensor3.iAnalogIn</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION2.fbAnalogSensor3.InputStatus</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION2.fbAnalogSensor4.iAnalogIn</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_MAIN.ACTION2.fbAnalogSensor4.InputStatus</Name>
-							<Type>UINT</Type>
 						</Var>
 						<Var>
 							<Name>GVL_MAIN.XY1openedLimit</Name>
@@ -2548,6 +2484,70 @@ External Setpoint Generation:
 						<Var>
 							<Name>GVL_MAIN.inputs</Name>
 							<Type GUID="{C8E96A02-83F6-5EB4-1284-F3763D0B70E7}">ARRAY [1..1] OF sEL1809</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION1.fbAnalogSensor1.iAnalogIn</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION1.fbAnalogSensor1.InputStatus</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION1.fbAnalogSensor2.iAnalogIn</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION1.fbAnalogSensor2.InputStatus</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION1.fbAnalogSensor3.iAnalogIn</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION1.fbAnalogSensor3.InputStatus</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION1.fbAnalogSensor4.iAnalogIn</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION1.fbAnalogSensor4.InputStatus</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION2.fbAnalogSensor1.iAnalogIn</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION2.fbAnalogSensor1.InputStatus</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION2.fbAnalogSensor2.iAnalogIn</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION2.fbAnalogSensor2.InputStatus</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION2.fbAnalogSensor3.iAnalogIn</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION2.fbAnalogSensor3.InputStatus</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION2.fbAnalogSensor4.iAnalogIn</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_MAIN.ACTION2.fbAnalogSensor4.InputStatus</Name>
+							<Type>UINT</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
