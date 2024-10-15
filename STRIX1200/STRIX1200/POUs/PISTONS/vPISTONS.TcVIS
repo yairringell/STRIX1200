@@ -483,7 +483,7 @@
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
-                      <v n="Value">true</v>
+                      <v n="Value">false</v>
                     </o>
                     <o>
                       <v n="Id">2488267801L</v>
@@ -492,6 +492,14 @@
                     <o>
                       <v n="Id">3391210245L</v>
                       <v n="Value">"ACTION2.bMANUAL"</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"true"</v>
+                    </o>
+                    <o>
+                      <v n="Id">1013868361L</v>
+                      <v n="Value">true</v>
                     </o>
                   </l>
                 </o>
@@ -1258,7 +1266,11 @@
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
-                      <v n="Value">true</v>
+                      <v n="Value">false</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"true"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
@@ -1445,6 +1457,10 @@
                     <o>
                       <v n="Id">2597686782L</v>
                       <v n="Value">false</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"true"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
@@ -3792,6 +3808,10 @@
                       <v n="Value">"NOT ACTION2.bALL_HOMED"</v>
                     </o>
                     <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"true"</v>
+                    </o>
+                    <o>
                       <v n="Id">823443203L</v>
                       <v n="Value">"89"</v>
                     </o>
@@ -3896,6 +3916,10 @@
                       <v n="Id">743958181L</v>
                       <v n="Value">"ACTION2.bMANUAL"</v>
                     </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"true"</v>
+                    </o>
                   </l>
                 </o>
                 <v n="VisualElementName">"Lamp1"</v>
@@ -3989,6 +4013,10 @@
                     <o>
                       <v n="Id">743958181L</v>
                       <v n="Value">"bSECOND_SYS"</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"true"</v>
                     </o>
                   </l>
                 </o>
@@ -4435,7 +4463,7 @@
                     </o>
                     <o>
                       <v n="Id">1649127785L</v>
-                      <v n="Value">70</v>
+                      <v n="Value">16</v>
                     </o>
                     <o>
                       <v n="Id">357335551L</v>
@@ -4443,7 +4471,7 @@
                     </o>
                     <o>
                       <v n="Id">2422045748L</v>
-                      <v n="Value">489</v>
+                      <v n="Value">265</v>
                     </o>
                     <o>
                       <v n="Id">2134141914L</v>
@@ -4492,7 +4520,7 @@
                     </o>
                     <o>
                       <v n="Id">550940142L</v>
-                      <v n="Value">314</v>
+                      <v n="Value">148</v>
                     </o>
                     <o>
                       <v n="Id">1473355128L</v>
@@ -4958,7 +4986,11 @@
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
-                      <v n="Value">true</v>
+                      <v n="Value">false</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"true"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
@@ -5087,7 +5119,11 @@
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
-                      <v n="Value">true</v>
+                      <v n="Value">false</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"true"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
@@ -5249,6 +5285,10 @@
                     <o>
                       <v n="Id">2477733581L</v>
                       <v n="Value">"LIFT2_DOWN_VEL"</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"true"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
@@ -5431,6 +5471,10 @@
                       <v n="Value">"XY2_OPEN_VEL"</v>
                     </o>
                     <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"true"</v>
+                    </o>
+                    <o>
                       <v n="Id">823443203L</v>
                       <v n="Value">"450"</v>
                     </o>
@@ -5576,7 +5620,11 @@
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
-                      <v n="Value">true</v>
+                      <v n="Value">false</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"true"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
@@ -5740,6 +5788,10 @@
                       <v n="Value">"XY2_CLOSE_VEL"</v>
                     </o>
                     <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"true"</v>
+                    </o>
+                    <o>
                       <v n="Id">823443203L</v>
                       <v n="Value">"450"</v>
                     </o>
@@ -5885,7 +5937,11 @@
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
-                      <v n="Value">true</v>
+                      <v n="Value">false</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"true"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
@@ -6057,6 +6113,10 @@
                       <v n="Value">false</v>
                     </o>
                     <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"true"</v>
+                    </o>
+                    <o>
                       <v n="Id">823443203L</v>
                       <v n="Value">"450"</v>
                     </o>
@@ -6226,6 +6286,10 @@
                       <v n="Value">false</v>
                     </o>
                     <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"true"</v>
+                    </o>
+                    <o>
                       <v n="Id">823443203L</v>
                       <v n="Value">"450"</v>
                     </o>
@@ -6352,7 +6416,11 @@
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
-                      <v n="Value">true</v>
+                      <v n="Value">false</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"true"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
@@ -6481,7 +6549,11 @@
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
-                      <v n="Value">true</v>
+                      <v n="Value">false</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"true"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
@@ -6643,6 +6715,10 @@
                     <o>
                       <v n="Id">2477733581L</v>
                       <v n="Value">"LIFT2_UP_VEL"</v>
+                    </o>
+                    <o>
+                      <v n="Id">2880254039L</v>
+                      <v n="Value">"true"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
