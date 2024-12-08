@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="GVL_MAIN" Id="{7384caef-394f-40b5-a173-7cc02d269eff}">
+    <Declaration><![CDATA[//{attribute 'qualified_only'}
+VAR_GLOBAL PERSISTENT
+    XY1_JOG_VEL:LREAL:=30;
+	XY1_HOME_VEL:LREAL:=30;
+	XY1_OPEN_VEL:LREAL:=20;
+	XY1_CLOSE_VEL:LREAL:=20;
+	
+	LIFT1_JOG_VEL:LREAL:=30;
+	LIFT1_HOME_VEL:LREAL:=30;
+	LIFT1_UP_VEL:LREAL:=20; 
+	LIFT1_DOWN_VEL:LREAL:=20;
+	
+	XY2_JOG_VEL:LREAL:=30;
+	XY2_HOME_VEL:LREAL:=30;
+	XY2_OPEN_VEL:LREAL:=20;
+	XY2_CLOSE_VEL:LREAL:=20;
+	
+	LIFT2_JOG_VEL:LREAL:=30;
+	LIFT2_HOME_VEL:LREAL:=30;
+	LIFT2_UP_VEL:LREAL:=20;
+	LIFT2_DOWN_VEL:LREAL:=20;
+	
+	iOFFSET1:INT:=15;
+	iOFFSET2:INT:=15;
+	
+	SAFETY_LIMIT1: INT:=6;
+	SAFETY_LIMIT2: INT:=6;
+	//33
+END_VAR
+	
+
+
+VAR_GLOBAL
+	fbWritePersistentData : WritePersistentData;
+    fbR_Trig              : R_TRIG;
+	bWP_Start                : BOOL;
+    bWP_Error                : BOOL;
+    bWP_Busy                 : BOOL;
+    nWP_ErrorId              : UDINT;
+	
+	LIFT1:FB_Axis;
+	XY1:FB_Axis;
+	LIFT2:FB_Axis;
+	XY2:FB_Axis;
+	PIST1: FB_PISTON;
+	PIST2: FB_PISTON;
+	ACTION1:FB_ACTION;
+	ACTION2:FB_ACTION;
+	
+	bSECOND_SYS:BOOL:=FALSE;
+	
+	//XY1_JOG_VEL:LREAL:=15;
+	//XY1_HOME_VEL:LREAL:=15;
+	//XY1_OPEN_VEL:LREAL:=38;
+	//XY1_CLOSE_VEL:LREAL:=30;
+	
+	//LIFT1_JOG_VEL:LREAL:=15;
+	//LIFT1_HOME_VEL:LREAL:=15;
+	//LIFT1_UP_VEL:LREAL:=20;
+	//LIFT1_DOWN_VEL:LREAL:=30;
+	
+// IO
+	CARGHERon AT %Q* :BOOL;//OUT1
+	bDISABLE_LIFT1 AT %Q* :BOOL;//OUT14
+	bDISABLE_LIFT2 AT %Q* :BOOL;
+	bDISABLE_XY1 AT %Q* :BOOL;// OUT15
+	bDISABLE_XY2 AT %Q* :BOOL;
+	LED AT %Q* :BOOL;//OUT6
+	
+	XY1openedLimit   AT %I* :BOOL;
+	XY1closedLimit   AT %I* :BOOL;
+	LIFT1openedLimit   AT %I* :BOOL;
+	LIFT1closedLimit   AT %I* :BOOL;
+	PIST1opened   AT %I* :BOOL;
+	PIST1closed   AT %I* :BOOL;
+	
+	XY2openedLimit   AT %I* :BOOL;
+	XY2closedLimit   AT %I* :BOOL;
+	LIFT2openedLimit   AT %I* :BOOL;
+	LIFT2closedLimit   AT %I* :BOOL;
+	PIST2opened   AT %I* :BOOL;
+	PIST2closed   AT %I* :BOOL;
+	
+	PIST1open AT %Q* :BOOL;
+	PIST1close AT %Q* :BOOL;
+	PIST2open AT %Q* :BOOL;
+	PIST2close AT %Q* :BOOL;
+	
+	PTCon AT %Q* :BOOL;//OUT4
+	PTCoff AT %Q* :BOOL;
+	
+	WARNING1 AT %Q* :BOOL;
+	WARNING2 AT %Q* :BOOL;
+	
+	iVOLTAGE1   AT %I* :INT;
+	iCURRENT_CHARGE1   AT %I* :INT;
+	iCURRENT_PISTON1   AT %I* :INT;
+	iTEMP1   AT %I* :INT;
+	inputs AT %I* : ARRAY [1..1]  OF sEL1809;
+	outputs AT %Q* : ARRAY [1..1]  OF sEL2809;
+	
+	
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>
