@@ -1731,6 +1731,9 @@ External Setpoint Generation:
 	</ImageDatas>
 	<Project ProjectGUID="{1AD8C3F1-2D24-47B1-B663-CC64FCF63C6B}" TargetNetId="5.144.184.198.1.1" RelativeTargetNetId="true" RelativeIpAddresses="true" ShowHideConfigurations="#x1c6">
 		<System>
+			<Settings>
+				<IoIdleTask CycleTime="40000"/>
+			</Settings>
 			<Licenses>
 				<Target BkhfOrder="01279183"/>
 			</Licenses>
@@ -2408,7 +2411,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{CA1013CD-D2D4-4D21-B7E4-1998D10D30A6}" Name="STRIX1200" PrjFilePath="STRIX1200\STRIX1200.plcproj" TmcFilePath="STRIX1200\STRIX1200.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="STRIX1200\STRIX1200.tmc" TmcHash="{53A45734-7610-37FD-3853-D1CCB968372E}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="STRIX1200\STRIX1200.tmc" TmcHash="{D7681728-0C6E-795B-DC06-03A0742BC49A}">
 					<Name>STRIX1200 Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
