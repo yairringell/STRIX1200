@@ -10,10 +10,14 @@ VAR
 	tON: TON:=(PT:=T#500ms);
 	tON2: TON:=(PT:=T#500MS);
 	sVar: STRING;
+	
+	stAppInfo: PlcAppSystemInfo;
+
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[tON(IN:= bSTART_TIMER,PT:=T#501MS);
+      <ST><![CDATA[stAppInfo:=_AppInfo;
+tON(IN:= bSTART_TIMER,PT:=T#501MS);
 tON2(IN:= bSTART_TIMER2,PT:=T#501MS);
 sVar := TIME_TO_STRING(tON.ET); 
 AXES_CYCLE();
@@ -63,6 +67,7 @@ END_IF
       </Implementation>
     </Action>
     <LineIds Name="MAIN">
+      <LineId Id="105" Count="0" />
       <LineId Id="11" Count="0" />
       <LineId Id="79" Count="0" />
       <LineId Id="12" Count="1" />
