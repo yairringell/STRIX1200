@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MAIN" Id="{6c7239d6-f7f9-4e71-8a46-bf89f21a2b56}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	INTEG:INT;
+	
+	bSTART_TIMER : BOOL;
+	bSTART_TIMER2 : BOOL;
+	tON: TON:=(PT:=T#500ms);
+	tON2: TON:=(PT:=T#500MS);
+	sVar: STRING;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[tON(IN:= bSTART_TIMER,PT:=T#501MS);
+tON2(IN:= bSTART_TIMER2,PT:=T#501MS);
+sVar := TIME_TO_STRING(tON.ET); 
+AXES_CYCLE();
+PIST_CYCLE();
+ACTION1(bCLOSED:= PIST1closed, SAFETY_LIMIT:=SAFETY_LIMIT1, iOFFSET:=iOFFSET1,  bPTC_ON=>PTCon, bCHARGE=>CARGHERon,iVOLTAGE_IN:=iVOLTAGE1,iCURRENT_CHARGE_IN:=iCURRENT_CHARGE1,iTEMP_IN:= iTEMP1  ,iCURRENT_PISTON_IN:=iCURRENT_PISTON1, sNAME:='ACTION1', PIST:=PIST1, aXY:=XY1, aLIFT:=LIFT1);
+ACTION2(bCLOSED:= PIST2closed,SAFETY_LIMIT:=SAFETY_LIMIT2,iOFFSET:=iOFFSET2,  bPTC_ON=>PTCon2, bCHARGE=>CARGHER2on,iVOLTAGE_IN:=iVOLTAGE2,iCURRENT_CHARGE_IN:=iCURRENT_CHARGE2,iTEMP_IN:= iTEMP2  ,iCURRENT_PISTON_IN:=iCURRENT_PISTON2,sNAME:='ACTION2',PIST:=PIST2, aXY:=XY2, aLIFT:=LIFT2);
+A_BLINK();
+
+
+fbR_Trig( CLK:=bWP_Start );
+IF fbR_Trig.Q THEN
+    
+    fbWritePersistentData(NETID:='', PORT:=851, START:=bWP_Start, TMOUT:=T#1s );
+ELSE
+    fbWritePersistentData( START:=FALSE);
+END_IF;
+//http://192.168.1.100/Tc3PlcHmiWeb/Port_851/Visu/webvisu.htm
+// C:\Temp\CP6606_Backup\TwinCAT\3.1\Target\License
+
+]]></ST>
+    </Implementation>
+    <Action Name="A_BLINK" Id="{d96445a9-baf5-40f4-b45b-a764a3589fd1}">
+      <Implementation>
+        <ST><![CDATA[bSTART_TIMER:=TRUE;
+
+IF tON.Q THEN
+	bSTART_TIMER:=FALSE;
+	IF ACTION1.bBUSY  THEN
+		LED:=NOT LED;
+	ELSE
+		LED:=FALSE;
+	END_IF
+END_IF
+//============================================	
+//============================================
+bSTART_TIMER2:=TRUE;
+
+IF tON2.Q THEN
+	bSTART_TIMER2:=FALSE;
+	IF ACTION2.bBUSY  THEN
+		LED2:=NOT LED2;
+	ELSE
+		LED2:=FALSE;
+	END_IF
+END_IF
+	]]></ST>
+      </Implementation>
+    </Action>
+    <LineIds Name="MAIN">
+      <LineId Id="11" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="12" Count="1" />
+      <LineId Id="2" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="54" Count="3" />
+      <LineId Id="65" Count="3" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="90" Count="0" />
+    </LineIds>
+    <LineIds Name="MAIN.A_BLINK">
+      <LineId Id="2" Count="0" />
+      <LineId Id="1" Count="0" />
+      <LineId Id="6" Count="1" />
+      <LineId Id="10" Count="1" />
+      <LineId Id="15" Count="1" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="3" Count="1" />
+      <LineId Id="18" Count="9" />
+      <LineId Id="17" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

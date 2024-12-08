@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="E_ACTION_STATE" Id="{f0ae24b7-2532-46a6-91ee-eebf6871e145}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_ACTION_STATE :
+(
+	uninit := 0,
+	st1,
+	st2,
+	st3,
+	st4,
+	st5,
+	st6,
+	st7,
+	st8,
+	st9,
+	ready:=100,
+	error:=99
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="E_AXIS_STATE" Id="{7f491dc2-1e1e-47c3-a83e-77e5ec6f7938}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_AXIS_STATE :
+(
+	uninit:=0,
+	opening,
+	open_dec,
+	opened,
+	closing,
+	close_dec,
+	closed,
+	ready,
+	error
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
