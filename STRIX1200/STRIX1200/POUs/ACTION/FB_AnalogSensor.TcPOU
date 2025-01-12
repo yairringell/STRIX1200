@@ -12,6 +12,7 @@ VAR_INPUT
 	bHighLevelAlarmSp:REAL;
 	bLowLevelAlarmSp:REAL;
 	iCyclesFilter:INT:=1;
+	sSensorName:STRING;
 END_VAR
 VAR_OUTPUT
 	rSensorVal:REAL;
@@ -22,6 +23,7 @@ END_VAR
 VAR
 	rAvg:LREAL:=0;
 	iCycleCounter:INT:=0;
+	rCorrection	:	REAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -66,7 +68,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF  (IO_max - IO_min) > 0 THEN
-	METH_LinearScaling :=  ((eng_max - eng_min)/(IO_max - IO_min))*(analog_read - IO_max) + eng_max;
+	METH_LinearScaling := ( ((eng_max - eng_min)/(IO_max - IO_min))*(analog_read - IO_max) + eng_max)-rCorrection;
 ELSE
 	METH_LinearScaling :=  0;
 END_IF]]></ST>

@@ -124,10 +124,54 @@
     <Compile Include="Visualization Manager.TcVMO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="VISUs\VISUs\AllSensCal\Action_1\vSensorCalibrate_1_1.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="VISUs\VISUs\AllSensCal\Action_1\vSensorCalibrate_1_2.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="VISUs\VISUs\AllSensCal\Action_1\vSensorCalibrate_1_3.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="VISUs\VISUs\AllSensCal\Action_1\vSensorCalibrate_1_4.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="VISUs\VISUs\AllSensCal\Action_2\vSensorCalibrate_2_1.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="VISUs\VISUs\AllSensCal\Action_2\vSensorCalibrate_2_2.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="VISUs\VISUs\AllSensCal\Action_2\vSensorCalibrate_2_3.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="VISUs\VISUs\AllSensCal\Action_2\vSensorCalibrate_2_4.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
     <Compile Include="VISUs\VISUs\ImagePool.TcIPO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="VISUs\VISUs\vCalibrationScreen.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
     <Compile Include="VISUs\VISUs\vCOMM.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="VISUs\VISUs\vCooling.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="VISUs\VISUs\vCharging.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
     </Compile>
@@ -150,6 +194,9 @@
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
     <Folder Include="VISUs\VISUs" />
+    <Folder Include="VISUs\VISUs\AllSensCal" />
+    <Folder Include="VISUs\VISUs\AllSensCal\Action_1" />
+    <Folder Include="VISUs\VISUs\AllSensCal\Action_2" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="CmpBitmapPool">

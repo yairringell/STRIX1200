@@ -3,18 +3,20 @@
   <POU Name="MAIN" Id="{6c7239d6-f7f9-4e71-8a46-bf89f21a2b56}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	INTEG:INT;
+	INTEG				:INT;
 	
-	bSTART_TIMER : BOOL;
-	bSTART_TIMER2 : BOOL;
-	tON: TON:=(PT:=T#500ms);
-	tON2: TON:=(PT:=T#500MS);
-	sVar: STRING;
+	bSTART_TIMER 		: BOOL;
+	bSTART_TIMER2 		: BOOL;
+	tON: TON			:=(PT:=T#500MS);
+	tON2: TON			:=(PT:=T#500MS);
+	sVar				: STRING;
 	
-	stAppInfo: PlcAppSystemInfo;
-
+	stAppInfo			: PlcAppSystemInfo;
+	bSetPerData			:BOOL;
+	
 END_VAR
-]]></Declaration>
+(*---------Edit by Shuki dadon, 12/01/2025--------
+*)]]></Declaration>
     <Implementation>
       <ST><![CDATA[stAppInfo:=_AppInfo;
 tON(IN:= bSTART_TIMER,PT:=T#501MS);
@@ -28,9 +30,11 @@ A_BLINK();
 
 
 fbR_Trig( CLK:=bWP_Start );
-IF fbR_Trig.Q THEN
-    
-    fbWritePersistentData(NETID:='', PORT:=851, START:=bWP_Start, TMOUT:=T#1s );
+IF fbR_Trig.Q OR bSetPerData THEN
+    fbWritePersistentData(NETID:='', PORT:=851, START:=TRUE, TMOUT:=T#1S );
+	IF NOT fbWritePersistentData.BUSY THEN
+		bSetPerData:=FALSE;
+	END_IF
 ELSE
     fbWritePersistentData( START:=FALSE);
 END_IF;
@@ -76,7 +80,9 @@ END_IF
       <LineId Id="31" Count="0" />
       <LineId Id="41" Count="0" />
       <LineId Id="54" Count="3" />
-      <LineId Id="65" Count="3" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="120" Count="2" />
+      <LineId Id="67" Count="1" />
       <LineId Id="43" Count="0" />
       <LineId Id="42" Count="0" />
       <LineId Id="53" Count="0" />

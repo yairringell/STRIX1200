@@ -63,6 +63,12 @@ VAR_OUTPUT
 	
 END_VAR
 VAR
+	rStartCoolingTemp			: REAL;
+    rEndCoolingTemp				: REAL;
+	rStartCharginValue			: REAL;
+    rEndCharginValue			: REAL;
+	rEndCharginValueVoltage		: REAL;
+	bChargingByCurrent			:BOOL;
 	
 END_VAR
 ]]></Declaration>
@@ -79,14 +85,18 @@ IF bALL_HOMED THEN
 	END_IF
 END_IF
 
-IF (NOT bCLOSED OR (iCURRENT_CHARGE_SHOW < 1.4 AND tCHARGE.Q)) AND NOT bMANUAL THEN
+//charging
+IF 	NOT bMANUAL	AND (NOT bCLOSED OR (bChargingByCurrent AND iCURRENT_CHARGE_SHOW <rEndCharginValue  AND tCHARGE.Q))  THEN	// bCHARGE activate contactor that start charging 1.4
+	bCHARGE:=FALSE;
+ELSIF NOT bMANUAL	AND (NOT bCLOSED OR (NOT bChargingByCurrent AND iCURRENT_CHARGE_SHOW <rEndCharginValueVoltage  AND tCHARGE.Q))  THEN
 	bCHARGE:=FALSE;
 END_IF
 
-IF iTEMP_SHOW > 35 THEN
+//cooling
+IF iTEMP_SHOW > rStartCoolingTemp THEN //activate cooling 35
 	bPTC_ON:=TRUE;
 END_IF
-IF iTEMP_SHOW < 33 THEN
+IF iTEMP_SHOW < rEndCoolingTemp THEN //deactivate cooling 33
 	bPTC_ON:=FALSE;
 END_IF
 
@@ -103,13 +113,14 @@ END_IF
 fbAnalogSensor1(
 	iAnalogIn:=iVOLTAGE_IN, 
 	InputStatus:= , 
-	IoMax:=4183 , 
-	IoMin:= 391, 
-	EngMin:= 0, 
-	EngMax:= 25.29, 
+	IoMax:=	,//rIoMax_1 ,	//4183 , 
+	IoMin:=	,//rIoMin_1 ,	//391, 
+	EngMin:=,//rEngMin_1 ,	//0, 
+	EngMax:=,//rEngMax_1,	//25.29, 
 	bHighLevelAlarmSp:= , 
 	bLowLevelAlarmSp:= , 
-	iCyclesFilter:= 100, 
+	iCyclesFilter:= 100,
+	sSensorName:='Voltage Sensor', 
 	rSensorVal=>iVOLTAGE_SHOW , 
 	bHighLevelAlarm=> , 
 	bLowLevelAlarm=> , 
@@ -118,13 +129,14 @@ fbAnalogSensor1(
 fbAnalogSensor2(
 	iAnalogIn:=iCURRENT_CHARGE_IN, 
 	InputStatus:= , 
-	IoMax:=9108 , 
-	IoMin:=8647, 
-	EngMin:= 0, 
-	EngMax:= 5, 
+	IoMax:=,//9108 , 
+	IoMin:=,//8647, 
+	EngMin:= ,//0, 
+	EngMax:= ,//5, 
 	bHighLevelAlarmSp:= , 
 	bLowLevelAlarmSp:= , 
 	iCyclesFilter:= 100, 
+	sSensorName:='Charging Current Sensor', 
 	rSensorVal=>iCURRENT_CHARGE_SHOW , 
 	bHighLevelAlarm=> , 
 	bLowLevelAlarm=> , 
@@ -140,6 +152,7 @@ fbAnalogSensor2(
 	bHighLevelAlarmSp:= , 
 	bLowLevelAlarmSp:= , 
 	iCyclesFilter:= 100, 
+	sSensorName:='Piston Current Sensor', 
 	rSensorVal=>iCURRENT_PISTON_SHOW , 
 	bHighLevelAlarm=> , 
 	bLowLevelAlarm=> , 
@@ -155,6 +168,7 @@ fbAnalogSensor2(
 	bHighLevelAlarmSp:= , 
 	bLowLevelAlarmSp:= , 
 	iCyclesFilter:= 100, 
+	sSensorName:='Temp Sensor', 
 	rSensorVal=>iTEMP_SHOW , 
 	bHighLevelAlarm=> , 
 	bLowLevelAlarm=> , 
@@ -528,9 +542,13 @@ END_CASE]]></ST>
       <LineId Id="126" Count="0" />
       <LineId Id="123" Count="0" />
       <LineId Id="128" Count="0" />
+      <LineId Id="675" Count="0" />
       <LineId Id="507" Count="0" />
       <LineId Id="425" Count="0" />
-      <LineId Id="508" Count="1" />
+      <LineId Id="508" Count="0" />
+      <LineId Id="676" Count="1" />
+      <LineId Id="509" Count="0" />
+      <LineId Id="671" Count="0" />
       <LineId Id="516" Count="0" />
       <LineId Id="427" Count="0" />
       <LineId Id="517" Count="1" />
@@ -544,16 +562,24 @@ END_CASE]]></ST>
       <LineId Id="363" Count="1" />
       <LineId Id="362" Count="0" />
       <LineId Id="428" Count="1" />
-      <LineId Id="169" Count="13" />
+      <LineId Id="169" Count="10" />
+      <LineId Id="597" Count="0" />
+      <LineId Id="180" Count="2" />
       <LineId Id="168" Count="0" />
       <LineId Id="225" Count="0" />
-      <LineId Id="327" Count="12" />
+      <LineId Id="327" Count="9" />
+      <LineId Id="598" Count="0" />
+      <LineId Id="337" Count="2" />
       <LineId Id="125" Count="0" />
       <LineId Id="342" Count="0" />
-      <LineId Id="344" Count="12" />
+      <LineId Id="344" Count="9" />
+      <LineId Id="599" Count="0" />
+      <LineId Id="354" Count="2" />
       <LineId Id="343" Count="0" />
       <LineId Id="430" Count="0" />
-      <LineId Id="432" Count="12" />
+      <LineId Id="432" Count="9" />
+      <LineId Id="600" Count="0" />
+      <LineId Id="442" Count="2" />
       <LineId Id="431" Count="0" />
     </LineIds>
     <LineIds Name="FB_ACTION.aACTION_ERROR">
